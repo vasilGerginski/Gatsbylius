@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
 
-export const Container = styled.div`
+export default styled.div`
   padding: 1rem 2rem;
 `

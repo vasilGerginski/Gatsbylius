@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from "../components/Layout"
+import ProductGrid from "../components/ProductGrid"
 import SEO from "../components/seo"
 
 const IndexPage = ({ data }) => (
@@ -11,14 +12,7 @@ const IndexPage = ({ data }) => (
     <h1>Hello world</h1>
 
     <h2>Nos produits</h2>
-    <ul
-      style={{
-        listStyle: "none",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-      }}
-    >
+    <ProductGrid>
       {data.allProduct.nodes.map(product => (
         <li key={product.slug}>
           <Link to={`/product/${product.slug}`}>
@@ -28,7 +22,7 @@ const IndexPage = ({ data }) => (
           </Link>
         </li>
       ))}
-    </ul>
+    </ProductGrid>
 
     <h2>Nos catégories</h2>
     <ul>

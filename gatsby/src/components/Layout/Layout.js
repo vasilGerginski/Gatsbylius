@@ -8,10 +8,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { Container } from "./styled"
 import Helmet from "react-helmet"
-import Header from "../Header"
-import "../reset.css"
+import Container from "./Container"
+import Header from "./Header"
+import Main from "./Main"
+import Footer from "./Footer"
+import "../style.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -54,22 +56,24 @@ const Layout = ({ children }) => {
         />
       </Helmet>
 
-      <Container>
-        <Header
-          menuLinks={data.allCategory.edges}
-          siteTitle={data.site.siteMetadata.title}
-        />
+      <Header
+        menuLinks={data.allCategory.edges}
+        siteTitle={data.site.siteMetadata.title}
+      />
 
-        <main>{children}</main>
+      <Main>
+        <Container>{children}</Container>
+      </Main>
 
-        <footer style={{ textAlign: "center", fontSize: "0.8rem" }}>
+      <Footer>
+        <Container>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
           <span> & </span>
           <a href="https://sylius.com/">Sylius</a>
-        </footer>
-      </Container>
+        </Container>
+      </Footer>
     </>
   )
 }
