@@ -14,9 +14,15 @@ const IndexPage = ({ data }) => (
     <h2>Nos produits</h2>
     <ProductGrid>
       {data.allProduct.nodes.map(product => (
-        <li key={product.slug}>
-          <Link to={`/product/${product.slug}`}>
-            <Img fixed={product.localImage.childImageSharp.fixed} />
+        <li key={product.slug} className="product-grid__item">
+          <Link
+            to={`/product/${product.slug}`}
+            className="product-grid__item-link"
+          >
+            <Img
+              fixed={product.localImage.childImageSharp.fixed}
+              className="product-grid__item-image"
+            />
             <br />
             {product.name}
           </Link>
@@ -59,7 +65,7 @@ export const query = graphql`
           childImageSharp {
             # Specify the image processing specifications right in the query.
             # Makes it trivial to update as your page's design changes.
-            fixed(width: 125, height: 125) {
+            fixed(width: 300, height: 300) {
               ...GatsbyImageSharpFixed
             }
           }
