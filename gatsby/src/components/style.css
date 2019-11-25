@@ -1,3 +1,5 @@
+/* ==== CSS Reset : https://dev.to/hankchizljaw/a-modern-css-reset-6p3 ==== */
+
 /* Box sizing rules */
 *,
 *::before,
@@ -77,7 +79,7 @@ select {
   }
 }
 
-/* Typography */
+/* ==== Typography ==== */
 body {
   font-family: "Roboto", sans-serif;
 }
