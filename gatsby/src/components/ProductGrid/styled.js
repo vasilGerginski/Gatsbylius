@@ -30,9 +30,10 @@ export default styled.ul`
 
       img {
         transition: all 0.4s !important;
-        &:hover {
-          transform: scale(1.2);
-        }
+      }
+
+      &:hover img {
+        transform: scale(1.2);
       }
     }
   }

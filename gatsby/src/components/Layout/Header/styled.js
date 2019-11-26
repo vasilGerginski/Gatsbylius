@@ -7,10 +7,11 @@ export default styled.header`
 
   .logo {
     font-size: 1.3rem;
-    color: rgb(36, 36, 40);
+    color: #0fbf9c;
   }
 
   .nav-links {
+    position: relative;
     display: flex;
     align-items: center;
     list-style: none;
@@ -22,10 +23,14 @@ export default styled.header`
       a {
         color: rgb(36, 36, 40);
         transition: color 0.3s;
-        &:hover {
+        &:hover,
+        &.active {
           color: #0fbf9c;
         }
       }
     }
   }
 `
+
+/*
+ */

@@ -17,7 +17,9 @@ const Header = ({ siteTitle = ``, menuLinks }) => (
           {menuLinks.map(({ node }) => {
             return (
               <li className="nav-link" key={node.code}>
-                <Link to={`/categories/${node.code}`}>{node.name}</Link>
+                <Link activeClassName="active" to={`/categories/${node.code}`}>
+                  {node.name}
+                </Link>
               </li>
             )
           })}
