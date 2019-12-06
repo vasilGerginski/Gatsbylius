@@ -2,7 +2,8 @@ import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
+import ProductGrid from "../components/ProductGrid"
 import SEO from "../components/seo"
 
 const IndexPage = ({ data }) => {
@@ -13,19 +14,24 @@ const IndexPage = ({ data }) => {
       .then(setContributors)
   }, [])
 
-  return (
-    <Layout>
-      <SEO title="The fastest shop on earth!" />
-      <h1>You're browsing the fastest shop on earth!</h1>
-      <p>
-        This is an experimentation created at a friendly{" "}
-        <a href="https://opengento.fr/">Opengento</a> meetup in France, over a
-        weekend. It uses the{" "}
-        <a href="https://github.com/Sylius/ShopApiPlugin">Sylius Shop API</a> as
-        a <a href="https://www.gatsbyjs.org/">Gatsby</a> source, to create a
-        fast eCommerce PWA.
-      </p>
-
+    <h2>Nos produits</h2>
+    <ProductGrid>
+      {data.allProduct.nodes.map(product => (
+        <li key={product.slug} className="product-grid__item">
+          <Link
+            to={`/product/${product.slug}`}
+            className="product-grid__item-link"
+          >
+            <Img
+              fixed={product.localImage.childImageSharp.fixed}
+              className="product-grid__item-image"
+            />
+            <br />
+            {product.name}
+          </Link>
+        </li>
+      ))}
+    </ProductGrid>
       <section>
         <h2>Our products</h2>
         <ul
@@ -119,7 +125,7 @@ export const query = graphql`
           childImageSharp {
             # Specify the image processing specifications right in the query.
             # Makes it trivial to update as your page's design changes.
-            fixed(width: 125, height: 125) {
+            fixed(width: 300, height: 300) {
               ...GatsbyImageSharpFixed
             }
           }

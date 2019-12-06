@@ -1,7 +1,7 @@
 import { graphql } from "gatsby"
 import React, { Fragment, useState } from "react"
 import { Link } from "gatsby"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import Configurator from "../components/Configurator"
 import Price from "../components/Price"
 import Img from "gatsby-image"
@@ -82,7 +82,7 @@ const Product = props => {
         </ul>
       </div>
       <div className="cross-sell">
-        <h4>Other products</h4>
+        <h4>Autres produits</h4>
         <ul>
           {props.data.allProduct.nodes.map(product => {
             return (
