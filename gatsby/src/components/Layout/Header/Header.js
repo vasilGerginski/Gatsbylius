@@ -1,31 +1,36 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
-import StyledHeader from "./styled"
+import {
+  Header as StyleHeader,
+  Logo,
+  NavLink,
+  NavList,
+  NavItem,
+} from "./styled"
 import Container from "../Container"
 
 const Header = ({ siteTitle = ``, menuLinks }) => (
   <Container>
-    <StyledHeader>
-      <div>
-        <Link className="logo" to="/">
-          {siteTitle}
-        </Link>
-      </div>
+    <StyleHeader>
+      <Logo to="/">{siteTitle}</Logo>
       <nav>
-        <ul className="nav-links">
+        <NavList>
           {menuLinks.map(({ node }) => {
             return (
-              <li className="nav-link" key={node.code}>
-                <Link activeClassName="active" to={`/categories/${node.code}`}>
+              <NavItem key={node.code}>
+                <NavLink
+                  activeClassName="active"
+                  to={`/categories/${node.code}`}
+                >
                   {node.name}
-                </Link>
-              </li>
+                </NavLink>
+              </NavItem>
             )
           })}
-        </ul>
+        </NavList>
       </nav>
-    </StyledHeader>
+    </StyleHeader>
   </Container>
 )
 
