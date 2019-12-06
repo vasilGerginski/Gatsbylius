@@ -8,19 +8,31 @@ import Img from "gatsby-image"
 
 const ProductBreadcrumb = ({ product }) => {
   return (
-    <div itemScope itemType="http://schema.org/BreadcrumbList" className="">
+    <div itemScope itemType="http://schema.org/BreadcrumbList">
       <span
         itemProp="itemListElement"
         itemScope
         itemType="http://schema.org/ListItem"
       >
-        <Link to={`/categories/`}>
+        <Link to="/">
           <span itemProp="item">
-            <span itemProp="name">main_taxon</span>
+            <span itemProp="name">Gatsbylius</span>
           </span>
         </Link>
       </span>{" "}
-      /<span>{product.name}</span>
+      /{" "}
+      <span
+        itemProp="itemListElement"
+        itemScope
+        itemType="http://schema.org/ListItem"
+      >
+        <Link to={`/categories/${product.taxons.main}`}>
+          <span itemProp="item">
+            <span itemProp="name">{product.taxons.main}</span>
+          </span>
+        </Link>
+      </span>{" "}
+      / <span>{product.name}</span>
     </div>
   )
 }
@@ -57,10 +69,10 @@ const Product = props => {
 
         <ProductSynthesis product={props.data.product} />
 
-        <h5>Détails</h5>
+        <h5>Details</h5>
         <p>{props.data.product.description}</p>
 
-        <h5>Attributs</h5>
+        <h5>Attributes</h5>
         <ul>
           <li>Code: {props.data.product.code}</li>
           <li>
@@ -98,6 +110,9 @@ export const query = graphql`
       description
       channelCode
       averageRating
+      taxons {
+        main
+      }
       variants {
         price {
           currency
