@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Header as StyleHeader,
   Logo,
@@ -8,7 +9,9 @@ import {
   NavList,
   NavItem,
 } from "./styled"
+import MiniCart from "./MiniCart"
 import Container from "../Container"
+import MiniCartButton from "./MiniCartButton"
 
 const Header = ({ siteTitle = ``, menuLinks }) => (
   <Container>
@@ -28,9 +31,14 @@ const Header = ({ siteTitle = ``, menuLinks }) => (
               </NavItem>
             )
           })}
+          <MiniCartButton />
+            <NavItem key={"user"}>
+                <FontAwesomeIcon icon={faUser} />
+            </NavItem>
         </NavList>
       </nav>
     </StyleHeader>
+    <MiniCart />
   </Container>
 )
 

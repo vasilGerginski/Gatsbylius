@@ -13,6 +13,7 @@ import Container from "./Container"
 import Header from "./Header"
 import Main from "./Main"
 import Footer from "./Footer"
+import CartProvider from "./../Provider/CartProvider"
 import "../style.css"
 
 const Layout = ({ children }) => {
@@ -49,6 +50,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <CartProvider />
       <Helmet>
         <link
           href="https://fonts.googleapis.com/css?family=Montserrat:600|Roboto:300,300i,700&display=swap"
