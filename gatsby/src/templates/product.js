@@ -5,6 +5,7 @@ import Layout from "../components/Layout"
 import Configurator from "../components/Configurator"
 import Price from "../components/Price"
 import Img from "gatsby-image"
+import AddToCartButton from "../components/Layout/Button/AddToCartButton"
 
 const ProductBreadcrumb = ({ product }) => {
   return (
@@ -54,6 +55,13 @@ const ProductSynthesis = ({ product }) => {
       <Configurator
         variants={product.variants}
         onChange={variant => selectVariant(variant)}
+      />
+      <AddToCartButton
+        slug={product.code}
+        variantsCode={
+          selectedVariant ? selectedVariant.code : product.variants[0].code
+        }
+        qty={1}
       />
     </Fragment>
   )
@@ -119,6 +127,7 @@ export const query = graphql`
           current
         }
         name
+        code
       }
       localImage {
         childImageSharp {

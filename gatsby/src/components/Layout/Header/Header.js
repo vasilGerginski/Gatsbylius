@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   Header as StyleHeader,
   Logo,
@@ -32,9 +32,9 @@ const Header = ({ siteTitle = ``, menuLinks }) => (
             )
           })}
           <MiniCartButton />
-            <NavItem key={"user"}>
-                <FontAwesomeIcon icon={faUser} />
-            </NavItem>
+          <NavItem key={"user"}>
+            <FontAwesomeIcon icon={faUser} />
+          </NavItem>
         </NavList>
       </nav>
     </StyleHeader>
