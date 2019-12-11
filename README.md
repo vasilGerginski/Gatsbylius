@@ -4,7 +4,7 @@ Gatsby + Sylius = :rocket:
 
 Le site le plus rapide du monde
 
-Projet crée pendant le weekend Opengento 2019 https://opengento.fr/
+Started with :heart: :beers: :fire: in Béthune #opengento 
 
 ## Docs
 
