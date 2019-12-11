@@ -14,8 +14,11 @@ export const StoreStateContext = React.createContext()
 export const StoreDispatchContext = React.createContext()
 
 export const withStoreContext = Component => {
-  const context = React.useContext(StoreStateContext)
-  return props => <Component {...props} storeContext={context} />
+  return props => (
+    <StoreStateContext.Consumer>
+      {context => <Component {...props} storeContext={context} />}
+    </StoreStateContext.Consumer>
+  )
 }
 
 export const useStoreStateContext = () => {

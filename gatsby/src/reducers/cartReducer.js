@@ -1,7 +1,8 @@
+import React from "react"
 export const cartReducer = (state, action) => {
   switch (action.type) {
-    case "add": {
-      return { count: state.count + 1 }
+    case "addProducts": {
+      return { ...state, products: action.payload }
     }
     case "remove": {
       return { count: state.count - 1 }
@@ -11,8 +12,11 @@ export const cartReducer = (state, action) => {
         ? (state.storeContext.miniCartIsOpen = false)
         : (state.storeContext.miniCartIsOpen = true)
     }
+    case "updateCartKey": {
+      return { ...state, cartKey: action.payload }
+    }
     default: {
-      console.log(state)
+      throw new Error("Default reducer bla")
     }
   }
 }

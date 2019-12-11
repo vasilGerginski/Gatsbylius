@@ -1,8 +1,15 @@
 import React from "react"
-import { withStoreContext } from "../../../context/StoreContext"
+import {
+  useStoreDispatchContext,
+  useStoreStateContext,
+  withStoreContext,
+} from "../../../context/StoreContext"
 import { addVariantToCart } from "../../../helpers/cartHelper"
 
 const AddToCartButton = props => {
+  const storeState = useStoreStateContext()
+  const storeDispatch = useStoreDispatchContext()
+
   return (
     <button
       onClick={() => {
@@ -10,7 +17,8 @@ const AddToCartButton = props => {
           props.slug,
           props.variantsCode,
           props.qty,
-          props.storeContext
+          storeState,
+          storeDispatch
         ).then(() => {
           console.log(props.storeContext)
         })

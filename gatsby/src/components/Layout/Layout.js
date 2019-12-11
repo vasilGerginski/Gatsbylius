@@ -18,7 +18,7 @@ import {
   StoreStateContext,
   StoreDispatchContext,
 } from "./../../context/StoreContext"
-import cartReducer from "./../../reducers/cartReducer"
+import { cartReducer } from "./../../reducers/cartReducer"
 import "../style.css"
 
 const Layout = ({ children }) => {

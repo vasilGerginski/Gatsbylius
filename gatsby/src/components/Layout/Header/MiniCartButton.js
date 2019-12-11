@@ -7,22 +7,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { CartInfo, NavItem, NavLink } from "./styled"
 
-const MiniCartButton = props => {
+const MiniCartButton = () => {
   const storeState = useStoreStateContext()
   const storeDispatch = useStoreDispatchContext()
   return (
-    console.log(props) || (
+    console.log(storeState) || (
       <NavItem key={"cart"}>
         <NavLink
           onClick={() => {
-            storeDispatch({ type: "bloob" })
-            storeState.storeContext.miniCartIsOpen
-              ? (storeState.storeContext.miniCartIsOpen = false)
-              : (storeState.storeContext.miniCartIsOpen = true)
+            storeDispatch({ type: "add", payload: "okok" })
+            storeState.miniCartIsOpen
+              ? (storeState.miniCartIsOpen = false)
+              : (storeState.miniCartIsOpen = true)
           }}
         >
           <FontAwesomeIcon icon={faShoppingCart} />{" "}
-          <CartInfo>{storeState.storeContext.products.length}</CartInfo>
+          <CartInfo>{storeState.products.length}</CartInfo>
         </NavLink>
       </NavItem>
     )

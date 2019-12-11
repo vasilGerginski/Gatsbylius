@@ -1,5 +1,5 @@
 import React from "react"
-import { withStoreContext } from "../../../context/StoreContext"
+import { useStoreStateContext } from "../../../context/StoreContext"
 import {
   MiniCartHeader,
   MiniCartItem,
@@ -11,8 +11,10 @@ import {
   MiniCart as MinicartComponent,
 } from "./styled"
 
-const MiniCart = props => {
-  if (props.storeContext.miniCartIsOpen) {
+const MiniCart = () => {
+  const storeState = useStoreStateContext()
+
+  if (storeState.miniCartIsOpen) {
     return (
       <MinicartComponent>
         <MiniCartHeader>
@@ -21,7 +23,7 @@ const MiniCart = props => {
           </MiniCartTotal>
         </MiniCartHeader>
         <MiniCartItems>
-          {props.storeContext.products.map(item => {
+          {storeState.products.map(item => {
             return (
               <MiniCartItem>
                 <img
@@ -42,4 +44,4 @@ const MiniCart = props => {
   return null
 }
 
-export default withStoreContext(MiniCart)
+export default MiniCart
