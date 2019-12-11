@@ -1,6 +1,6 @@
 import React from "react"
 
-export const defaultStoreContext = {
+export const defaultStoreState = {
   cartKey: localStorage.getItem("cartKey"),
   miniCartIsOpen: false,
   adding: false,
@@ -10,14 +10,30 @@ export const defaultStoreContext = {
   updateCartItem: () => {},
 }
 
-const StoreContext = React.createContext(defaultStoreContext)
+export const StoreStateContext = React.createContext()
+export const StoreDispatchContext = React.createContext()
 
 export const withStoreContext = Component => {
-  return props => (
-    <StoreContext.Consumer>
-      {context => <Component {...props} storeContext={context} />}
-    </StoreContext.Consumer>
-  )
+  const context = React.useContext(StoreStateContext)
+  return props => <Component {...props} storeContext={context} />
 }
 
-export default StoreContext
+export const useStoreStateContext = () => {
+  const context = React.useContext(StoreStateContext)
+  if (context === undefined) {
+    throw new Error(
+      "useStoreStateContext must be used within a StoreStateProvider"
+    )
+  }
+  return context
+}
+
+export const useStoreDispatchContext = () => {
+  const context = React.useContext(StoreDispatchContext)
+  if (context === undefined) {
+    throw new Error(
+      "useStoreDispatchContext must be used within a StoreDispatchContext"
+    )
+  }
+  return context
+}
