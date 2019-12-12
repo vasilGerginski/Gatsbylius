@@ -13,16 +13,10 @@ import Container from "./Container"
 import Header from "./Header"
 import Main from "./Main"
 import Footer from "./Footer"
-import {
-  defaultStoreState,
-  StoreStateContext,
-  StoreDispatchContext,
-} from "./../../context/StoreContext"
-import { cartReducer } from "./../../reducers/cartReducer"
+import { StoreProvider } from "./../../context/StoreContext"
 import "../style.css"
 
 const Layout = ({ children }) => {
-  const [state, dispatch] = React.useReducer(cartReducer, defaultStoreState)
   const data = useStaticQuery(graphql`
     query SiteTitleQuery($code: String) {
       site {
@@ -56,35 +50,31 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <StoreStateContext.Provider value={state}>
-        <StoreDispatchContext.Provider value={dispatch}>
-          <Helmet>
-            <link
-              href="https://fonts.googleapis.com/css?family=Montserrat:600|Roboto:300,300i,700&display=swap"
-              rel="stylesheet"
-            />
-          </Helmet>
+      <Helmet>
+        <link
+          href="https://fonts.googleapis.com/css?family=Montserrat:600|Roboto:300,300i,700&display=swap"
+          rel="stylesheet"
+        />
+      </Helmet>
 
-          <Header
-            menuLinks={data.allCategory.edges}
-            siteTitle={data.site.siteMetadata.title}
-          />
+      <Header
+        menuLinks={data.allCategory.edges}
+        siteTitle={data.site.siteMetadata.title}
+      />
 
-          <Main>
-            <Container>{children}</Container>
-          </Main>
+      <Main>
+        <Container>{children}</Container>
+      </Main>
 
-          <Footer>
-            <Container>
-              © {new Date().getFullYear()}, Built with
-              {` `}
-              <a href="https://www.gatsbyjs.org">Gatsby</a>
-              <span> & </span>
-              <a href="https://sylius.com/">Sylius</a>
-            </Container>
-          </Footer>
-        </StoreDispatchContext.Provider>
-      </StoreStateContext.Provider>
+      <Footer>
+        <Container>
+          © {new Date().getFullYear()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <span> & </span>
+          <a href="https://sylius.com/">Sylius</a>
+        </Container>
+      </Footer>
     </>
   )
 }

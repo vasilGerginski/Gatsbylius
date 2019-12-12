@@ -1,16 +1,15 @@
 import React from "react"
+//@todo: Actions.js contients les types dans des contantes en majuscules
 export const cartReducer = (state, action) => {
   switch (action.type) {
-    case "addProducts": {
+    case "updateProducts": {
       return { ...state, products: action.payload }
     }
-    case "remove": {
-      return { count: state.count - 1 }
-    }
     case "toggleMiniCart": {
-      return state.storeContext.miniCartIsOpen
-        ? (state.storeContext.miniCartIsOpen = false)
-        : (state.storeContext.miniCartIsOpen = true)
+      return {
+        ...state,
+        miniCartIsOpen: !state.miniCartIsOpen,
+      }
     }
     case "updateCartKey": {
       return { ...state, cartKey: action.payload }

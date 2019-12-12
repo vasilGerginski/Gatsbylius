@@ -2,26 +2,25 @@ import React from "react"
 import {
   useStoreDispatchContext,
   useStoreStateContext,
-  withStoreContext,
 } from "../../../context/StoreContext"
 import { addVariantToCart } from "../../../helpers/cartHelper"
 
-const AddToCartButton = props => {
+const AddToCartButton = ({ slug, variantsCode, qty }) => {
   const storeState = useStoreStateContext()
   const storeDispatch = useStoreDispatchContext()
+
+  console.log("Button", { storeState })
 
   return (
     <button
       onClick={() => {
         addVariantToCart(
-          props.slug,
-          props.variantsCode,
-          props.qty,
+          slug,
+          variantsCode,
+          qty,
           storeState,
           storeDispatch
-        ).then(() => {
-          console.log(props.storeContext)
-        })
+        ).then(() => {})
       }}
     >
       Ajouter au pannier
@@ -29,4 +28,4 @@ const AddToCartButton = props => {
   )
 }
 
-export default withStoreContext(AddToCartButton)
+export default AddToCartButton

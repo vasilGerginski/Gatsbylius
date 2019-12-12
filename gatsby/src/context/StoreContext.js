@@ -1,23 +1,34 @@
 import React from "react"
+import { cartReducer } from "../reducers/cartReducer"
 
-export const defaultStoreState = {
-  cartKey: localStorage.getItem("cartKey"),
-  miniCartIsOpen: false,
-  adding: false,
-  products: [],
-  cart: {},
-  removeCartItem: () => {},
-  updateCartItem: () => {},
-}
+export const defaultStoreState = localStorage.getItem("storeState")
+  ? JSON.parse(localStorage.getItem("storeState"))
+  : {
+      cartKey: "",
+      miniCartIsOpen: false,
+      adding: false,
+      products: [],
+      cart: {},
+    }
+
+console.log(defaultStoreState)
 
 export const StoreStateContext = React.createContext()
 export const StoreDispatchContext = React.createContext()
 
-export const withStoreContext = Component => {
-  return props => (
-    <StoreStateContext.Consumer>
-      {context => <Component {...props} storeContext={context} />}
-    </StoreStateContext.Consumer>
+export const StoreProvider = ({ children }) => {
+  const [state, dispatch] = React.useReducer(cartReducer, defaultStoreState)
+
+  React.useEffect(() => {
+    localStorage.setItem("storeState", JSON.stringify(state))
+  }, [state])
+
+  return (
+    <StoreStateContext.Provider value={state}>
+      <StoreDispatchContext.Provider value={dispatch}>
+        {children}
+      </StoreDispatchContext.Provider>
+    </StoreStateContext.Provider>
   )
 }
 
@@ -28,6 +39,7 @@ export const useStoreStateContext = () => {
       "useStoreStateContext must be used within a StoreStateProvider"
     )
   }
+  console.log({ context })
   return context
 }
 
