@@ -3,37 +3,37 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-const path = require(`path`)
-const got = require("got")
+const path = require(`path`);
+const got = require("got");
 
-const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL
+const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL;
 
 const getAllProductsData = async () => {
   if (!SYLIUS_URL) {
-    return require("./__fixtures__/product-latest.json")
+    return require("./__fixtures__/product-latest.json");
   }
 
   return got(`${SYLIUS_URL}/shop-api/product-latest/?limit=100000`, {
     json: true,
-  }).then(response => response.body)
-}
+  }).then(response => response.body);
+};
 
 const getAllCategoryData = async () => {
   if (!SYLIUS_URL) {
-    return require("./__fixtures__/category.json").self
+    return require("./__fixtures__/category.json").self;
   }
 
   return got(`${SYLIUS_URL}/shop-api/taxons/category`, {
     json: true,
-  }).then(response => response.body.self)
-}
+  }).then(response => response.body.self);
+};
 
 exports.sourceNodes = async ({
   actions,
   createNodeId,
   createContentDigest,
 }) => {
-  const { createNode } = actions
+  const { createNode } = actions;
 
   const adaptCategory = originalCategory => {
     return {
@@ -44,8 +44,8 @@ exports.sourceNodes = async ({
       position: originalCategory.position,
       children: originalCategory.children,
       images: originalCategory.images,
-    }
-  }
+    };
+  };
 
   const adaptVariants = variants => {
     return Object.values(variants).map(({ name, price, code }) => {
@@ -53,9 +53,9 @@ exports.sourceNodes = async ({
         name: name,
         price: price,
         code: code,
-      }
-    })
-  }
+      };
+    });
+  };
 
   const adaptProduct = originalProduct => {
     return {
@@ -68,15 +68,15 @@ exports.sourceNodes = async ({
       firstImage: originalProduct.images[0].cachedPath,
       variants: adaptVariants(originalProduct.variants),
       taxons: originalProduct.taxons,
-    }
-  }
+    };
+  };
 
   const createNodeFromCategory = (categoryData, level = 0) => {
-    const nodeContent = JSON.stringify(categoryData)
+    const nodeContent = JSON.stringify(categoryData);
 
     const childrenIds = categoryData.children.map(categoryData => {
-      return createNodeFromCategory(categoryData, level + 1)
-    })
+      return createNodeFromCategory(categoryData, level + 1);
+    });
 
     const nodeMeta = {
       id: createNodeId(`category-${categoryData.code}`),
@@ -89,16 +89,16 @@ exports.sourceNodes = async ({
         contentDigest: createContentDigest(categoryData),
       },
       level,
-    }
+    };
 
-    const node = Object.assign({}, categoryData, nodeMeta)
-    createNode(node)
+    const node = Object.assign({}, categoryData, nodeMeta);
+    createNode(node);
 
-    return node.id
-  }
+    return node.id;
+  };
 
   const createNodeFromProduct = async productData => {
-    const nodeContent = JSON.stringify(productData)
+    const nodeContent = JSON.stringify(productData);
 
     const nodeMeta = {
       id: createNodeId(`product-${productData.code}`),
@@ -110,35 +110,49 @@ exports.sourceNodes = async ({
         content: nodeContent,
         contentDigest: createContentDigest(productData),
       },
-    }
+    };
 
-    const node = Object.assign({}, productData, nodeMeta)
-    return await createNode(node)
-  }
+    const node = Object.assign({}, productData, nodeMeta);
+    return await createNode(node);
+  };
 
   await getAllCategoryData().then(({ children }) => {
     return children.map(originalCategoryData => {
-      const categoryData = adaptCategory(originalCategoryData)
-      return createNodeFromCategory(categoryData)
-    })
-  })
+      const categoryData = adaptCategory(originalCategoryData);
+      return createNodeFromCategory(categoryData);
+    });
+  });
 
   // Data can come from anywhere, but for now create it manually
 
   await getAllProductsData().then(({ items }) => {
     return Promise.all(
       items.map(originalProductData => {
-        const productData = adaptProduct(originalProductData)
-        return createNodeFromProduct(productData)
+        const productData = adaptProduct(originalProductData);
+        return createNodeFromProduct(productData);
       })
-    )
-  })
-}
+    );
+  });
+};
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
-  const blogPostTemplate = path.resolve(`src/templates/product.js`)
-  const categoryTemplate = path.resolve(`src/templates/category.js`)
+exports.createPages = ({ graphql, actions, page }) => {
+  const { createPage } = actions;
+  const blogPostTemplate = path.resolve(`src/templates/product.js`);
+  const categoryTemplate = path.resolve(`src/templates/category.js`);
+
+  const userLogin = path.resolve(`src/templates/user/login.js`);
+  const userProfile = path.resolve(`src/templates/user/profile.js`);
+
+  createPage({
+    path: `/user/login`,
+    component: userLogin,
+  });
+
+  createPage({
+    path: `/user/profile`,
+    component: userProfile,
+  });
+
   // Query for markdown nodes to use in creating pages.
   // You can query for whatever data you want to create pages for e.g.
   // products, portfolio items, landing pages, etc.
@@ -171,7 +185,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
   ).then(result => {
     if (result.errors) {
-      throw result.errors
+      throw result.errors;
     }
 
     result.data.allCategory.edges.forEach(({ node }) => {
@@ -190,8 +204,8 @@ exports.createPages = ({ graphql, actions }) => {
           // The page "path" is always available as a GraphQL
           // argument.
         },
-      })
-    })
+      });
+    });
 
     // Create product post pages.
     result.data.allProduct.nodes.forEach(node => {
@@ -210,27 +224,27 @@ exports.createPages = ({ graphql, actions }) => {
           // The page "path" is always available as a GraphQL
           // argument.
         },
-      })
-    })
-  })
-}
+      });
+    });
+  });
+};
 
 // For function createNodeField
 exports.onCreateNode = ({ node, getNode, createNodeId, actions }) => {
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
 
   if (node.internal.type === "Product" && node.taxons) {
-    let categoryNode = getNode(createNodeId(`category-${node.taxons.main}`))
+    let categoryNode = getNode(createNodeId(`category-${node.taxons.main}`));
 
-    let categoryNodeValue = [node.id]
+    let categoryNodeValue = [node.id];
     if (categoryNode.fields && categoryNode.fields.products___NODE) {
-      categoryNodeValue = [...categoryNode.fields.products___NODE, node.id]
+      categoryNodeValue = [...categoryNode.fields.products___NODE, node.id];
     }
 
     createNodeField({
       node: categoryNode,
       name: "products___NODE",
       value: categoryNodeValue,
-    })
+    });
   }
-}
+};
