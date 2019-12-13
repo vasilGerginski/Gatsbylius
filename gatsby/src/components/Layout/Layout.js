@@ -5,16 +5,15 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import Helmet from "react-helmet"
-import Container from "./Container"
-import Header from "./Header"
-import Main from "./Main"
-import Footer from "./Footer"
-import { StoreProvider } from "./../../context/StoreContext"
-import "../style.css"
+import React from "react";
+import PropTypes from "prop-types";
+import { useStaticQuery, graphql } from "gatsby";
+import Helmet from "react-helmet";
+import Container from "./Container";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+import "../style.css";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -46,7 +45,7 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <>
@@ -76,11 +75,11 @@ const Layout = ({ children }) => {
         </Container>
       </Footer>
     </>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;

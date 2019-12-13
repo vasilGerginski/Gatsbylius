@@ -1,16 +1,13 @@
-import React from "react"
+import React from "react";
 import {
   useStoreDispatchContext,
   useStoreStateContext,
-} from "../../../context/StoreContext"
-import { addVariantToCart } from "../../../helpers/cartHelper"
+} from "../../../context/StoreContext";
+import { addVariantToCart } from "../../../helpers/cartHelper";
 
-const AddToCartButton = ({ slug, variantsCode, qty }) => {
-  const storeState = useStoreStateContext()
-  const storeDispatch = useStoreDispatchContext()
-
-  console.log("Button", { storeState })
-
+const AddToCartButton = ({ slug, variantsCode, qty, isSimple }) => {
+  const storeState = useStoreStateContext();
+  const storeDispatch = useStoreDispatchContext();
   return (
     <button
       onClick={() => {
@@ -18,14 +15,15 @@ const AddToCartButton = ({ slug, variantsCode, qty }) => {
           slug,
           variantsCode,
           qty,
+          isSimple,
           storeState,
           storeDispatch
-        ).then(() => {})
+        ).then(() => {});
       }}
     >
       Ajouter au pannier
     </button>
-  )
-}
+  );
+};
 
-export default AddToCartButton
+export default AddToCartButton;

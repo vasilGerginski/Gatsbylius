@@ -1,17 +1,17 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { faUser } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import React from "react";
+import PropTypes from "prop-types";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Header as StyleHeader,
   Logo,
   NavLink,
   NavList,
   NavItem,
-} from "./styled"
-import MiniCart from "./MiniCart"
-import Container from "../Container"
-import MiniCartButton from "./MiniCartButton"
+} from "./styled";
+import MiniCart from "./MiniCart";
+import Container from "../Container";
+import MiniCartButton from "./MiniCartButton";
 
 const Header = ({ siteTitle = ``, menuLinks }) => (
   <Container>
@@ -29,7 +29,7 @@ const Header = ({ siteTitle = ``, menuLinks }) => (
                   {node.name}
                 </NavLink>
               </NavItem>
-            )
+            );
           })}
           <MiniCartButton />
           <NavItem key={"user"}>
@@ -40,11 +40,11 @@ const Header = ({ siteTitle = ``, menuLinks }) => (
     </StyleHeader>
     <MiniCart />
   </Container>
-)
+);
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
   menuLinks: PropTypes.object.isRequired,
-}
+};
 
-export default Header
+export default Header;

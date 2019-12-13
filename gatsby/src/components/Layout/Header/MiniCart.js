@@ -1,11 +1,16 @@
-import React from "react"
+import React from "react";
 import {
   useStoreDispatchContext,
   useStoreStateContext,
-} from "../../../context/StoreContext"
-import { priceParser, changeItemQty } from "./../../../helpers/cartHelper"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
+} from "../../../context/StoreContext";
+import {
+  priceParser,
+  changeItemQty,
+  removeItemFromCart,
+  dropCart,
+} from "./../../../helpers/cartHelper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMinus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import {
   MiniCartHeader,
   MiniCartItem,
@@ -15,11 +20,11 @@ import {
   MiniCartItems,
   MiniCartTotal,
   MiniCart as MinicartComponent,
-} from "./styled"
+} from "./styled";
 
 const MiniCart = () => {
-  const storeState = useStoreStateContext()
-  const storeDispatch = useStoreDispatchContext()
+  const storeState = useStoreStateContext();
+  const storeDispatch = useStoreDispatchContext();
 
   if (storeState.miniCartIsOpen) {
     return (
@@ -58,7 +63,7 @@ const MiniCart = () => {
                       "increment",
                       storeState,
                       storeDispatch
-                    )
+                    );
                   }}
                 >
                   <FontAwesomeIcon icon={faPlus} />
@@ -70,20 +75,34 @@ const MiniCart = () => {
                       "decrement",
                       storeState,
                       storeDispatch
-                    )
+                    );
                   }}
                 >
                   <FontAwesomeIcon icon={faMinus} />
                 </button>
+                <button
+                  onClick={() => {
+                    removeItemFromCart(item.id, storeState, storeDispatch);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
               </MiniCartItem>
-            )
+            );
           })}
         </MiniCartItems>
+        <button
+          onClick={() => {
+            dropCart(storeState, storeDispatch);
+          }}
+        >
+          Drop Cart
+        </button>
       </MinicartComponent>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
-export default MiniCart
+export default MiniCart;
