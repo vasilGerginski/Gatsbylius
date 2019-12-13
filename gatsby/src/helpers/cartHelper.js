@@ -12,7 +12,6 @@ export const priceParser = (centsPrice, locale) => {
 };
 
 export const ensureCartKey = async (storeState, storeDispatch) => {
-  console.log(storeState.cartKey, "okokokok");
   if (!storeState.cartKey) {
     await axios
       .post(`${SYLIUS_URL}/shop-api/carts`, {})
