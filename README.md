@@ -4,6 +4,8 @@ Gatsby + Sylius = :rocket:
 
 Le site le plus rapide du monde
 
+Started with :heart: :beers: :fire: in Béthune #opengento 
+
 ## Docs
 
 - https://docs.sylius.com/en/latest/index.html
