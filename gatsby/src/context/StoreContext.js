@@ -5,6 +5,7 @@ export const defaultStoreState = localStorage.getItem("storeState")
   ? JSON.parse(localStorage.getItem("storeState"))
   : {
       cartKey: "",
+      currency: "USD",
       miniCartIsOpen: false,
       adding: false,
       products: [],

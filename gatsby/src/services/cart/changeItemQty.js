@@ -1,7 +1,7 @@
 const axios = require("axios");
 const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL;
 
-export const changeItemQty = async (
+const changeItemQty = async (
     itemId,
     changeType,
     storeState,
@@ -27,9 +27,27 @@ export const changeItemQty = async (
             quantity: newItemQty,
         })
         .then(response => {
-            storeDispatch({ type: "updateProducts", payload: response.data.items });
+            storeDispatch({type: "updateProducts", payload: response.data.items});
         })
         .catch(error => {
             console.error("Error on change qty item", error);
         });
 };
+
+export const incrementQty = async (itemId, storeState, storeDispatch) => {
+    await changeItemQty(
+        itemId,
+        "increment",
+        storeState,
+        storeDispatch
+    );
+}
+
+export const decrementQty = async (itemId, storeState, storeDispatch) => {
+    await changeItemQty(
+        itemId,
+        "decrement",
+        storeState,
+        storeDispatch
+    );
+}

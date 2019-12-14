@@ -13,8 +13,11 @@ export const cartReducer = (state, action) => {
     case "updateCartKey": {
       return { ...state, cartKey: action.payload };
     }
+    case "changeCurrency": {
+      return { ...state, currency: action.payload };
+    }
     default: {
-      throw new Error("Default reducer bla");
+      throw new Error("This reducer action does not exist");
     }
   }
 };

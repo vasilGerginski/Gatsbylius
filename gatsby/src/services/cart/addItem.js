@@ -29,6 +29,6 @@ export const addVariantToCart = async (
             storeDispatch({ type: "updateProducts", payload: response.data.items });
         })
         .catch(err => {
-            console.log("Error on add to cart", err);
+            console.error("Error on add to cart", err);
         });
 };

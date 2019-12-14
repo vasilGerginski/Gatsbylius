@@ -13,7 +13,7 @@ export const ensureCartKey = async (storeState, storeDispatch) => {
                 storeState.cartKey = response.data.tokenValue;
             })
             .catch(error => {
-                console.log("Error on cart creation ", error);
+                console.error("Error on cart creation ", error);
             });
     }
 };

@@ -3,9 +3,9 @@ import {
     useStoreDispatchContext,
     useStoreStateContext,
 } from "../../context/StoreContext";
-import { priceParser } from "./../../helpers/cartHelper";
+import { priceParser, getTotal } from "./../../helpers/cartHelper";
 
-import { changeItemQty, dropCart, removeItemFromCart } from "../../services/cart";
+import { incrementQty, decrementQty, dropCart, removeItemFromCart } from "../../services/cart";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -32,11 +32,8 @@ const MiniCart = () => {
                         Total:{" "}
                         <MiniCartItemPrice>
                             {priceParser(
-                                storeState.products.reduce(
-                                    (total, item) => total + item.total,
-                                    0
-                                ),
-                                "USD"
+                                getTotal(storeState.products),
+                                storeState.currency
                             )}
                         </MiniCartItemPrice>
                     </MiniCartTotal>
@@ -51,14 +48,13 @@ const MiniCart = () => {
                                 />
                                 <MiniCartItemName>{item.product.name}</MiniCartItemName>
                                 <MiniCartItemPrice>
-                                    {priceParser(item.total, "USD")}
+                                    {priceParser(item.total, storeState.currency)}
                                 </MiniCartItemPrice>
                                 <MiniCartItemQty>Qty: {item.quantity}</MiniCartItemQty>
                                 <button
                                     onClick={() => {
-                                        changeItemQty(
+                                        incrementQty(
                                             item.id,
-                                            "increment",
                                             storeState,
                                             storeDispatch
                                         );
@@ -68,9 +64,8 @@ const MiniCart = () => {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        changeItemQty(
+                                        decrementQty(
                                             item.id,
-                                            "decrement",
                                             storeState,
                                             storeDispatch
                                         );
