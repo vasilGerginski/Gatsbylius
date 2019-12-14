@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import Configurator from "../components/Configurator";
 import Price from "../components/Price";
 import Img from "gatsby-image";
-import AddToCartButton from "../components/Layout/Button/AddToCartButton";
+import AddToCartButton from "../components/Button/AddToCartButton";
 
 const ProductBreadcrumb = ({ product }) => {
   return (

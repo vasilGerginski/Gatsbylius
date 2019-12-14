@@ -2,8 +2,8 @@ import React from "react";
 import {
   useStoreDispatchContext,
   useStoreStateContext,
-} from "../../../context/StoreContext";
-import { addVariantToCart } from "../../../helpers/cartHelper";
+} from "../../context/StoreContext";
+import { addVariantToCart } from "./../../services/cart";
 
 const AddToCartButton = ({ slug, variantsCode, qty, isSimple }) => {
   const storeState = useStoreStateContext();

@@ -9,9 +9,9 @@ import {
   NavList,
   NavItem,
 } from "./styled";
-import MiniCart from "./MiniCart";
+import MiniCart from "./../../MiniCart/MiniCart";
 import Container from "../Container";
-import MiniCartButton from "./MiniCartButton";
+import MiniCartButton from "./../../MiniCart/MiniCartButton";
 
 const Header = ({ siteTitle = ``, menuLinks }) => (
   <Container>
