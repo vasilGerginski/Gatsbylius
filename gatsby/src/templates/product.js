@@ -1,11 +1,11 @@
-import { graphql } from "gatsby"
-import React, { Fragment, useState } from "react"
-import { Link } from "gatsby"
-import Layout from "../components/Layout"
-import Configurator from "../components/Configurator"
-import Price from "../components/Price"
-import Img from "gatsby-image"
-import AddToCartButton from "../components/Layout/Button/AddToCartButton"
+import { graphql } from "gatsby";
+import React, { Fragment, useState } from "react";
+import { Link } from "gatsby";
+import Layout from "../components/Layout";
+import Configurator from "../components/Configurator";
+import Price from "../components/Price";
+import Img from "gatsby-image";
+import AddToCartButton from "../components/Button/AddToCartButton";
 
 const ProductBreadcrumb = ({ product }) => {
   return (
@@ -35,11 +35,11 @@ const ProductBreadcrumb = ({ product }) => {
       </span>{" "}
       / <span>{product.name}</span>
     </div>
-  )
-}
+  );
+};
 
 const ProductSynthesis = ({ product }) => {
-  const [selectedVariant, selectVariant] = useState(null)
+  const [selectedVariant, selectVariant] = useState(null);
 
   return (
     <Fragment>
@@ -62,10 +62,11 @@ const ProductSynthesis = ({ product }) => {
           selectedVariant ? selectedVariant.code : product.variants[0].code
         }
         qty={1}
+        isSimple={product.variants.length === 1}
       />
     </Fragment>
-  )
-}
+  );
+};
 
 const Product = props => {
   return (
@@ -99,15 +100,15 @@ const Product = props => {
                   <Link to={`/product/${product.slug}`}>{product.name}</Link>
                 </p>
               </li>
-            )
+            );
           })}
         </ul>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
 
 export const query = graphql`
   query ProductPageQuery($slug: String) {
@@ -156,4 +157,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
