@@ -1,9 +1,9 @@
-/**
- @todo: delete this file if unused
- */
-
 import React from "react";
-import { StoreProvider } from "./src/context/StoreContext";
-export const wrapRootElement = ({ element }) => (
-  <StoreProvider>{element}</StoreProvider>
+import {StoreProvider} from "./src/context/StoreContext";
+import {UserProvider} from "./src/context/UserContext";
+
+export const wrapRootElement = ({element}) => (
+    <UserProvider>
+        <StoreProvider>{element}</StoreProvider>
+    </UserProvider>
 );

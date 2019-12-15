@@ -139,6 +139,20 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
   const blogPostTemplate = path.resolve(`src/templates/product.js`)
   const categoryTemplate = path.resolve(`src/templates/category.js`)
+
+  const loginComponent = path.resolve(`src/components/User/Login.js`)
+  const registerComponent = path.resolve(`src/components/User/Register.js`)
+
+  createPage({
+      path: `/user/login`,
+      component: loginComponent,
+  })
+
+  createPage({
+      path: `/user/register`,
+      component: registerComponent,
+  })
+
   // Query for markdown nodes to use in creating pages.
   // You can query for whatever data you want to create pages for e.g.
   // products, portfolio items, landing pages, etc.
