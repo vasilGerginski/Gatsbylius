@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export default styled.ul`
   display: flex;
@@ -32,9 +32,11 @@ export default styled.ul`
         transition: all 0.4s !important;
       }
 
-      &:hover img {
-        transform: scale(1.2);
+      @media (hover: hover) {
+        &:hover img {
+          transform: scale(1.2);
+        }
       }
     }
   }
-`
+`;
