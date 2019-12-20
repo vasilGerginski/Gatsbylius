@@ -13,7 +13,7 @@ import Container from "./Container";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import "../style.css";
+import { GlobalStyle } from "../../config/theme";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -56,15 +56,15 @@ const Layout = ({ children }) => {
         />
       </Helmet>
 
+      <GlobalStyle />
+
       <Header
         menuLinks={data.allCategory.edges}
         siteTitle={data.site.siteMetadata.title}
       />
-
       <Main>
         <Container>{children}</Container>
       </Main>
-
       <Footer>
         <Container>
           © {new Date().getFullYear()}, Built with
