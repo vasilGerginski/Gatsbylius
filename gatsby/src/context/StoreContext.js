@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { cartReducer } from "../reducers/cartReducer";
 
 export const defaultStoreState = localStorage.getItem("storeState")
@@ -29,6 +30,10 @@ export const StoreProvider = ({ children }) => {
       </StoreDispatchContext.Provider>
     </StoreStateContext.Provider>
   );
+};
+
+StoreProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useStoreStateContext = () => {

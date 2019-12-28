@@ -1,12 +1,13 @@
-import React from "react"
-import { Link } from "gatsby"
-import Layout from "../components/Layout"
-import Img from "gatsby-image"
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql, Link } from "gatsby";
+import Layout from "../components/Layout";
+import Img from "gatsby-image";
 
-const Category = props => {
-  const category = props.data.category
-  const products = category.fields && category.fields.products
-  const subCategories = category.childrenCategory
+const Category = ({ data }) => {
+  const category = data.category;
+  const products = category.fields && category.fields.products;
+  const subCategories = category.childrenCategory;
 
   return (
     <Layout>
@@ -25,7 +26,7 @@ const Category = props => {
                     {subCategory.name}
                   </Link>
                 </li>
-              )
+              );
             })}
           </ul>
         </section>
@@ -51,16 +52,20 @@ const Category = props => {
                     {product.name}
                   </Link>
                 </li>
-              )
+              );
             })}
           </ul>
         </section>
       )}
     </Layout>
-  )
-}
+  );
+};
 
-export default Category
+Category.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
+export default Category;
 
 export const query = graphql`
   query CategoryPageQuery($code: String) {
@@ -93,4 +98,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;

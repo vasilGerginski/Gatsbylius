@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   useStoreDispatchContext,
   useStoreStateContext,
@@ -24,6 +25,13 @@ const AddToCartButton = ({ slug, variantsCode, qty, isSimple }) => {
       Ajouter au pannier
     </button>
   );
+};
+
+AddToCartButton.propTypes = {
+  slug: PropTypes.string,
+  variantsCode: PropTypes.string,
+  qty: PropTypes.number,
+  isSimple: PropTypes.bool,
 };
 
 export default AddToCartButton;

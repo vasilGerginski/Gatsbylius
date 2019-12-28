@@ -1,10 +1,11 @@
-import React from "react"
-import { Link } from "gatsby"
-import Img from "gatsby-image"
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql, Link } from "gatsby";
+import Img from "gatsby-image";
 
-import Layout from "../components/Layout"
-import ProductGrid from "../components/ProductGrid"
-import SEO from "../components/seo"
+import Layout from "../components/Layout";
+import ProductGrid from "../components/ProductGrid";
+import SEO from "../components/seo";
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -37,13 +38,17 @@ const IndexPage = ({ data }) => (
           <li key={node.code}>
             <Link to={`/categories/${node.code}`}>{node.name}</Link>
           </li>
-        )
+        );
       })}
     </ul>
   </Layout>
-)
+);
 
-export default IndexPage
+IndexPage.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
+export default IndexPage;
 
 export const query = graphql`
   query HomePageQuery {
@@ -73,4 +78,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
