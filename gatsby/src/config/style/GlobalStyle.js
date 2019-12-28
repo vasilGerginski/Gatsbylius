@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   /* Box sizing rules */
@@ -14,18 +14,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   /* Remove default padding */
+  /* Remove list styles on ul, ol elements with a class attribute */
   ul[class],
   ol[class] {
     padding: 0;
+    list-style: none;
   }
 
   /* Remove default margin */
   body,
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
   ul[class],
   ol[class],
   li,
@@ -45,12 +42,6 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
 
-  /* Remove list styles on ul, ol elements with a class attribute */
-  ul[class],
-  ol[class] {
-    list-style: none;
-  }
-
   /* A elements that don't have a class get default styles */
   a:not([class]) {
     text-decoration-skip-ink: auto;
@@ -60,11 +51,6 @@ export const GlobalStyle = createGlobalStyle`
   img {
     max-width: 100%;
     display: block;
-  }
-
-  /* Natural flow and rhythm in articles by default */
-  article > * + * {
-    margin-top: 1em;
   }
 
   /* Inherit fonts for inputs and buttons */
@@ -86,18 +72,35 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   /* ==== Typography ==== */
+  html {
+    font-size: 100%;
+  }
+
   body {
-    font-family: "Roboto", sans-serif;
+    font-family: ${({ theme }) => theme.fonts.font1};
+    font-size: ${({ theme }) => theme.fontSizes.body};
   }
 
   h1,
   h2 {
-    font-family: "Montserrat", sans-serif;
+    font-family: ${({ theme }) => theme.fonts.font2};
     font-weight: 600;
     text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: ${({ theme }) => theme.fontSizes.h1}
+  }
+
+  h2 {
+    font-size: ${({ theme }) => theme.fontSizes.h2}
+  }
+
+  h3 {
+    font-size: ${({ theme }) => theme.fontSizes.h3}
   }
 
   a {
     text-decoration: none;
   }
-`
+`;

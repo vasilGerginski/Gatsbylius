@@ -1,10 +1,3 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
@@ -13,7 +6,9 @@ import Container from "./Container";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import { GlobalStyle } from "../../config/theme";
+import { GlobalStyle } from "../../config/style/GlobalStyle";
+import { ThemeProvider } from "styled-components";
+import theme from "../../config/style/theme";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -56,24 +51,25 @@ const Layout = ({ children }) => {
         />
       </Helmet>
 
-      <GlobalStyle />
-
-      <Header
-        menuLinks={data.allCategory.edges}
-        siteTitle={data.site.siteMetadata.title}
-      />
-      <Main>
-        <Container>{children}</Container>
-      </Main>
-      <Footer>
-        <Container>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-          <span> & </span>
-          <a href="https://sylius.com/">Sylius</a>
-        </Container>
-      </Footer>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Header
+          menuLinks={data.allCategory.edges}
+          siteTitle={data.site.siteMetadata.title}
+        />
+        <Main>
+          <Container>{children}</Container>
+        </Main>
+        <Footer>
+          <Container>
+            © {new Date().getFullYear()}, Built with
+            {` `}
+            <a href="https://www.gatsbyjs.org">Gatsby</a>
+            <span> & </span>
+            <a href="https://sylius.com/">Sylius</a>
+          </Container>
+        </Footer>
+      </ThemeProvider>
     </>
   );
 };
