@@ -1,5 +1,6 @@
-import { graphql } from "gatsby";
 import React, { Fragment, useState } from "react";
+import PropTypes from "prop-types";
+import { graphql } from "gatsby";
 import { Link } from "gatsby";
 import Layout from "../components/Layout";
 import Configurator from "../components/Configurator";
@@ -38,6 +39,10 @@ const ProductBreadcrumb = ({ product }) => {
   );
 };
 
+ProductBreadcrumb.propTypes = {
+  product: PropTypes.object.isRequired,
+};
+
 const ProductSynthesis = ({ product }) => {
   const [selectedVariant, selectVariant] = useState(null);
 
@@ -68,24 +73,28 @@ const ProductSynthesis = ({ product }) => {
   );
 };
 
-const Product = props => {
+ProductSynthesis.propTypes = {
+  product: PropTypes.object.isRequired,
+};
+
+const Product = ({ data }) => {
   return (
     <Layout>
       <div className="product-informations">
-        <ProductBreadcrumb product={props.data.product} />
+        <ProductBreadcrumb product={data.product} />
 
-        <Img fixed={props.data.product.localImage.childImageSharp.fixed} />
+        <Img fixed={data.product.localImage.childImageSharp.fixed} />
 
-        <ProductSynthesis product={props.data.product} />
+        <ProductSynthesis product={data.product} />
 
         <h5>Details</h5>
-        <p>{props.data.product.description}</p>
+        <p>{data.product.description}</p>
 
         <h5>Attributes</h5>
         <ul>
-          <li>Code: {props.data.product.code}</li>
+          <li>Code: {data.product.code}</li>
           <li>
-            Average Rating: {props.data.product.averageRating}
+            Average Rating: {data.product.averageRating}
             {"/5"}
           </li>
         </ul>
@@ -93,7 +102,7 @@ const Product = props => {
       <div className="cross-sell">
         <h4>Autres produits</h4>
         <ul>
-          {props.data.allProduct.nodes.map(product => {
+          {data.allProduct.nodes.map(product => {
             return (
               <li key={product.slug}>
                 <p>
@@ -106,6 +115,10 @@ const Product = props => {
       </div>
     </Layout>
   );
+};
+
+Product.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default Product;
