@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Header as StyleHeader,
+  Header as StyledHeader,
   Logo,
   NavLink,
   NavList,
@@ -15,7 +15,7 @@ import MiniCartButton from "./../../MiniCart/MiniCartButton";
 
 const Header = ({ siteTitle = ``, menuLinks }) => (
   <Container>
-    <StyleHeader>
+    <StyledHeader>
       <Logo to="/">{siteTitle}</Logo>
       <nav>
         <NavList>
@@ -37,14 +37,14 @@ const Header = ({ siteTitle = ``, menuLinks }) => (
           </NavItem>
         </NavList>
       </nav>
-    </StyleHeader>
+    </StyledHeader>
     <MiniCart />
   </Container>
 );
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-  menuLinks: PropTypes.object.isRequired,
+  menuLinks: PropTypes.array.isRequired,
 };
 
 export default Header;

@@ -8,8 +8,5 @@ export const priceParser = (centsPrice, locale) => {
 };
 
 export const getTotal = products => {
-  return products.reduce(
-      (total, item) => total + item.total,
-      0
-  )
-}
+  return products.reduce((total, item) => total + item.total, 0);
+};
