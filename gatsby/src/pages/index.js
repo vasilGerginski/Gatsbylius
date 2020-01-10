@@ -7,11 +7,11 @@ import Layout from "../components/Layout";
 import ProductGrid from "../components/ProductGrid";
 import SEO from "../components/seo";
 
-const IndexPage = ({ data }) => (
-  <Layout>
-    <SEO title="The fastest shop on earth!" />
-    <h1>Hello world</h1>
+const pageTitle = "Gatsbylius Print Shop";
 
+const IndexPage = ({ data }) => (
+  <Layout pageTitle={pageTitle}>
+    <SEO title={pageTitle} />
     <h2>Nos produits</h2>
     <ProductGrid>
       {data.allProduct.nodes.map(product => (

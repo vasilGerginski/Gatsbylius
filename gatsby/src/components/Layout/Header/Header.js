@@ -10,11 +10,10 @@ import {
   NavItem,
 } from "./styled";
 import MiniCart from "./../../MiniCart/MiniCart";
-import Container from "../Container";
 import MiniCartButton from "./../../MiniCart/MiniCartButton";
 
 const Header = ({ siteTitle = ``, menuLinks }) => (
-  <Container>
+  <div>
     <StyledHeader>
       <Logo to="/">{siteTitle}</Logo>
       <nav>
@@ -39,7 +38,7 @@ const Header = ({ siteTitle = ``, menuLinks }) => (
       </nav>
     </StyledHeader>
     <MiniCart />
-  </Container>
+  </div>
 );
 
 Header.propTypes = {
