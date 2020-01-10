@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import { fontFamily, spacing, color } from "../../helpers/themeHelpers";
 export const GlobalStyle = createGlobalStyle`
   /* Box sizing rules */
   *,
@@ -73,34 +73,30 @@ export const GlobalStyle = createGlobalStyle`
 
   /* ==== Typography ==== */
   html {
-    font-size: 100%;
+    font-size: ${({ theme }) => `${theme.typography.baseFontSize}em`};
   }
 
   body {
-    font-family: ${({ theme }) => theme.fonts.font1};
-    font-size: ${({ theme }) => theme.fontSizes.body};
+    ${fontFamily("bodyFont")}
+    line-height: ${spacing(["base"])};
   }
 
   h1,
-  h2 {
-    font-family: ${({ theme }) => theme.fonts.font2};
+  h2,
+  h3 {
+    ${fontFamily("titleFont")}
     font-weight: 600;
     text-transform: uppercase;
-  }
-
-  h1 {
-    font-size: ${({ theme }) => theme.fontSizes.h1}
-  }
-
-  h2 {
-    font-size: ${({ theme }) => theme.fontSizes.h2}
-  }
-
-  h3 {
-    font-size: ${({ theme }) => theme.fontSizes.h3}
   }
 
   a {
     text-decoration: none;
   }
+
+
+/* ==== Colors ==== */
+body {
+  background-color: ${color("background")};
+}
+
 `;
