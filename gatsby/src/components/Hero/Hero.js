@@ -1,16 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { spacing, color } from "../../helpers/themeHelpers";
 import heroImage from "../../images/heroImage.jpg";
+import { media } from "styled-bootstrap-grid";
 
 const StyledHero = styled.div`
   position: relative;
-  height: calc(100vh - ${spacing(["lg"])});
-  font-size: 2.7vw;
+  height: 50vh;
+  font-size: 2.6vw;
   color: ${color("white")};
   background-image: url(${heroImage});
   background-size: cover;
+  ${media.md`
+    height: calc(100vh - ${spacing(["lg"])});
+  `}
 `;
 
 const Overlay = styled.div`
@@ -26,21 +29,19 @@ const Overlay = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  text-shadow: ${({ theme }) => theme.boxShadows.medium};
+  position: relative;
+  letter-spacing: 0.1em;
+  text-shadow: ${({ theme }) => theme.boxShadows.textMedium};
 `;
 
-const Hero = ({ pageTitle }) => {
+const Hero = () => {
   return (
     <StyledHero bgImage={heroImage}>
       <Overlay>
-        <PageTitle>{pageTitle}</PageTitle>
+        <PageTitle>Gatsbylius Print Shop</PageTitle>
       </Overlay>
     </StyledHero>
   );
-};
-
-Hero.propTypes = {
-  pageTitle: PropTypes.string.isRequired,
 };
 
 export default Hero;

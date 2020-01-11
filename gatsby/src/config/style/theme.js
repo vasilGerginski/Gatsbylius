@@ -38,6 +38,6 @@ export default {
   },
   boxShadows: {
     light: "0 0 6px rgba(36, 36, 36, 0.2)",
-    medium: "0 0 10px rgba(36, 36, 36, 0.5)",
+    textMedium: "2px 2px 10px rgba(36, 36, 36, 0.6)",
   },
 };

@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
+import { Container, Row, Col } from "styled-bootstrap-grid";
 
 import Layout from "../components/Layout";
-import ProductGrid from "../components/ProductGrid";
+import { GalleryItem } from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
 
 const pageTitle = "Gatsbylius Print Shop";
@@ -12,35 +13,48 @@ const pageTitle = "Gatsbylius Print Shop";
 const IndexPage = ({ data }) => (
   <Layout pageTitle={pageTitle}>
     <SEO title={pageTitle} />
-    <h2>Nos produits</h2>
-    <ProductGrid>
-      {data.allProduct.nodes.map(product => (
-        <li key={product.slug} className="product-grid__item">
-          <Link
-            to={`/product/${product.slug}`}
-            className="product-grid__item-link"
-          >
-            <Img
-              fixed={product.localImage.childImageSharp.fixed}
-              className="product-grid__item-image"
-            />
-            <br />
-            {product.name}
-          </Link>
-        </li>
-      ))}
-    </ProductGrid>
+    <Container>
+      <Row>
+        <Col>
+          <h2>Our products</h2>
+        </Col>
+      </Row>
 
-    <h2>Nos catégories</h2>
-    <ul>
-      {data.allCategory.edges.map(({ node }) => {
-        return (
-          <li key={node.code}>
-            <Link to={`/categories/${node.code}`}>{node.name}</Link>
-          </li>
-        );
-      })}
-    </ul>
+      <Row>
+        {data.allProduct.nodes.map(product => (
+          <Col key={product.slug} sm={6} md={4} lg={3}>
+            <GalleryItem>
+              <Link to={`/product/${product.slug}`}>
+                <Img fluid={product.localImage.childImageSharp.fluid} />
+                <br />
+                {product.name}
+              </Link>
+            </GalleryItem>
+          </Col>
+        ))}
+      </Row>
+
+      <Row>
+        <Col>
+          <h2>Our categories</h2>
+        </Col>
+      </Row>
+
+      <Row>
+        {data.allCategory.edges.map(({ node: category }) => {
+          return (
+            <Col key={category.code} sm={6} md={4} lg={3}>
+              <GalleryItem>
+                <Link to={`/categories/${category.code}`}>
+                  <br />
+                  {category.name}
+                </Link>
+              </GalleryItem>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
   </Layout>
 );
 
@@ -59,6 +73,9 @@ export const query = graphql`
           code
           slug
           name
+          images {
+            path
+          }
         }
       }
     }
@@ -70,8 +87,8 @@ export const query = graphql`
           childImageSharp {
             # Specify the image processing specifications right in the query.
             # Makes it trivial to update as your page's design changes.
-            fixed(width: 300, height: 300) {
-              ...GatsbyImageSharpFixed
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

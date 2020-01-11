@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import Helmet from "react-helmet";
-import { Container, Row, Col } from "styled-bootstrap-grid";
+import { Container, Row } from "styled-bootstrap-grid";
 import Header from "./Header";
 import Footer from "./Footer";
 import { GlobalStyle } from "../../config/style/GlobalStyle";
@@ -11,7 +11,7 @@ import theme from "../../config/style/theme";
 import Hero from "../Hero";
 import Main from "./Main";
 
-const Layout = ({ children, pageTitle }) => {
+const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery($code: String) {
       site {
@@ -61,14 +61,8 @@ const Layout = ({ children, pageTitle }) => {
         />
 
         <Main>
-          {pageTitle === "Gatsbylius Print Shop" && (
-            <Hero pageTitle={pageTitle} />
-          )}
-
-          <Container>
-            <h1>{pageTitle}</h1>
-            {children}
-          </Container>
+          {window.location.pathname === "/" && <Hero />}
+          {children}
         </Main>
 
         <Footer>
@@ -85,7 +79,6 @@ const Layout = ({ children, pageTitle }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  pageTitle: PropTypes.string.isRequired,
 };
 
 export default Layout;
