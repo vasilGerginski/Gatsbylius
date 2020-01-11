@@ -44,6 +44,10 @@ exports.sourceNodes = async ({
       position: originalCategory.position,
       children: originalCategory.children,
       images: originalCategory.images,
+      categoryImage:
+        originalCategory.images.length > 0
+          ? originalCategory.images[0].cachedPath
+          : null,
     };
   };
 

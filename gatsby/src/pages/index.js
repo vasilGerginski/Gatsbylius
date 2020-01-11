@@ -25,7 +25,12 @@ const IndexPage = ({ data }) => (
           <Col key={product.slug} sm={6} md={4} lg={3}>
             <GalleryItem>
               <Link to={`/product/${product.slug}`}>
-                <Img fluid={product.localImage.childImageSharp.fluid} />
+                <Img
+                  sizes={{
+                    ...product.localImage.childImageSharp.fluid,
+                    aspectRatio: 3 / 2,
+                  }}
+                />
                 <br />
                 {product.name}
               </Link>
@@ -42,10 +47,21 @@ const IndexPage = ({ data }) => (
 
       <Row>
         {data.allCategory.edges.map(({ node: category }) => {
+          const fluidCategoryImage = category.localImage
+            ? category.localImage.childImageSharp.fluid
+            : data.file.childImageSharp.fluid;
+
           return (
             <Col key={category.code} sm={6} md={4} lg={3}>
               <GalleryItem>
                 <Link to={`/categories/${category.code}`}>
+                  <Img
+                    sizes={{
+                      ...fluidCategoryImage,
+                      aspectRatio: 3 / 2,
+                    }}
+                  />
+
                   <br />
                   {category.name}
                 </Link>
@@ -66,6 +82,13 @@ export default IndexPage;
 
 export const query = graphql`
   query HomePageQuery {
+    file(name: { eq: "placeholder" }) {
+      childImageSharp {
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     allCategory {
       edges {
         node {
@@ -73,8 +96,12 @@ export const query = graphql`
           code
           slug
           name
-          images {
-            path
+          localImage {
+            childImageSharp {
+              fluid(maxWidth: 700) {
+                ...GatsbyImageSharpFluid
+              }
+            }
           }
         }
       }
@@ -85,8 +112,6 @@ export const query = graphql`
         name
         localImage {
           childImageSharp {
-            # Specify the image processing specifications right in the query.
-            # Makes it trivial to update as your page's design changes.
             fluid(maxWidth: 700) {
               ...GatsbyImageSharpFluid
             }

@@ -36,6 +36,13 @@ module.exports = {
         imagePath: "firstImage",
       },
     },
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "Category",
+        imagePath: "categoryImage",
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
