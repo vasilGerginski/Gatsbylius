@@ -22,8 +22,8 @@ export default {
   },
   spaces: {
     none: 0,
-    sm: lineHeight / 2,
-    base: lineHeight,
+    xs: lineHeight / 2,
+    sm: lineHeight,
     md: lineHeight * 1.5,
     lg: lineHeight * 2,
     xl: lineHeight * 4,
@@ -35,6 +35,8 @@ export default {
     secondary: palette.purpleGatsby,
     white: palette.white,
     black: palette.black,
+    greyLight: palette.greyLight,
+    greyDark: palette.greyDark,
   },
   boxShadows: {
     light: "0 0 6px rgba(36, 36, 36, 0.2)",

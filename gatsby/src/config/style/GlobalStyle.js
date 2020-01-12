@@ -78,7 +78,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     ${fontFamily("bodyFont")}
-    line-height: ${spacing(["base"])};
+    line-height: ${spacing(["sm"])};
   }
 
   h1,

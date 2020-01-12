@@ -6,7 +6,7 @@ export default styled.footer`
   justify-content: center;
   align-items: center;
   height: ${spacing(["lg"])};
-  padding: ${spacing(["none", "base"])};
+  padding: ${spacing(["none", "sm"])};
   font-size: 0.8rem;
   background-color: #fff;
   z-index: 1;

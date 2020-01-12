@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import Helmet from "react-helmet";
-import { Container, Row } from "styled-bootstrap-grid";
 import Header from "./Header";
 import Footer from "./Footer";
 import { GlobalStyle } from "../../config/style/GlobalStyle";

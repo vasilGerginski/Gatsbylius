@@ -39,7 +39,7 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   height: ${spacing(["lg"])};
-  padding: ${spacing(["none", "base"])};
+  padding: ${spacing(["none", "sm"])};
   background-color: #fff;
   box-shadow: ${({ theme }) => theme.boxShadows.light};
   z-index: 100;

@@ -5,7 +5,7 @@ import Img from "gatsby-image";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 
 import Layout from "../components/Layout";
-import { GalleryItem } from "../components/ProductGrid/styled";
+import { GalleryItem, Infos } from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
 
 const pageTitle = "Gatsbylius Print Shop";
@@ -16,13 +16,15 @@ const IndexPage = ({ data }) => (
     <Container>
       <Row>
         <Col>
-          <h2>Our products</h2>
+          <h2 id="our-products" style={{ paddingTop: "4rem" }}>
+            Our products
+          </h2>
         </Col>
       </Row>
 
       <Row>
         {data.allProduct.nodes.map(product => (
-          <Col key={product.slug} sm={6} md={4} lg={3}>
+          <Col key={product.slug} sm={6} md={4}>
             <GalleryItem>
               <Link to={`/product/${product.slug}`}>
                 <Img
@@ -31,8 +33,7 @@ const IndexPage = ({ data }) => (
                     aspectRatio: 3 / 2,
                   }}
                 />
-                <br />
-                {product.name}
+                <Infos>{product.name}</Infos>
               </Link>
             </GalleryItem>
           </Col>
@@ -52,7 +53,7 @@ const IndexPage = ({ data }) => (
             : data.file.childImageSharp.fluid;
 
           return (
-            <Col key={category.code} sm={6} md={4} lg={3}>
+            <Col key={category.code} sm={6} md={4}>
               <GalleryItem>
                 <Link to={`/categories/${category.code}`}>
                   <Img
@@ -61,9 +62,7 @@ const IndexPage = ({ data }) => (
                       aspectRatio: 3 / 2,
                     }}
                   />
-
-                  <br />
-                  {category.name}
+                  <Infos>{category.name}</Infos>
                 </Link>
               </GalleryItem>
             </Col>
