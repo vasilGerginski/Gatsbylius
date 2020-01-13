@@ -1,6 +1,13 @@
 import styled from "styled-components";
+import { spacing } from "../../../helpers/themeHelpers";
 
 export default styled.footer`
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: ${spacing(["lg"])};
+  padding: ${spacing(["none", "sm"])};
   font-size: 0.8rem;
+  background-color: #fff;
+  z-index: 1;
 `;

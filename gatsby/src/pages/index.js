@@ -2,45 +2,74 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
+import { Container, Row, Col } from "styled-bootstrap-grid";
 
 import Layout from "../components/Layout";
-import ProductGrid from "../components/ProductGrid";
+import { GalleryItem, Infos } from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
 
+const pageTitle = "Gatsbylius Print Shop";
+
 const IndexPage = ({ data }) => (
-  <Layout>
-    <SEO title="The fastest shop on earth!" />
-    <h1>Hello world</h1>
+  <Layout pageTitle={pageTitle}>
+    <SEO title={pageTitle} />
+    <Container>
+      <Row>
+        <Col>
+          <h2 id="our-products" style={{ paddingTop: "4rem" }}>
+            Our products
+          </h2>
+        </Col>
+      </Row>
 
-    <h2>Nos produits</h2>
-    <ProductGrid>
-      {data.allProduct.nodes.map(product => (
-        <li key={product.slug} className="product-grid__item">
-          <Link
-            to={`/product/${product.slug}`}
-            className="product-grid__item-link"
-          >
-            <Img
-              fixed={product.localImage.childImageSharp.fixed}
-              className="product-grid__item-image"
-            />
-            <br />
-            {product.name}
-          </Link>
-        </li>
-      ))}
-    </ProductGrid>
+      <Row>
+        {data.allProduct.nodes.map(product => (
+          <Col key={product.slug} sm={6} md={4}>
+            <GalleryItem>
+              <Link to={`/product/${product.slug}`}>
+                <Img
+                  sizes={{
+                    ...product.localImage.childImageSharp.fluid,
+                    aspectRatio: 3 / 2,
+                  }}
+                />
+                <Infos>{product.name}</Infos>
+              </Link>
+            </GalleryItem>
+          </Col>
+        ))}
+      </Row>
 
-    <h2>Nos catégories</h2>
-    <ul>
-      {data.allCategory.edges.map(({ node }) => {
-        return (
-          <li key={node.code}>
-            <Link to={`/categories/${node.code}`}>{node.name}</Link>
-          </li>
-        );
-      })}
-    </ul>
+      <Row>
+        <Col>
+          <h2>Our categories</h2>
+        </Col>
+      </Row>
+
+      <Row>
+        {data.allCategory.edges.map(({ node: category }) => {
+          const fluidCategoryImage = category.localImage
+            ? category.localImage.childImageSharp.fluid
+            : data.file.childImageSharp.fluid;
+
+          return (
+            <Col key={category.code} sm={6} md={4}>
+              <GalleryItem>
+                <Link to={`/categories/${category.code}`}>
+                  <Img
+                    sizes={{
+                      ...fluidCategoryImage,
+                      aspectRatio: 3 / 2,
+                    }}
+                  />
+                  <Infos>{category.name}</Infos>
+                </Link>
+              </GalleryItem>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
   </Layout>
 );
 
@@ -52,6 +81,13 @@ export default IndexPage;
 
 export const query = graphql`
   query HomePageQuery {
+    file(name: { eq: "placeholder" }) {
+      childImageSharp {
+        fluid(maxWidth: 700) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     allCategory {
       edges {
         node {
@@ -59,6 +95,13 @@ export const query = graphql`
           code
           slug
           name
+          localImage {
+            childImageSharp {
+              fluid(maxWidth: 700) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
       }
     }
@@ -68,10 +111,8 @@ export const query = graphql`
         name
         localImage {
           childImageSharp {
-            # Specify the image processing specifications right in the query.
-            # Makes it trivial to update as your page's design changes.
-            fixed(width: 300, height: 300) {
-              ...GatsbyImageSharpFixed
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
