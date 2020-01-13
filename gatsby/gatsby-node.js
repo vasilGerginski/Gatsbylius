@@ -69,7 +69,7 @@ exports.sourceNodes = async ({
       description: originalProduct.description,
       channelCode: originalProduct.channelCode,
       averageRating: originalProduct.averageRating,
-      firstImage: originalProduct.images[0].cachedPath,
+      firstImage: `${SYLIUS_URL}/media/image/${originalProduct.images[0].path}`,
       variants: adaptVariants(originalProduct.variants),
       taxons: originalProduct.taxons,
     };

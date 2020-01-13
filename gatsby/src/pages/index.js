@@ -3,9 +3,17 @@ import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { Container, Row, Col } from "styled-bootstrap-grid";
+import { FiEye, FiShoppingCart } from "react-icons/fi";
 
 import Layout from "../components/Layout";
-import { GalleryItem, Infos } from "../components/ProductGrid/styled";
+import {
+  GalleryItem,
+  GalleryImageWrapper,
+  Infos,
+  ProductOverlay,
+  ProductOverlayButton,
+  ProductOverlayLink,
+} from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
 
 const pageTitle = "Gatsbylius Print Shop";
@@ -26,15 +34,27 @@ const IndexPage = ({ data }) => (
         {data.allProduct.nodes.map(product => (
           <Col key={product.slug} sm={6} md={4}>
             <GalleryItem>
-              <Link to={`/product/${product.slug}`}>
+              <GalleryImageWrapper>
                 <Img
                   sizes={{
                     ...product.localImage.childImageSharp.fluid,
-                    aspectRatio: 3 / 2,
                   }}
+                  style={{ maxHeight: "100%" }}
+                  imgStyle={{ objectFit: "contain" }}
                 />
-                <Infos>{product.name}</Infos>
-              </Link>
+              </GalleryImageWrapper>
+
+              <ProductOverlay>
+                <em>{product.name}</em>
+                <ProductOverlayButton type="button">
+                  <span>Add to cart</span>
+                  <FiShoppingCart size="1.2em" />
+                </ProductOverlayButton>
+                <ProductOverlayLink to={`/product/${product.slug}`}>
+                  <span>Details</span>
+                  <FiEye size="1.2em" />
+                </ProductOverlayLink>
+              </ProductOverlay>
             </GalleryItem>
           </Col>
         ))}
@@ -47,7 +67,7 @@ const IndexPage = ({ data }) => (
       </Row>
 
       <Row>
-        {data.allCategory.edges.map(({ node: category }) => {
+        {data.allCategory.nodes.map(category => {
           const fluidCategoryImage = category.localImage
             ? category.localImage.childImageSharp.fluid
             : data.file.childImageSharp.fluid;
@@ -62,6 +82,7 @@ const IndexPage = ({ data }) => (
                       aspectRatio: 3 / 2,
                     }}
                   />
+
                   <Infos>{category.name}</Infos>
                 </Link>
               </GalleryItem>
@@ -89,17 +110,15 @@ export const query = graphql`
       }
     }
     allCategory {
-      edges {
-        node {
-          id
-          code
-          slug
-          name
-          localImage {
-            childImageSharp {
-              fluid(maxWidth: 700) {
-                ...GatsbyImageSharpFluid
-              }
+      nodes {
+        id
+        code
+        slug
+        name
+        localImage {
+          childImageSharp {
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

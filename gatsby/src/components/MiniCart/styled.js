@@ -1,13 +1,27 @@
 import styled from "styled-components";
+import { color } from "../../helpers/themeHelpers";
+
+export const CartButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+`;
 
 export const CartInfo = styled.span`
-  background-color: #6394f8;
-  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.2rem;
+  font-size: 0.8rem;
+  border-radius: 50%;
   color: white;
-  display: inline-block;
-  font-size: 12px;
-  line-height: 1;
-  padding: 3px 7px;
+  background-color: ${color("secondary")};
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
@@ -40,12 +54,12 @@ export const MiniCartItemName = styled.span`
 `;
 
 export const MiniCartItemPrice = styled.span`
-  color: #6394f8;
+  color: ${color("secondary")};
   margin-right: 8px;
 `;
 
 export const MiniCartItemQty = styled.span`
-  color: #abb0be;
+  color: ${color("secondary")};
 `;
 
 export const MiniCartItems = styled.ul`
