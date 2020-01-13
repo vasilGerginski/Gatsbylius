@@ -46,7 +46,7 @@ const Layout = ({ children }) => {
     <>
       <Helmet>
         <link
-          href="https://fonts.googleapis.com/css?family=Montserrat:600|Roboto:300,300i,700&display=swap"
+          href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,600&display=swap"
           rel="stylesheet"
         />
       </Helmet>

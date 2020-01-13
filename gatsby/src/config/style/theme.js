@@ -15,7 +15,7 @@ export default {
   typography: {
     families: {
       titleFont: "Montserrat, sans-serif",
-      bodyFont: "Roboto, sans-serif",
+      bodyFont: "Montserrat, sans-serif",
     },
     baseFontSize,
     lineHeight,
