@@ -2,16 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { cartReducer } from "../reducers/cartReducer";
 
-export const defaultStoreState = localStorage.getItem("storeState")
-  ? JSON.parse(localStorage.getItem("storeState"))
-  : {
-      cartKey: "",
-      currency: "USD",
-      miniCartIsOpen: false,
-      adding: false,
-      products: [],
-      cart: {},
-    };
+export const defaultStoreState =
+  window !== undefined && localStorage.getItem("storeState")
+    ? JSON.parse(localStorage.getItem("storeState"))
+    : {
+        cartKey: "",
+        currency: "USD",
+        miniCartIsOpen: false,
+        adding: false,
+        products: [],
+        cart: {},
+      };
 
 export const StoreStateContext = React.createContext();
 export const StoreDispatchContext = React.createContext();
