@@ -14,8 +14,8 @@ export const defaultStoreState =
         cart: {},
       };
 
-export const StoreStateContext = React.createContext();
-export const StoreDispatchContext = React.createContext();
+export const StoreStateContext = React.createContext(defaultStoreState);
+export const StoreDispatchContext = React.createContext({});
 
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(cartReducer, defaultStoreState);
