@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { cartReducer } from "../reducers/cartReducer";
 
 export const defaultStoreState =
-  window !== undefined && localStorage.getItem("storeState")
+  typeof window !== "undefined" && localStorage.getItem("storeState")
     ? JSON.parse(localStorage.getItem("storeState"))
     : {
         cartKey: "",
