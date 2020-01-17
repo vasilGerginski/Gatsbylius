@@ -60,7 +60,7 @@ const Layout = ({ children }) => {
         />
 
         <Main>
-          {window !== "undefined" && window.location.pathname === "/" && <Hero />}
+          {typeof window !== "undefined" && window.location.pathname === "/" && <Hero />}
           {children}
         </Main>
 
