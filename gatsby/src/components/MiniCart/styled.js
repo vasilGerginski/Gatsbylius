@@ -79,15 +79,15 @@ export const MiniCartItems = styled.ul`
 `;
 
 export const MiniCart = styled.div`
-  margin: 20px 0;
-  float: right;
-  background: white;
+  position: fixed;
+  top: 4rem;
+  right: 1rem;
   width: 320px;
-  position: absolute;
-  right: 2%;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.25rem;
+  box-shadow: ${({ theme }) => theme.boxShadows.light};
   z-index: 100;
-  border-radius: 3px;
-  padding: 20px;
 
   ${MiniCartHeader}
 

@@ -36,10 +36,12 @@ export const ProductOverlay = styled.div`
   background: rgba(15, 191, 185, 0.92);
   box-shadow: inset 0px 0px 20px rgba(255, 255, 255, 0.5);
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.05s ease-in-out;
+  transform: scale(0);
 
   ${GalleryItem}:hover & {
     opacity: 1;
+    transform: scale(1);
   }
 `;
 
