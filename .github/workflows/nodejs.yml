@@ -1,16 +1,12 @@
 name: Node CI
 
 on: [push]
-
 jobs:
   build:
-
     runs-on: ubuntu-18.04
-
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
-
+        node-version: [10.x]
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
@@ -33,3 +29,25 @@ jobs:
         npm test
       env:
         CI: true
+    
+    - name: Slack notification
+      if: failure()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Github Gatsbylius # Optional.
+        SLACK_CHANNEL: gatsbylius # Optional.
+      uses: Ilshidur/action-slack@master
+      with:
+        args: 'Error on commit build'
+        
+    - name: Slack notification
+      if: success()
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: Github Gatsbylius # Optional.
+        SLACK_CHANNEL: gatsbylius # Optional.
+      uses: Ilshidur/action-slack@master
+      with:
+        args: 'Commit build successfully'
+
+   
