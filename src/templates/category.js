@@ -70,7 +70,7 @@ const Category = ({data}) => {
             }}
           >
             {subCategories.map(subCategory => {
-              return subCategory.fields.products && subCategory.fields.products.length > 0 && subCategory.fields.products.map(product => {
+              return subCategory.fields && subCategory.fields.products && subCategory.fields.products.length > 0 && subCategory.fields.products.map(product => {
                 return (
                   <li key={product.slug}>
                     <Link to={`product/${product.slug}`}>
