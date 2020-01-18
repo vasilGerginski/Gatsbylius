@@ -17,9 +17,9 @@ const Category = ({data}) => {
   let categoryName = category.name;
 
   if (category.parent) {
-    fluidCategoryImage = category.parent.localImage
+    fluidCategoryImage =category.parent.localImage && (category.parent.localImage
       ? category.parent.localImage.childImageSharp.fluid
-      : data.file.childImageSharp.fluid;
+      : data.file.childImageSharp.fluid);
     categoryName = category.parent.name;
     subCategories = category.parent.childrenCategory;
   }
