@@ -15,7 +15,6 @@ import {
   ProductOverlayLink,
 } from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
-import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
 
 const pageTitle = "Gatsbylius Print Shop";
 
