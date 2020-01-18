@@ -42,7 +42,7 @@ exports.sourceNodes = async ({
       slug: originalCategory.slug,
       description: originalCategory.description,
       position: originalCategory.position,
-      children: originalCategory.children,
+      syliusChildren: originalCategory.children,
       images: originalCategory.images,
       categoryImage:
         originalCategory.images.length > 0
@@ -75,24 +75,24 @@ exports.sourceNodes = async ({
     };
   };
 
-  const createNodeFromCategory = (categoryData, level = 0) => {
+  const createNodeFromCategory = (categoryData) => {
     const nodeContent = JSON.stringify(categoryData);
 
-    const childrenIds = categoryData.children.map(categoryData => {
-      return createNodeFromCategory(categoryData, level + 1);
-    });
+    if (nodeContent.hasOwnProperty("children")) {
+      nodeContent["syliusChildren"] = nodeContent["children"];
+      delete nodeContent["children"];
+    }
 
     const nodeMeta = {
       id: createNodeId(`category-${categoryData.code}`),
       parent: null,
-      children: childrenIds,
       internal: {
         type: `Category`,
         mediaType: `text/html`,
         content: nodeContent,
         contentDigest: createContentDigest(categoryData),
       },
-      level,
+      level: 0,
     };
 
     const node = Object.assign({}, categoryData, nodeMeta);
@@ -220,8 +220,8 @@ exports.createPages = ({ graphql, actions }) => {
 };
 
 // For function createNodeField
-exports.onCreateNode = ({ node, getNode, createNodeId, actions }) => {
-  const { createNodeField } = actions;
+exports.onCreateNode = ({ node, getNode, createNodeId, createContentDigest, actions }) => {
+  const { createNodeField, createParentChildLink, createNode } = actions;
 
   if (node.internal.type === "Product" && node.taxons) {
     let categoryNode = getNode(createNodeId(`category-${node.taxons.main}`));
@@ -236,5 +236,32 @@ exports.onCreateNode = ({ node, getNode, createNodeId, actions }) => {
       name: "products___NODE",
       value: categoryNodeValue,
     });
+  }
+
+  if (node.internal.type === "Category" && node.level === 0) {
+
+    return node.syliusChildren.map(childrenCategoryData => {
+      const nodeContent = JSON.stringify(childrenCategoryData);
+      const nodeMeta = {
+        id: createNodeId(`category-${childrenCategoryData.code}`),
+        parent: node.id,
+        children: [],
+        internal: {
+          type: `Category`,
+          mediaType: `text/html`,
+          content: nodeContent,
+          contentDigest: createContentDigest(childrenCategoryData),
+        },
+        level: 1,
+      };
+
+      const childrenNode = Object.assign({}, childrenCategoryData, nodeMeta);
+      createNode(childrenNode);
+      createParentChildLink({
+        parent: node, child: childrenNode
+      });
+
+      return childrenNode;
+    })
   }
 };

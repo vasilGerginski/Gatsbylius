@@ -6,12 +6,16 @@ export const categoryGridTextStyle = `
   text-align: center;
 `;
 
+export const selectedCategory = `
+  color: black;
+`;
+
 export const CategoryTitle = styled.h1`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 6rem;
+  font-size: 5.5vw;
 `;
 
 export const CategoryImageContainer = styled.div`
@@ -23,6 +27,19 @@ export const CategoryImageContainer = styled.div`
 
 export const CategoryProductContainer = styled(Col)`
   padding-bottom: 1em;
+`;
+
+export const ChildCategoryLinks = styled(Link)`
+  color: grey;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover 
+  {
+       color:#00A0C6; 
+       text-decoration:none; 
+       cursor:pointer;  
+  }
 `;
 
 export const CategoryProductLink = styled(Link)`

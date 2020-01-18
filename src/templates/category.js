@@ -4,15 +4,26 @@ import {graphql, Link} from "gatsby";
 import Layout from "../components/Layout";
 import Img from "gatsby-image";
 import {Container, Row, Col} from 'styled-bootstrap-grid';
-import {categoryGridTextStyle, CategoryTitle, CategoryImageContainer, CategoryProductLink, CategoryProductContainer} from '../components/CategoryGrid/styled';
+import {ChildCategoryLinks, categoryGridTextStyle, CategoryTitle, CategoryImageContainer, CategoryProductLink, CategoryProductContainer, selectedCategory} from '../components/CategoryGrid/styled';
 
 const Category = ({data}) => {
   const category = data.category;
   const products = category.fields && category.fields.products;
-  const subCategories = category.childrenCategory;
-  const fluidCategoryImage = category.localImage
+  const baseCategoryCode = category.parent ? category.parent.code : category.code;
+  let subCategories = category.childrenCategory;
+  let fluidCategoryImage = category.localImage && (category.localImage
     ? category.localImage.childImageSharp.fluid
-    : data.file.childImageSharp.fluid;
+    : data.file.childImageSharp.fluid);
+  let categoryName = category.name;
+
+  if (category.parent) {
+    fluidCategoryImage = category.parent.localImage
+      ? category.parent.localImage.childImageSharp.fluid
+      : data.file.childImageSharp.fluid;
+    categoryName = category.parent.name;
+    subCategories = category.parent.childrenCategory;
+  }
+
 
   return (
     <Layout>
@@ -26,29 +37,41 @@ const Category = ({data}) => {
                   aspectRatio: 8 / 2,
                 }}
               />
-              <CategoryTitle>{category.name}</CategoryTitle>
+              <CategoryTitle>{categoryName}</CategoryTitle>
             </CategoryImageContainer>
-            <p>{category.description}</p>
           </Col>
         </Row>
         <Row>
-          <Col sm={2}>
+          <Col lg={2}>
             {subCategories && subCategories.length > 0 && (
               <>
-                <h3>Sub categories</h3>
+                <h3>Our {categoryName}</h3>
+
+                <Col sm={12} key={baseCategoryCode}>
+                  <ChildCategoryLinks
+                    css={baseCategoryCode === category.code ? selectedCategory : null}
+                    to={`/categories/${baseCategoryCode}`}
+                  >
+                    All {categoryName}
+                  </ChildCategoryLinks>
+                </Col>
+
                 {subCategories.map(subCategory => {
                   return (
                     <Col sm={12} key={subCategory.code}>
-                      <Link to={`/categories/${subCategory.code}`}>
+                      <ChildCategoryLinks
+                        to={`/categories/${subCategory.code}`}
+                        css={subCategory.code === category.code ? selectedCategory : null}
+                      >
                         {subCategory.name}
-                      </Link>
+                      </ChildCategoryLinks>
                     </Col>
                   );
                 })}
               </>
             )}
           </Col>
-          <Col sm={10}>
+          <Col lg={10}>
             {products && products.length > 0 && (
               <Row>
                 <Col sm={12}>
@@ -56,13 +79,12 @@ const Category = ({data}) => {
                 </Col>
                 {products.map(product => {
                   return (
-                    <Col md={6} lg={4} xl={3} key={product.slug}>
-                      <Link to={`product/${product.slug}`}>
+                    <CategoryProductContainer md={6} lg={4} xl={3} key={product.slug}>
+                      <CategoryProductLink to={`product/${product.slug}`}>
                         <Img fluid={product.localImage.childImageSharp.fluid}/>{" "}
-                        <br/>
                         {product.name}
-                      </Link>
-                    </Col>
+                      </CategoryProductLink>
+                    </CategoryProductContainer>
                   );
                 })}
               </Row>
@@ -79,7 +101,6 @@ const Category = ({data}) => {
                       <CategoryProductContainer md={6} lg={4} xl={3} key={product.slug}>
                         <CategoryProductLink to={`product/${product.slug}`}>
                           <Img fluid={product.localImage.childImageSharp.fluid}/>{" "}
-                          <br/>
                           {product.name}
                         </CategoryProductLink>
                       </CategoryProductContainer>
@@ -108,6 +129,24 @@ export const query = graphql`
       slug
       name
       description
+      parent {
+        id
+        ... on Category {
+          name
+          code
+          childrenCategory {
+            name
+            code
+          }
+          localImage {
+            childImageSharp {
+              fluid(maxWidth: 1000, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
       localImage {
         childImageSharp {
           fluid(maxWidth: 1000, quality: 100) {
