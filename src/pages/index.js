@@ -21,43 +21,46 @@ const pageTitle = "Gatsbylius Print Shop";
 const IndexPage = ({ data }) => (
   <Layout pageTitle={pageTitle}>
     <SEO title={pageTitle} />
-    <Container>
+    <Container fluid>
       <Row>
         <Col>
           <h2 id="our-products" style={{ paddingTop: "4rem" }}>
-            Our products
+            Our latest products
           </h2>
         </Col>
       </Row>
 
       <Row>
-        {data.allProduct.nodes.map(product => (
-          <Col key={product.slug} sm={6} md={4}>
-            <GalleryItem>
-              <GalleryImageWrapper>
-                <Img
-                  sizes={{
-                    ...product.localImage.childImageSharp.fluid,
-                  }}
-                  style={{ maxHeight: "100%" }}
-                  imgStyle={{ objectFit: "contain" }}
-                />
-              </GalleryImageWrapper>
+        {[...data.allProduct.nodes]
+          .reverse()
+          .slice(0, 8)
+          .map(product => (
+            <Col key={product.slug} sm={6} md={4} lg={3}>
+              <GalleryItem>
+                <GalleryImageWrapper>
+                  <Img
+                    sizes={{
+                      ...product.localImage.childImageSharp.fluid,
+                    }}
+                    style={{ maxHeight: "100%" }}
+                    imgStyle={{ objectFit: "contain" }}
+                  />
+                </GalleryImageWrapper>
 
-              <ProductOverlay>
-                <em>{product.name}</em>
-                <ProductOverlayButton type="button">
-                  <span>Add to cart</span>
-                  <FiShoppingCart size="1.2em" />
-                </ProductOverlayButton>
-                <ProductOverlayLink to={`/product/${product.slug}`}>
-                  <span>Details</span>
-                  <FiEye size="1.2em" />
-                </ProductOverlayLink>
-              </ProductOverlay>
-            </GalleryItem>
-          </Col>
-        ))}
+                <ProductOverlay>
+                  <em>{product.name}</em>
+                  <ProductOverlayButton type="button">
+                    <FiShoppingCart size="1.2em" />
+                    <span>Add to cart</span>
+                  </ProductOverlayButton>
+                  <ProductOverlayLink to={`/product/${product.slug}`}>
+                    <FiEye size="1.2em" />
+                    <span>Details</span>
+                  </ProductOverlayLink>
+                </ProductOverlay>
+              </GalleryItem>
+            </Col>
+          ))}
       </Row>
 
       <Row>
@@ -73,18 +76,20 @@ const IndexPage = ({ data }) => (
             : data.file.childImageSharp.fluid;
 
           return (
-            <Col key={category.code} sm={6} md={4}>
+            <Col key={category.code} sm={4} md={3}>
               <GalleryItem>
-                <Link to={`/categories/${category.code}`}>
-                  <Img
-                    sizes={{
-                      ...fluidCategoryImage,
-                      aspectRatio: 3 / 2,
-                    }}
-                  />
+                <GalleryImageWrapper>
+                  <Link to={`/categories/${category.code}`}>
+                    <Img
+                      sizes={{
+                        ...fluidCategoryImage,
+                        aspectRatio: 3 / 2,
+                      }}
+                    />
 
-                  <Infos>{category.name}</Infos>
-                </Link>
+                    <Infos>{category.name}</Infos>
+                  </Link>
+                </GalleryImageWrapper>
               </GalleryItem>
             </Col>
           );

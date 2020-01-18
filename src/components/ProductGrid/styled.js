@@ -4,17 +4,21 @@ import { Link } from "gatsby";
 
 export const GalleryItem = styled.div`
   position: relative;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 100% 0.5rem;
   margin-bottom: 2rem;
   background-color: #fff;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
 `;
 
 export const GalleryImageWrapper = styled.div`
+  position: absolute;
+  top: ${spacing(["xs"])};
+  bottom: ${spacing(["xs"])};
+  left: ${spacing(["xs"])};
+  right: ${spacing(["xs"])};
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 15rem;
 `;
 
 export const ProductOverlay = styled.div`
@@ -25,9 +29,11 @@ export const ProductOverlay = styled.div`
   right: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,31 +53,33 @@ export const ProductOverlay = styled.div`
 
 const ProductOverlayButtonStyle = css`
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 0.5rem 1rem;
+  width: 13rem;
+  padding: ${spacing(["xs", "sm"])};
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 0.1em;
+  text-align: left;
   text-transform: uppercase;
-  color: ${color("white")};
-  background: transparent;
+  color: ${color("primary")};
+  background: ${color("white")};
   border: 1px solid ${color("white")};
   transition: background 0.3s, color 0.3s;
 
   &:hover {
     cursor: pointer;
-    color: ${color("primary")};
-    background: ${color("white")};
+    color: ${color("white")};
+    background: transparent;
   }
 
   span {
-    margin-right: 1rem;
+    margin-left: 1.2rem;
   }
 `;
 
 export const ProductOverlayButton = styled.button`
   ${ProductOverlayButtonStyle}
+  margin: ${spacing(["md", "none", "sm"])};
 `;
 
 export const ProductOverlayLink = styled(Link)`
