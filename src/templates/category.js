@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { graphql, Link } from "gatsby";
+import {graphql, Link} from "gatsby";
 import Layout from "../components/Layout";
 import Img from "gatsby-image";
 
-const Category = ({ data }) => {
+const Category = ({data}) => {
   const category = data.category;
   const products = category.fields && category.fields.products;
   const subCategories = category.childrenCategory;
@@ -47,12 +47,40 @@ const Category = ({ data }) => {
               return (
                 <li key={product.slug}>
                   <Link to={`product/${product.slug}`}>
-                    <Img fixed={product.localImage.childImageSharp.fixed} />{" "}
-                    <br />
+                    <Img fixed={product.localImage.childImageSharp.fixed}/>{" "}
+                    <br/>
                     {product.name}
                   </Link>
                 </li>
               );
+            })}
+          </ul>
+        </section>
+      )}
+
+      {!products && subCategories && subCategories.length > 0 && (
+        <section>
+          <h2>Products</h2>
+          <ul
+            style={{
+              listStyle: "none",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
+            {subCategories.map(subCategory => {
+              return subCategory.fields.products && subCategory.fields.products.length > 0 && subCategory.fields.products.map(product => {
+                return (
+                  <li key={product.slug}>
+                    <Link to={`product/${product.slug}`}>
+                      <Img fixed={product.localImage.childImageSharp.fixed}/>{" "}
+                      <br/>
+                      {product.name}
+                    </Link>
+                  </li>
+                );
+              })
             })}
           </ul>
         </section>
@@ -69,7 +97,7 @@ export default Category;
 
 export const query = graphql`
   query CategoryPageQuery($code: String) {
-    category(code: { eq: $code }) {
+    category(code: {eq: $code}) {
       code
       slug
       name
@@ -81,8 +109,6 @@ export const query = graphql`
           slug
           localImage {
             childImageSharp {
-              # Specify the image processing specifications right in the query.
-              # Makes it trivial to update as your page's design changes.
               fixed(width: 125, height: 125) {
                 ...GatsbyImageSharpFixed
               }
@@ -95,6 +121,20 @@ export const query = graphql`
         code
         slug
         name
+        fields {
+          products {
+            id
+            name
+            slug
+            localImage {
+              childImageSharp {
+                fixed(width: 125, height: 125) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
