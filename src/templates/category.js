@@ -3,88 +3,94 @@ import PropTypes from "prop-types";
 import {graphql, Link} from "gatsby";
 import Layout from "../components/Layout";
 import Img from "gatsby-image";
+import {Container, Row, Col} from 'styled-bootstrap-grid';
+import {categoryGridTextStyle, CategoryTitle, CategoryImageContainer, CategoryProductLink, CategoryProductContainer} from '../components/CategoryGrid/styled';
 
 const Category = ({data}) => {
   const category = data.category;
   const products = category.fields && category.fields.products;
   const subCategories = category.childrenCategory;
+  const fluidCategoryImage = category.localImage
+    ? category.localImage.childImageSharp.fluid
+    : data.file.childImageSharp.fluid;
 
   return (
     <Layout>
-      <h1>{category.name}</h1>
+      <Container css={categoryGridTextStyle} fluid>
+        <Row>
+          <Col sm={12}>
+            <CategoryImageContainer>
+              <Img
+                sizes={{
+                  ...fluidCategoryImage,
+                  aspectRatio: 8 / 2,
+                }}
+              />
+              <CategoryTitle>{category.name}</CategoryTitle>
+            </CategoryImageContainer>
+            <p>{category.description}</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={2}>
+            {subCategories && subCategories.length > 0 && (
+              <>
+                <h3>Sub categories</h3>
+                {subCategories.map(subCategory => {
+                  return (
+                    <Col sm={12} key={subCategory.code}>
+                      <Link to={`/categories/${subCategory.code}`}>
+                        {subCategory.name}
+                      </Link>
+                    </Col>
+                  );
+                })}
+              </>
+            )}
+          </Col>
+          <Col sm={10}>
+            {products && products.length > 0 && (
+              <Row>
+                <Col sm={12}>
+                  <h2>Products</h2>
+                </Col>
+                {products.map(product => {
+                  return (
+                    <Col md={6} lg={4} xl={3} key={product.slug}>
+                      <Link to={`product/${product.slug}`}>
+                        <Img fluid={product.localImage.childImageSharp.fluid}/>{" "}
+                        <br/>
+                        {product.name}
+                      </Link>
+                    </Col>
+                  );
+                })}
+              </Row>
+            )}
 
-      <p>{category.description}</p>
-
-      {subCategories && subCategories.length > 0 && (
-        <section>
-          <h2>Sub categories</h2>
-          <ul>
-            {subCategories.map(subCategory => {
-              return (
-                <li key={subCategory.code}>
-                  <Link to={`/categories/${subCategory.code}`}>
-                    {subCategory.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      )}
-
-      {products && products.length > 0 && (
-        <section>
-          <h2>Products</h2>
-          <ul
-            style={{
-              listStyle: "none",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {products.map(product => {
-              return (
-                <li key={product.slug}>
-                  <Link to={`product/${product.slug}`}>
-                    <Img fixed={product.localImage.childImageSharp.fixed}/>{" "}
-                    <br/>
-                    {product.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      )}
-
-      {!products && subCategories && subCategories.length > 0 && (
-        <section>
-          <h2>Products</h2>
-          <ul
-            style={{
-              listStyle: "none",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {subCategories.map(subCategory => {
-              return subCategory.fields && subCategory.fields.products && subCategory.fields.products.length > 0 && subCategory.fields.products.map(product => {
-                return (
-                  <li key={product.slug}>
-                    <Link to={`product/${product.slug}`}>
-                      <Img fixed={product.localImage.childImageSharp.fixed}/>{" "}
-                      <br/>
-                      {product.name}
-                    </Link>
-                  </li>
-                );
-              })
-            })}
-          </ul>
-        </section>
-      )}
+            {!products && subCategories && subCategories.length > 0 && (
+              <Row>
+                <Col sm={12}>
+                  <h2>Products</h2>
+                </Col>
+                {subCategories.map(subCategory => {
+                  return subCategory.fields && subCategory.fields.products && subCategory.fields.products.length > 0 && subCategory.fields.products.map(product => {
+                    return (
+                      <CategoryProductContainer md={6} lg={4} xl={3} key={product.slug}>
+                        <CategoryProductLink to={`product/${product.slug}`}>
+                          <Img fluid={product.localImage.childImageSharp.fluid}/>{" "}
+                          <br/>
+                          {product.name}
+                        </CategoryProductLink>
+                      </CategoryProductContainer>
+                    );
+                  })
+                })}
+              </Row>
+            )}
+          </Col>
+        </Row>
+      </Container>
     </Layout>
   );
 };
@@ -102,6 +108,13 @@ export const query = graphql`
       slug
       name
       description
+      localImage {
+        childImageSharp {
+          fluid(maxWidth: 1000, quality: 100) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       fields {
         products {
           id
@@ -109,8 +122,8 @@ export const query = graphql`
           slug
           localImage {
             childImageSharp {
-              fixed(width: 125, height: 125) {
-                ...GatsbyImageSharpFixed
+              fluid(maxWidth: 400, quality: 100) {
+                ...GatsbyImageSharpFluid
               }
             }
           }
@@ -128,8 +141,8 @@ export const query = graphql`
             slug
             localImage {
               childImageSharp {
-                fixed(width: 125, height: 125) {
-                  ...GatsbyImageSharpFixed
+                fluid(maxWidth: 400, quality: 100) {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }
