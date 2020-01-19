@@ -75,7 +75,7 @@ exports.sourceNodes = async ({
     };
   };
 
-  const createNodeFromCategory = (categoryData) => {
+  const createNodeFromCategory = categoryData => {
     const nodeContent = JSON.stringify(categoryData);
 
     if (nodeContent.hasOwnProperty("children")) {
@@ -143,6 +143,25 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   const blogPostTemplate = path.resolve(`src/templates/product.js`);
   const categoryTemplate = path.resolve(`src/templates/category.js`);
+  const customerTemplate = path.resolve(`src/templates/checkout/customer.js`);
+  const paymentTemplate = path.resolve(`src/templates/checkout/payment.js`);
+  const shippingTemplate = path.resolve(`src/templates/checkout/shipping.js`);
+
+  createPage({
+    path: `/checkout/customer`,
+    component: customerTemplate,
+  });
+
+  createPage({
+    path: `/checkout/payment`,
+    component: paymentTemplate,
+  });
+
+  createPage({
+    path: `/checkout/shipping`,
+    component: shippingTemplate,
+  });
+
   // Query for markdown nodes to use in creating pages.
   // You can query for whatever data you want to create pages for e.g.
   // products, portfolio items, landing pages, etc.
@@ -220,7 +239,13 @@ exports.createPages = ({ graphql, actions }) => {
 };
 
 // For function createNodeField
-exports.onCreateNode = ({ node, getNode, createNodeId, createContentDigest, actions }) => {
+exports.onCreateNode = ({
+  node,
+  getNode,
+  createNodeId,
+  createContentDigest,
+  actions,
+}) => {
   const { createNodeField, createParentChildLink, createNode } = actions;
 
   if (node.internal.type === "Product" && node.taxons) {
@@ -239,7 +264,6 @@ exports.onCreateNode = ({ node, getNode, createNodeId, createContentDigest, acti
   }
 
   if (node.internal.type === "Category" && node.level === 0) {
-
     return node.syliusChildren.map(childrenCategoryData => {
       const nodeContent = JSON.stringify(childrenCategoryData);
       const nodeMeta = {
@@ -258,10 +282,11 @@ exports.onCreateNode = ({ node, getNode, createNodeId, createContentDigest, acti
       const childrenNode = Object.assign({}, childrenCategoryData, nodeMeta);
       createNode(childrenNode);
       createParentChildLink({
-        parent: node, child: childrenNode
+        parent: node,
+        child: childrenNode,
       });
 
       return childrenNode;
-    })
+    });
   }
 };
