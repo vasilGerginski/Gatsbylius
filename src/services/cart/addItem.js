@@ -26,6 +26,7 @@ export const addVariantToCart = async (
   await axios
     .post(`${SYLIUS_URL}/shop-api/carts/${cartKey}/items`, productData)
     .then(response => {
+      console.log(response);
       storeDispatch({ type: "updateProducts", payload: response.data.items });
     })
     .catch(err => {
