@@ -52,5 +52,13 @@ jobs:
         uses: Ilshidur/action-slack@master
         with:
           args: 'Branch build successfully'
+      - name: Deploy
+        if: success()
+        uses: s0/git-publish-subdir-action@master
+        env:
+          REPO: self
+          BRANCH: gh-pages
+          FOLDER: public
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
    
