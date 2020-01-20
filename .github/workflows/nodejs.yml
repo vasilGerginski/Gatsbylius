@@ -1,6 +1,9 @@
 name: Node CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -20,7 +23,7 @@ jobs:
           SLACK_CHANNEL: gatsbylius # Optional.
         uses: Ilshidur/action-slack@master
         with:
-          args: 'Modifications has been pushed, starting build...'
+          args: 'Modifications has been pushed on master, starting build...'
 
       - name: set environment variables
         uses: allenevans/set-env@v1.0.0
@@ -41,7 +44,7 @@ jobs:
           SLACK_CHANNEL: gatsbylius # Optional.
         uses: Ilshidur/action-slack@master
         with:
-          args: 'Error on current branch build'
+          args: 'Error on master branch build'
 
       - name: Slack notification
         if: success()
@@ -51,6 +54,15 @@ jobs:
           SLACK_CHANNEL: gatsbylius # Optional.
         uses: Ilshidur/action-slack@master
         with:
-          args: 'Branch build successfully'
-
-   
+          args: 'Master build successfully, run deploy...'
+      - name: deploy to server
+        if: success()
+        uses: AEnterprise/rsync-deploy@v1.0
+        env:
+          DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-e -c -r --delete"
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          FOLDER: "./public/"
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          USERNAME: ${{ secrets.USERNAME }}
+          SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
