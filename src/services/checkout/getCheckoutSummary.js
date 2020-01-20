@@ -2,12 +2,26 @@
 const axios = require("axios");
 const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL;
 
-export const getCheckoutSummary = async (storeState, checkoutState, checkoutDispatch) => {
+export const getCheckoutSummary = async (storeState, checkoutDispatch) => {
   if (storeState.cartKey) {
     await axios
       .get(`${SYLIUS_URL}/shop-api/checkout/${storeState.cartKey}`, {})
       .then(response => {
-        console.log(response)
+        checkoutDispatch({
+          type: "updateOrderSummary",
+          payload: {
+            items: response.data.items,
+            subTotal: response.data.totals.items,
+            shipping: response.data.totals.shipping,
+            taxes: response.data.totals.taxes,
+            total: response.data.totals.total,
+            cartDiscount: response.cartDiscount,
+            currency: response.currency,
+            //@todo get current shipment after
+            //currentShipment: response.shipments[0].method,
+          },
+        });
+        console.log(response);
       })
       .catch(error => {
         console.error("Error on cart creation ", error);
