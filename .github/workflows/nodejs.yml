@@ -55,11 +55,14 @@ jobs:
         uses: Ilshidur/action-slack@master
         with:
           args: 'Master build successfully, run deploy...'
-      - name: Deploy
+      - name: deploy to server
         if: success()
-        uses: s0/git-publish-subdir-action@master
+        uses: AEnterprise/rsync-deploy@v1.0
         env:
-          REPO: self
-          BRANCH: gh-pages
-          FOLDER: public
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-e -c -r --delete"
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          FOLDER: "./"
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          USERNAME: ${{ secrets.USERNAME }}
+          SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
