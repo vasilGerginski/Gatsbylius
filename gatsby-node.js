@@ -69,13 +69,15 @@ exports.sourceNodes = async ({
       description: originalProduct.description,
       channelCode: originalProduct.channelCode,
       averageRating: originalProduct.averageRating,
-      firstImage: `${SYLIUS_URL}/media/image/${originalProduct.images[0].path}`,
+      firstImage: originalProduct.images[0]
+        ? `${SYLIUS_URL}/media/image/${originalProduct.images[0].path}`
+        : null,
       variants: adaptVariants(originalProduct.variants),
       taxons: originalProduct.taxons,
     };
   };
 
-  const createNodeFromCategory = (categoryData) => {
+  const createNodeFromCategory = categoryData => {
     const nodeContent = JSON.stringify(categoryData);
 
     if (nodeContent.hasOwnProperty("children")) {
@@ -220,14 +222,29 @@ exports.createPages = ({ graphql, actions }) => {
 };
 
 // For function createNodeField
-exports.onCreateNode = ({ node, getNode, createNodeId, createContentDigest, actions }) => {
+exports.onCreateNode = ({
+  node,
+  getNode,
+  createNodeId,
+  createContentDigest,
+  actions,
+}) => {
   const { createNodeField, createParentChildLink, createNode } = actions;
 
-  if (node.internal.type === "Product" && node.taxons) {
+  if (
+    node &&
+    node.internal &&
+    node.internal.type === "Product" &&
+    node.taxons
+  ) {
     let categoryNode = getNode(createNodeId(`category-${node.taxons.main}`));
 
     let categoryNodeValue = [node.id];
-    if (categoryNode.fields && categoryNode.fields.products___NODE) {
+    if (
+      categoryNode &&
+      categoryNode.fields &&
+      categoryNode.fields.products___NODE
+    ) {
       categoryNodeValue = [...categoryNode.fields.products___NODE, node.id];
     }
 
@@ -239,7 +256,6 @@ exports.onCreateNode = ({ node, getNode, createNodeId, createContentDigest, acti
   }
 
   if (node.internal.type === "Category" && node.level === 0) {
-
     return node.syliusChildren.map(childrenCategoryData => {
       const nodeContent = JSON.stringify(childrenCategoryData);
       const nodeMeta = {
@@ -258,10 +274,11 @@ exports.onCreateNode = ({ node, getNode, createNodeId, createContentDigest, acti
       const childrenNode = Object.assign({}, childrenCategoryData, nodeMeta);
       createNode(childrenNode);
       createParentChildLink({
-        parent: node, child: childrenNode
+        parent: node,
+        child: childrenNode,
       });
 
       return childrenNode;
-    })
+    });
   }
 };
