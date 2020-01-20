@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { spacing } from "../../../helpers/themeHelpers";
 
-const StyledMain = styled.div`
+const StyledMain = styled.main`
   margin-top: ${spacing(["lg"])};
 `;
 
