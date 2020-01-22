@@ -6,53 +6,69 @@ import { Container, Row, Col } from "styled-bootstrap-grid";
 import Layout from "../components/Layout";
 import ProductBreadcrumb from "../components/ProductBreadcrumb";
 import ProductSynthesis from "../components/ProductSynthesis";
+import styled from "styled-components";
+import { spacing } from "../helpers/themeHelpers";
 import Img from "gatsby-image";
+
+const ProductPageWrapper = styled.div`
+  padding-top: ${spacing(["lg"])};
+`;
 
 const Product = ({ data }) => {
   return (
     <Layout>
-      <Container>
-        <Row>
-          <Col>
-            <ProductBreadcrumb product={data.product} />
-          </Col>
-        </Row>
+      <ProductPageWrapper>
+        <Container>
+          <Row>
+            <Col>
+              <ProductBreadcrumb product={data.product} />
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <Img fixed={data.product.localImage.childImageSharp.fixed} />
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <h1>{data.product.name}</h1>
+              <p>SKU: {data.product.code}</p>
+            </Col>
+          </Row>
 
-        <ProductSynthesis product={data.product} />
+          <Row>
+            <Col>
+              <Img fixed={data.product.localImage.childImageSharp.fixed} />
+            </Col>
+          </Row>
 
-        <h5>Details</h5>
-        <p>{data.product.description}</p>
+          <ProductSynthesis product={data.product} />
 
-        <h5>Attributes</h5>
-        <ul>
-          <li>Code: {data.product.code}</li>
-          <li>
-            Average Rating: {data.product.averageRating}
-            {"/5"}
-          </li>
-        </ul>
+          <h5>Details</h5>
+          <p>{data.product.description}</p>
 
-        <div>
-          <h4>Autres produits</h4>
+          <h5>Attributes</h5>
           <ul>
-            {data.allProduct.nodes.map(product => {
-              return (
-                <li key={product.slug}>
-                  <p>
-                    <Link to={`/product/${product.slug}`}>{product.name}</Link>
-                  </p>
-                </li>
-              );
-            })}
+            <li>
+              Average Rating: {data.product.averageRating}
+              {"/5"}
+            </li>
           </ul>
-        </div>
-      </Container>
+
+          <div>
+            <h4>Autres produits</h4>
+            <ul>
+              {data.allProduct.nodes.map(product => {
+                return (
+                  <li key={product.slug}>
+                    <p>
+                      <Link to={`/product/${product.slug}`}>
+                        {product.name}
+                      </Link>
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </Container>
+      </ProductPageWrapper>
     </Layout>
   );
 };
@@ -80,7 +96,7 @@ export const query = graphql`
           currency
           current
         }
-        name
+        #name
         code
       }
       localImage {

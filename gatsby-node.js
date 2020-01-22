@@ -69,7 +69,9 @@ exports.sourceNodes = async ({
       description: originalProduct.description,
       channelCode: originalProduct.channelCode,
       averageRating: originalProduct.averageRating,
-      firstImage: `${SYLIUS_URL}/media/image/${originalProduct.images[0].path}`,
+      firstImage: originalProduct.images[0]
+        ? `${SYLIUS_URL}/media/image/${originalProduct.images[0].path}`
+        : null,
       variants: adaptVariants(originalProduct.variants),
       taxons: originalProduct.taxons,
     };
@@ -248,11 +250,20 @@ exports.onCreateNode = ({
 }) => {
   const { createNodeField, createParentChildLink, createNode } = actions;
 
-  if (node.internal.type === "Product" && node.taxons) {
+  if (
+    node &&
+    node.internal &&
+    node.internal.type === "Product" &&
+    node.taxons
+  ) {
     let categoryNode = getNode(createNodeId(`category-${node.taxons.main}`));
 
     let categoryNodeValue = [node.id];
-    if (categoryNode.fields && categoryNode.fields.products___NODE) {
+    if (
+      categoryNode &&
+      categoryNode.fields &&
+      categoryNode.fields.products___NODE
+    ) {
       categoryNodeValue = [...categoryNode.fields.products___NODE, node.id];
     }
 
