@@ -1,6 +1,4 @@
 import styled from "styled-components";
+import { color, spacing } from "../../helpers/themeHelpers";
 
-export const SidebarContainer = styled.div`
-  background-color: #ecf0f1;
-  padding: 1vh 3vh 2vh 3vh;
-`;
+export const SidebarContainer = styled.div``;

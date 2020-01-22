@@ -59,6 +59,12 @@ export const GlobalStyle = createGlobalStyle`
   textarea,
   select {
     font: inherit;
+    outline: none;
+  }
+
+  /* Transform cursor in pointer for buttons */
+  button {
+    cursor: pointer;
   }
 
   /* Remove all animations and transitions for people that prefer not to see them */
@@ -85,7 +91,7 @@ export const GlobalStyle = createGlobalStyle`
   h2,
   h3 {
     ${fontFamily("titleFont")}
-    font-weight: 600;
+    font-weight: bold;
     text-transform: uppercase;
   }
 
