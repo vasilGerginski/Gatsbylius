@@ -9,7 +9,6 @@ const ProductSynthesis = ({ product }) => {
 
   return (
     <>
-      <h1>{product.name}</h1>
       <p>{product.channelCode}</p>
 
       {selectedVariant ? (

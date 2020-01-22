@@ -11,6 +11,9 @@ import Hero from "../Hero";
 import Main from "./Main";
 
 const Layout = ({ children }) => {
+  const isHomePage =
+    typeof window !== "undefined" && window.location.pathname === "/";
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery($code: String) {
       site {
@@ -53,14 +56,13 @@ const Layout = ({ children }) => {
 
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-
         <Header
           menuLinks={data.allCategory.edges}
           siteTitle={data.site.siteMetadata.title}
         />
 
-        <Main>
-          {typeof window !== "undefined" && window.location.pathname === "/" && <Hero />}
+        <Main isHomePage={isHomePage}>
+          {isHomePage && <Hero />}
           {children}
         </Main>
 
