@@ -3,9 +3,9 @@ import {
   useStoreDispatchContext,
   useStoreStateContext,
 } from "../../context/StoreContext";
-import { FiShoppingCart } from "react-icons/fi";
-import { CartButton, CartInfo } from "./styled";
-import { NavItem } from "../Layout/Header/styled";
+import {FiShoppingCart} from "react-icons/fi";
+import {CartButton, CartInfo} from "./styled";
+import {NavItem} from "../Layout/Header/styled";
 
 const MiniCartButton = () => {
   const storeState = useStoreStateContext();
@@ -14,10 +14,10 @@ const MiniCartButton = () => {
     <NavItem key={"cart"}>
       <CartButton
         onClick={() => {
-          storeDispatch({ type: "toggleMiniCart" });
+          storeDispatch({type: "toggleMiniCart"});
         }}
       >
-        <FiShoppingCart />
+        <FiShoppingCart/>
         <CartInfo>{storeState.products.length}</CartInfo>
       </CartButton>
     </NavItem>
