@@ -61,12 +61,27 @@ exports.sourceNodes = async ({
     });
   };
 
+  const adaptAttribute = attribute => {
+    return {
+      [attribute.code]: attribute.value,
+    };
+  };
+
   const adaptProduct = originalProduct => {
     return {
       code: originalProduct.code,
       slug: originalProduct.slug,
       name: originalProduct.name,
       description: originalProduct.description,
+      shortDescription: originalProduct.shortDescription,
+      originalAttributes: originalProduct.attributes,
+      ...originalProduct.attributes.reduce(
+        (acc, attribute) => ({
+          ...acc,
+          ...adaptAttribute(attribute),
+        }),
+        {}
+      ),
       channelCode: originalProduct.channelCode,
       averageRating: originalProduct.averageRating,
       firstImage: originalProduct.images[0]
