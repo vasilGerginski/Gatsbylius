@@ -3,7 +3,7 @@ import {
   useStoreDispatchContext,
   useStoreStateContext,
 } from "../../context/StoreContext";
-import { priceParser, getTotal } from "./../../helpers/cartHelper";
+import {priceParser, getTotal} from "./../../helpers/cartHelper";
 
 import {
   incrementQty,
@@ -12,8 +12,6 @@ import {
   removeItemFromCart,
 } from "../../services/cart";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faMinus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import {
   MiniCartHeader,
   MiniCartItem,
@@ -23,18 +21,32 @@ import {
   MiniCartItems,
   MiniCartTotal,
   MiniCart as MinicartComponent,
+  MiniCartImage,
+  CheckoutButton,
+  CheckoutButtonContainer,
 } from "./styled";
+
+const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL;
+const miniCartRef = React.createRef();
 
 const MiniCart = () => {
   const storeState = useStoreStateContext();
   const storeDispatch = useStoreDispatchContext();
 
   if (storeState.miniCartIsOpen) {
+    if (typeof window !== "undefined" && document.getElementsByTagName("main")[0] &&  storeState.miniCartIsOpen) {
+      document.getElementsByTagName("main")[0].addEventListener('mousedown', (e) => {
+        if (miniCartRef.current && !miniCartRef.current.contains(e.target)) {
+          storeDispatch({type: "toggleMiniCart"});
+        }
+      })
+    }
+
     return (
-      <MinicartComponent>
+      <MinicartComponent ref={miniCartRef}>
         <MiniCartHeader>
           <MiniCartTotal>
-            Total:{" "}
+            Subtotal:{" "}
             <MiniCartItemPrice>
               {priceParser(getTotal(storeState.products), storeState.currency)}
             </MiniCartItemPrice>
@@ -42,49 +54,29 @@ const MiniCart = () => {
         </MiniCartHeader>
         <MiniCartItems>
           {storeState.products.map(item => {
+            const productImage = item.product.images.filter(image => image.code === "main").shift();
             return (
               <MiniCartItem key={item.id}>
-                <img
-                  src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                  alt="item1"
+                <MiniCartImage
+                  src={`${SYLIUS_URL}/media/image/${productImage.path}`}
+                  alt={productImage.code}
                 />
                 <MiniCartItemName>{item.product.name}</MiniCartItemName>
+                <MiniCartItemQty>{item.quantity} x </MiniCartItemQty>
                 <MiniCartItemPrice>
-                  {priceParser(item.total, storeState.currency)}
+                  {priceParser((item.total / item.quantity), storeState.currency)}
                 </MiniCartItemPrice>
-                <MiniCartItemQty>Qty: {item.quantity}</MiniCartItemQty>
-                <button
-                  onClick={() => {
-                    incrementQty(item.id, storeState, storeDispatch);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faPlus} />
-                </button>
-                <button
-                  onClick={() => {
-                    decrementQty(item.id, storeState, storeDispatch);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faMinus} />
-                </button>
-                <button
-                  onClick={() => {
-                    removeItemFromCart(item.id, storeState, storeDispatch);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
               </MiniCartItem>
             );
           })}
         </MiniCartItems>
-        <button
-          onClick={() => {
-            dropCart(storeState, storeDispatch);
-          }}
-        >
-          Drop Cart
-        </button>
+        <CheckoutButton onClick={() => {
+          if (typeof window !== "undefined") {
+            window.location="/customer/checkout";
+          }
+        }}>
+          Checkout
+        </CheckoutButton>
       </MinicartComponent>
     );
   }
