@@ -7,12 +7,11 @@ const StyledPrice = styled.strong`
   font-size: 2rem;
 `;
 
-const Price = ({ price }) =>
-  console.log(price) || (
-    <p>
-      <StyledPrice>{priceParser(price.current, price.currency)}</StyledPrice>
-    </p>
-  );
+const Price = ({ price }) => (
+  <p>
+    <StyledPrice>{priceParser(price.current, price.currency)}</StyledPrice>
+  </p>
+);
 
 Price.propTypes = {
   price: PropTypes.shape({
