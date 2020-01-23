@@ -12,7 +12,7 @@ const styleButtonShared = `
 `;
 
 export const Title = styled.h1`
-  padding: ${spacing(["xl", "none", "md", "none"])};
+  padding: ${spacing(["md", "none"])};
   text-transform: capitalize;
 `;
 

@@ -16,6 +16,7 @@ const palette = {
   greyAlto: "#DDE3E8",
   greyMiddle1: "#a0a9aE",
   greyMiddle2: "#646e74",
+  greySemiDark: "#788995",
   greyDark: "#242428",
 };
 
@@ -52,6 +53,7 @@ export default {
     greyAlto: palette.greyAlto,
     greyMiddle1: palette.greyMiddle1,
     greyMiddle2: palette.greyMiddle2,
+    greySemiDark: palette.greySemiDark,
     greyDark: palette.greyDark,
   },
   boxShadows: {

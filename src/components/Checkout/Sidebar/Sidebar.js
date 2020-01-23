@@ -8,6 +8,8 @@ import {
   Title,
   HeadContainer,
   Divider,
+  Item,
+  FinalPrice,
 } from "./styled";
 
 const Sidebar = () => {
@@ -25,13 +27,29 @@ const Sidebar = () => {
       </Row>
       {items.map(item => {
         return (
-          <div key={item.id}>
-            {item.quantity}
-            {item.product.name}
-            {item.total}
-          </div>
+          <Item key={item.id}>
+            <img src={item.product.images[0].cachedPath} />
+            <div className="item-datas">
+              <span>{item.product.name}</span>
+              <div className="item-price-qty">
+                <span className="item-price">&euro;{item.total}</span>
+                <span className="item-qty">quantity {item.quantity}</span>
+              </div>
+            </div>
+          </Item>
         );
       })}
+      <Row>
+        <Divider />
+      </Row>
+      <Row>
+        <Col>
+          <FinalPrice>
+            <span>Total</span>
+            <span>&euro; 164.50</span>
+          </FinalPrice>
+        </Col>
+      </Row>
     </SidebarContainer>
   );
 };

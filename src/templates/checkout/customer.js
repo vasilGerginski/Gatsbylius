@@ -25,8 +25,9 @@ const Customer = () => {
       <Paper fluid>
         <Row>
           <Col sm={8}>
+            <h2>TABS HERE</h2>
             <CustomerInfoForm />
-            <CustomerShipping style={{ display: "none" }} />
+            {/* <CustomerShipping /> */}
           </Col>
           <Col sm={4}>
             <Sidebar />
