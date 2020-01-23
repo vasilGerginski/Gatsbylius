@@ -2,8 +2,8 @@ import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 
-import InputText from "../../Input/InputText";
-import InputSelect from "../../Input/InputSelect";
+import InputText from "../../../Input/InputText";
+import InputSelect from "../../../Input/InputSelect";
 
 import {
   Title,
@@ -11,7 +11,7 @@ import {
   ValidButton,
   BackButton,
   ButtonsContainer,
-} from "./styled";
+} from "../styled";
 
 const CustomerInfoForm = () => {
   return (

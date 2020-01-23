@@ -1,6 +1,6 @@
 import React from "react";
 import _get from "lodash.get";
-import { useCheckoutStateContext } from "../../context/CheckoutContext";
+import { useCheckoutStateContext } from "../../../context/CheckoutContext";
 import { SidebarContainer } from "./styled";
 
 const Sidebar = () => {
