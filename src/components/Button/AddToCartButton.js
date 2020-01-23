@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { FiShoppingCart } from "react-icons/fi";
 import {
   useStoreDispatchContext,
   useStoreStateContext,
 } from "../../context/StoreContext";
 import { addVariantToCart } from "./../../services/cart";
+import { AddToCartButton as StyledAddToCartButton } from "./styled";
 
 const AddToCartButton = ({ slug, variantsCode, qty, isSimple }) => {
   const storeState = useStoreStateContext();
   const storeDispatch = useStoreDispatchContext();
   return (
-    <button
+    <StyledAddToCartButton
       onClick={() => {
         addVariantToCart(
           slug,
@@ -22,8 +24,9 @@ const AddToCartButton = ({ slug, variantsCode, qty, isSimple }) => {
         ).then(() => {});
       }}
     >
-      Ajouter au pannier
-    </button>
+      <FiShoppingCart size="1.2em" />
+      <span>Add to cart</span>
+    </StyledAddToCartButton>
   );
 };
 
