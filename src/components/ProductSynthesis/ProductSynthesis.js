@@ -7,6 +7,7 @@ import { FiExternalLink } from "react-icons/fi";
 import Configurator from "../Configurator";
 import AddToCartButton from "../Button/AddToCartButton";
 import Price from "../Price";
+import QuantitySelect from "../QuantitySelect";
 import { ProductTitle, Sku } from "./styled";
 
 const ProductSynthesis = ({ product }) => {
@@ -19,7 +20,7 @@ const ProductSynthesis = ({ product }) => {
     variants,
   } = product;
   const [selectedVariant, selectVariant] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState({ label: 1, value: 1 });
 
   return (
     <section>
@@ -71,10 +72,16 @@ const ProductSynthesis = ({ product }) => {
         onChange={variant => selectVariant(variant)}
       />
 
+      <QuantitySelect
+        name="quantity"
+        value={quantity}
+        onChange={value => setQuantity(value)}
+      />
+
       <AddToCartButton
         slug={code}
         variantsCode={selectedVariant ? selectedVariant.code : variants[0].code}
-        qty={quantity}
+        qty={quantity.value}
         isSimple={variants.length === 1}
       />
     </section>
