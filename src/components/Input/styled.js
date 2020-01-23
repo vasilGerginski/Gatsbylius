@@ -19,6 +19,6 @@ export const Input = styled.input`
   }
 
   &:focus {
-    border-color: ${color("info")};
+    border-color: ${color("info1")};
   }
 `;

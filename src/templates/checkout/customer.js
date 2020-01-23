@@ -10,11 +10,9 @@ import { useStoreStateContext } from "../../context/StoreContext";
 
 import Paper from "../../components/Paper";
 import Layout from "../../components/Layout";
-import {
-  CustomerInfoForm,
-  CustomerShipping,
-} from "../../components/Checkout/Customer";
-import { Sidebar } from "../../components/Checkout/Sidebar";
+import CustomerInfoForm from "../../components/Checkout/Customer/CustomerInfoForm";
+import CustomerShipping from "../../components/Checkout/Customer/CustomerShipping";
+import Sidebar from "../../components/Checkout/Sidebar";
 
 const Customer = () => {
   const storeState = useStoreStateContext();

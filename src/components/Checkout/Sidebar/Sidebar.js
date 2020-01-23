@@ -1,7 +1,14 @@
 import React from "react";
 import _get from "lodash.get";
+import { Row, Col } from "styled-bootstrap-grid";
 import { useCheckoutStateContext } from "../../../context/CheckoutContext";
-import { SidebarContainer } from "./styled";
+import {
+  SidebarContainer,
+  ArticlesNumber,
+  Title,
+  HeadContainer,
+  Divider,
+} from "./styled";
 
 const Sidebar = () => {
   const checkoutState = useCheckoutStateContext();
@@ -9,8 +16,13 @@ const Sidebar = () => {
 
   return (
     <SidebarContainer>
-      <h4>Order Summary</h4>
-      <p>{items.length} item</p>
+      <Row>
+        <HeadContainer>
+          <Title>Shopping Cart</Title>
+          <ArticlesNumber>{items.length}</ArticlesNumber>
+        </HeadContainer>
+        <Divider />
+      </Row>
       {items.map(item => {
         return (
           <div key={item.id}>
