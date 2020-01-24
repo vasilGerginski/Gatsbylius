@@ -81,6 +81,7 @@ const MiniCart = () => {
         <CheckoutButton
           onClick={() => {
             if (typeof window !== "undefined") {
+              storeDispatch({ type: "toggleMiniCart" });
               window.location = "/checkout/customer";
             }
           }}
