@@ -6,13 +6,6 @@ import {
 import { priceParser, getTotal } from "./../../helpers/cartHelper";
 
 import {
-  incrementQty,
-  decrementQty,
-  dropCart,
-  removeItemFromCart,
-} from "../../services/cart";
-
-import {
   MiniCartHeader,
   MiniCartItem,
   MiniCartItemName,
@@ -23,7 +16,6 @@ import {
   MiniCart as MinicartComponent,
   MiniCartImage,
   CheckoutButton,
-  CheckoutButtonContainer,
 } from "./styled";
 
 const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL;
