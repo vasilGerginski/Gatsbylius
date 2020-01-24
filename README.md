@@ -78,9 +78,9 @@ Useful resources:
 - https://www.gatsbyjs.org/docs/
 
 You can also open
-[issues](https://github.com/Gatsby/Gatsby/issues) with the
+[issues](https://github.com/Gatsbylius/Gatsbylius/issues) with the
 tag `"question"` and we will do our best to answer it. Of course, you can
-[browse answered questions](https://github.com/Gatsbylius/Gatsbylius/issues?q=label%3Aquestion+is%3Aclosed)
+[browse answered questions](https://github.com/Gatsbylius/Gatsbylius/issues?q=is%3Aissue+label%3Aquestion+is%3Aopen)
 and try to help others by answering their opened questions.
 
 If you need anything else, [send an email to the team behind it!](mailto:contact@commit42.fr) We can also take care of your project!
