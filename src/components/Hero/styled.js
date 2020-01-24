@@ -22,7 +22,7 @@ export const Overlay = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.65);
 `;
 
 export const PageTitle = styled.h1`
@@ -36,7 +36,8 @@ export const PageTitle = styled.h1`
 
 export const ProductsAnchor = styled.button`
   padding: 0.5rem 1rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: ${color("white")};
