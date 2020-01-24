@@ -23,8 +23,6 @@ const Hero = () => {
     `
   );
 
-  console.log(file);
-
   return (
     <StyledBackgroundImage fluid={file.childImageSharp.fluid} Tag="section">
       <Overlay>

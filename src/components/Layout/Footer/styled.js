@@ -10,10 +10,13 @@ const centerXY = css`
 export default styled.footer`
   ${centerXY}
   height: ${spacing(["lg"])};
+  margin-top: ${spacing(["lg"])};
   padding: ${spacing(["none", "sm"])};
   font-size: 0.9rem;
   background-color: #fff;
+  border-top: 1px solid ${color("greyLight1")};
   z-index: 1;
+
 
   a {
     ${centerXY}

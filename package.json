@@ -34,6 +34,7 @@
     "react-icons": "^3.8.0",
     "react-image-gallery": "^1.0.5",
     "react-select": "^3.0.8",
+    "react-use": "^13.21.0",
     "styled-bootstrap-grid": "^3.0.5",
     "styled-components": "^4.4.1"
   },

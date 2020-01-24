@@ -16,11 +16,10 @@ export const CheckoutButton = styled.button`
   padding: 0.5rem;
   width: 100%;
   border: none;
-  
   color: ${color("white")};
   background-color: ${color("primary")};
   transition: all 200ms ease-in-out;
-  
+
   &:hover {
     background-color: ${color("deepBlue2")};
   }

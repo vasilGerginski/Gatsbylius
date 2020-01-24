@@ -36,7 +36,7 @@ export const PageTitle = styled.h1`
 
 export const ProductsAnchor = styled.button`
   padding: 0.5rem 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.1em;
   text-transform: uppercase;
