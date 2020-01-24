@@ -7,18 +7,25 @@ import Layout from "../components/Layout";
 import ProductBreadcrumb from "../components/ProductBreadcrumb";
 import ProductSynthesis from "../components/ProductSynthesis";
 import styled from "styled-components";
-import { spacing } from "../helpers/themeHelpers";
+import { color, spacing } from "../helpers/themeHelpers";
 import Img from "gatsby-image";
+import RelatedProducts from "../components/Layout/RelatedProducts/RelatedProducts";
 
-const ProductPageWrapper = styled.div`
-  padding-top: ${spacing(["lg"])};
+const ProductPageContainer = styled(Container)`
+  background-color: ${color("white")};
+  border-right: 1px solid ${color("greyLight1")};
+  border-left: 1px solid ${color("greyLight1")};
+`;
+
+const ProductPageContent = styled.div`
+  padding: ${spacing(["lg", "xs"])};
 `;
 
 const Product = ({ data }) => {
   return (
     <Layout>
-      <ProductPageWrapper>
-        <Container>
+      <ProductPageContainer>
+        <ProductPageContent>
           <Row>
             <Col>
               <ProductBreadcrumb product={data.product} />
@@ -26,49 +33,26 @@ const Product = ({ data }) => {
           </Row>
 
           <Row>
-            <Col>
-              <h1>{data.product.name}</h1>
-              <p>SKU: {data.product.code}</p>
+            <Col md={7}>
+              <Img fluid={data.product.localImage.childImageSharp.fluid} />
+            </Col>
+
+            <Col md={5}>
+              <ProductSynthesis product={data.product} />
             </Col>
           </Row>
 
           <Row>
             <Col>
-              <Img fixed={data.product.localImage.childImageSharp.fixed} />
+              <div id="details" style={{ paddingTop: "4rem" }}>
+                <h5>Details</h5>
+                <p>{data.product.description}</p>
+              </div>
             </Col>
           </Row>
-
-          <ProductSynthesis product={data.product} />
-
-          <h5>Details</h5>
-          <p>{data.product.description}</p>
-
-          <h5>Attributes</h5>
-          <ul>
-            <li>
-              Average Rating: {data.product.averageRating}
-              {"/5"}
-            </li>
-          </ul>
-
-          <div>
-            <h4>Autres produits</h4>
-            <ul>
-              {data.allProduct.nodes.map(product => {
-                return (
-                  <li key={product.slug}>
-                    <p>
-                      <Link to={`/product/${product.slug}`}>
-                        {product.name}
-                      </Link>
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </Container>
-      </ProductPageWrapper>
+          <RelatedProducts data={data} />
+        </ProductPageContent>
+      </ProductPageContainer>
     </Layout>
   );
 };
@@ -80,12 +64,31 @@ Product.propTypes = {
 export default Product;
 
 export const query = graphql`
-  query ProductPageQuery($slug: String) {
+  query ProductPageQuery($slug: String, $mainProductTaxon: String) {
+    category(code: { eq: $mainProductTaxon }) {
+      fields {
+        products {
+          id
+          name
+          slug
+          localImage {
+            childImageSharp {
+              fluid(maxWidth: 400, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
     product(slug: { eq: $slug }) {
       code
       slug
       name
       description
+      shortDescription
+      photographer
+      unsplash_url
       channelCode
       averageRating
       taxons {
@@ -103,8 +106,8 @@ export const query = graphql`
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
-          fixed(width: 400, height: 300) {
-            ...GatsbyImageSharpFixed
+          fluid(maxWidth: 700) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -118,8 +121,8 @@ export const query = graphql`
           childImageSharp {
             # Specify the image processing specifications right in the query.
             # Makes it trivial to update as your page's design changes.
-            fixed(width: 125, height: 125) {
-              ...GatsbyImageSharpFixed
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

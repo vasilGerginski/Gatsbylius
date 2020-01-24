@@ -9,6 +9,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "../../config/style/theme";
 import Hero from "../Hero";
 import Main from "./Main";
+import { GoMarkGithub } from "react-icons/go";
 
 const Layout = ({ children }) => {
   const isHomePage =
@@ -52,6 +53,21 @@ const Layout = ({ children }) => {
           href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,600&display=swap"
           rel="stylesheet"
         />
+        <link
+          href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          charset="UTF-8"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
       </Helmet>
 
       <ThemeProvider theme={theme}>
@@ -67,11 +83,16 @@ const Layout = ({ children }) => {
         </Main>
 
         <Footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-          <span> & </span>
-          <a href="https://sylius.com/">Sylius</a>
+          <div>© {new Date().getFullYear()}</div>
+          <div>
+            Follow
+            <a href="https://github.com/gatsbylius/gatsbylius">
+              <span>Gatsbylius on Github</span>
+              <span>
+                <GoMarkGithub size="1.6rem" />
+              </span>
+            </a>
+          </div>
         </Footer>
       </ThemeProvider>
     </>

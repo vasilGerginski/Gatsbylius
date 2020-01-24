@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "gatsby";
+import { BreadcrumbList } from "./styled";
 
 const ProductBreadcrumb = ({ product }) => {
   return (
-    <div itemScope itemType="http://schema.org/BreadcrumbList">
+    <BreadcrumbList itemScope itemType="http://schema.org/BreadcrumbList">
       <span
         itemProp="itemListElement"
         itemScope
@@ -12,11 +13,11 @@ const ProductBreadcrumb = ({ product }) => {
       >
         <Link to="/">
           <span itemProp="item">
-            <span itemProp="name">Gatsbylius</span>
+            <span itemProp="name">Home</span>
           </span>
         </Link>
-      </span>{" "}
-      /{" "}
+      </span>
+      {" / "}
       <span
         itemProp="itemListElement"
         itemScope
@@ -29,7 +30,7 @@ const ProductBreadcrumb = ({ product }) => {
         </Link>
       </span>{" "}
       / <span>{product.name}</span>
-    </div>
+    </BreadcrumbList>
   );
 };
 

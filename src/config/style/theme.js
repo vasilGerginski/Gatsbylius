@@ -5,6 +5,7 @@ const palette = {
   white: "#fff",
   black: "#222",
   greenSylius: "#0fbf9c",
+  greenSyliusLight: "#06D8AE",
   purpleGatsby: "#663399",
   sandLight: "#fcf9f4",
   info1: "#71b6ef",
@@ -17,6 +18,8 @@ const palette = {
   greyMiddle1: "#a0a9aE",
   greyMiddle2: "#646e74",
   greySemiDark: "#788995",
+  greyLight1: "#efefef",
+  greyMedium: "#898989",
   greyDark: "#242428",
 };
 
@@ -41,6 +44,7 @@ export default {
     text: palette.greyDark,
     background: palette.sandLight,
     primary: palette.greenSylius,
+    primaryLight: palette.greenSyliusLight,
     secondary: palette.purpleGatsby,
     info1: palette.info1,
     info2: palette.info2,
@@ -54,6 +58,8 @@ export default {
     greyMiddle1: palette.greyMiddle1,
     greyMiddle2: palette.greyMiddle2,
     greySemiDark: palette.greySemiDark,
+    greyLight1: palette.greyLight1,
+    greyMedium: palette.greyMedium,
     greyDark: palette.greyDark,
   },
   boxShadows: {

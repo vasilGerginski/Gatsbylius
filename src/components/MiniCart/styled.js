@@ -1,6 +1,32 @@
 import styled from "styled-components";
 import { color } from "../../helpers/themeHelpers";
 
+export const MiniCartImage = styled.img`
+  margin-top: 10px;
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
+`;
+
+export const CheckoutButton = styled.button`
+  text-transform: uppercase;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+
+  color: ${color("white")};
+  background-color: ${color("primary")};
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    background-color: ${color("deepBlue2")};
+  }
+`;
+
 export const CartButton = styled.button`
   display: flex;
   justify-content: center;
@@ -19,7 +45,6 @@ export const CartInfo = styled.span`
   height: 1rem;
   margin-left: 0.2rem;
   font-size: 0.8rem;
-  border-radius: 50%;
   color: white;
   background-color: ${color("secondary")};
   text-align: center;
@@ -29,17 +54,18 @@ export const CartInfo = styled.span`
 
 export const MiniCartTotal = styled.div`
   float: right;
+  color: ${color("primary")};
 `;
 
 export const MiniCartHeader = styled.div`
-  border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 1.6em;
+  padding-bottom: 2em;
   color: #abb0be;
 
   ${MiniCartTotal}
 `;
 
 export const MiniCartItem = styled.li`
+  border-top: 1px solid #e8e8e8;
   &:after {
     content: "";
     display: table;
@@ -51,15 +77,16 @@ export const MiniCartItemName = styled.span`
   display: block;
   padding-top: 10px;
   font-size: 16px;
+  font-weight: bold;
 `;
 
 export const MiniCartItemPrice = styled.span`
-  color: ${color("secondary")};
+  color: ${color("black")};
   margin-right: 8px;
 `;
 
 export const MiniCartItemQty = styled.span`
-  color: ${color("secondary")};
+  color: #828282;
 `;
 
 export const MiniCartItems = styled.ul`
@@ -85,7 +112,6 @@ export const MiniCart = styled.div`
   width: 320px;
   padding: 1rem;
   background: white;
-  border-radius: 0.25rem;
   box-shadow: ${({ theme }) => theme.boxShadows.light};
   z-index: 100;
 

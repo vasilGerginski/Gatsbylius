@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+import { priceParser } from "../helpers/cartHelper";
 
-const Price = props => (
+const StyledPrice = styled.strong`
+  font-size: 2rem;
+`;
+
+const Price = ({ price }) => (
   <p>
-    <strong>
-      {props.price.current / 100} {props.price.currency}
-    </strong>
+    <StyledPrice>{priceParser(price.current, price.currency)}</StyledPrice>
   </p>
 );
 
