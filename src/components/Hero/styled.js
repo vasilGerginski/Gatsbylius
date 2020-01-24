@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { media } from "styled-bootstrap-grid";
+import BackgroundImage from "gatsby-background-image";
 import { spacing, color } from "../../helpers/themeHelpers";
 
-export const StyledHero = styled.div`
+export const StyledBackgroundImage = styled(BackgroundImage)`
   position: relative;
+  width: 100%;
   height: 50vh;
-  color: ${color("white")};
   ${media.md`
     height: calc(100vh - ${spacing(["lg"])});
   `}
@@ -29,6 +30,7 @@ export const PageTitle = styled.h1`
   font-size: 5.5vw;
   margin-bottom: ${spacing(["xl"])};
   letter-spacing: 0.1em;
+  color: ${color("white")};
   text-shadow: ${({ theme }) => theme.boxShadows.textMedium};
 `;
 
