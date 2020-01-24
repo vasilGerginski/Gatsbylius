@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StoreProvider } from "./src/context/StoreContext";
+import { CheckoutProvider } from "./src/context/CheckoutContext";
 
 export const wrapRootElement = ({ element }) => (
-  <StoreProvider>{element}</StoreProvider>
+  <StoreProvider>
+    <CheckoutProvider>{element}</CheckoutProvider>
+  </StoreProvider>
 );
 
 wrapRootElement.propTypes = {
