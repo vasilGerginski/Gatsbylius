@@ -161,22 +161,10 @@ exports.createPages = ({ graphql, actions }) => {
   const blogPostTemplate = path.resolve(`src/templates/product.js`);
   const categoryTemplate = path.resolve(`src/templates/category.js`);
   const customerTemplate = path.resolve(`src/templates/checkout/customer.js`);
-  const paymentTemplate = path.resolve(`src/templates/checkout/payment.js`);
-  const shippingTemplate = path.resolve(`src/templates/checkout/shipping.js`);
 
   createPage({
     path: `/checkout/customer`,
     component: customerTemplate,
-  });
-
-  createPage({
-    path: `/checkout/payment`,
-    component: paymentTemplate,
-  });
-
-  createPage({
-    path: `/checkout/shipping`,
-    component: shippingTemplate,
   });
 
   // Query for markdown nodes to use in creating pages.
