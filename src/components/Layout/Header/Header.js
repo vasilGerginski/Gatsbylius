@@ -29,7 +29,7 @@ const Header = ({ siteTitle = ``, menuLinks }) => {
 
   return (
     <div>
-      <SlideMenu isOpen={isOpen}>TEST</SlideMenu>
+      {/* <SlideMenu isOpen={isOpen}>TEST</SlideMenu> */}
       <StyledHeader>
         {!isWide && (
           <>
