@@ -8,7 +8,7 @@ import {
 import { addVariantToCart } from "./../../services/cart";
 import { AddToCartButton as StyledAddToCartButton } from "./styled";
 
-const AddToCartButton = ({ slug, variantsCode, qty, isSimple }) => {
+const AddToCartButton = ({ slug, variantsCode, qty, isSimple, name }) => {
   const storeState = useStoreStateContext();
   const storeDispatch = useStoreDispatchContext();
   return (
@@ -19,6 +19,7 @@ const AddToCartButton = ({ slug, variantsCode, qty, isSimple }) => {
           variantsCode,
           qty,
           isSimple,
+          name,
           storeState,
           storeDispatch
         ).then(() => {});
@@ -35,6 +36,7 @@ AddToCartButton.propTypes = {
   variantsCode: PropTypes.string,
   qty: PropTypes.number,
   isSimple: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 export default AddToCartButton;

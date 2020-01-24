@@ -8,7 +8,7 @@ import Configurator from "../Configurator";
 import AddToCartButton from "../Button/AddToCartButton";
 import Price from "../Price";
 import QuantitySelect from "../QuantitySelect";
-import { ProductTitle, Sku } from "./styled";
+import { ProductTitle, Sku, LearnMoreButton } from "./styled";
 
 const ProductSynthesis = ({ product }) => {
   const {
@@ -55,9 +55,12 @@ const ProductSynthesis = ({ product }) => {
       <p>
         {shortDescription && shortDescription}
         <span>
-          <button id="our-products" onClick={() => scrollTo("#details")}>
+          <LearnMoreButton
+            id="our-products"
+            onClick={() => scrollTo("#details")}
+          >
             Learn more
-          </button>
+          </LearnMoreButton>
         </span>
       </p>
 
@@ -82,6 +85,7 @@ const ProductSynthesis = ({ product }) => {
         slug={code}
         variantsCode={selectedVariant ? selectedVariant.code : variants[0].code}
         qty={quantity.value}
+        name={name}
         isSimple={variants.length === 1}
       />
     </section>

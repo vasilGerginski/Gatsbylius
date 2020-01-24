@@ -34,8 +34,10 @@
     "react-icons": "^3.8.0",
     "react-image-gallery": "^1.0.5",
     "react-select": "^3.0.8",
+    "react-slick": "^0.25.2",
     "styled-bootstrap-grid": "^3.0.5",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",

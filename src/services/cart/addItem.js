@@ -1,4 +1,6 @@
 import { ensureCartKey } from "./";
+import { toastrConfig } from "./../../helpers/themeHelpers";
+const toastr = require("toastr");
 const axios = require("axios");
 
 const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL;
@@ -8,6 +10,7 @@ export const addVariantToCart = async (
   variantsCode,
   qty,
   isSimple,
+  name,
   storeState,
   storeDispatch
 ) => {
@@ -19,6 +22,8 @@ export const addVariantToCart = async (
     quantity: qty,
   };
 
+  const successQtyString = qty > 1 ? ` (x${qty})` : ``;
+
   if (!isSimple) {
     productData.variantCode = variantsCode;
   }
@@ -26,9 +31,19 @@ export const addVariantToCart = async (
   await axios
     .post(`${SYLIUS_URL}/shop-api/carts/${cartKey}/items`, productData)
     .then(response => {
+      toastr.success(
+        `Successfully added to cart`,
+        `"${name}"` + successQtyString,
+        toastrConfig
+      );
       storeDispatch({ type: "updateProducts", payload: response.data.items });
     })
     .catch(err => {
+      toastr.error(
+        `Was not added to cart, error.`,
+        `"${name}"` + successQtyString,
+        toastrConfig
+      );
       console.error("Error on add to cart", err);
     });
 };

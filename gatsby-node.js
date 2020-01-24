@@ -171,6 +171,9 @@ exports.createPages = ({ graphql, actions }) => {
           nodes {
             code
             slug
+            taxons {
+              main
+            }
           }
         }
         allCategory {
@@ -222,6 +225,7 @@ exports.createPages = ({ graphql, actions }) => {
         component: blogPostTemplate,
         context: {
           slug: node.slug,
+          mainProductTaxon: node.taxons.main,
           // Add optional context data to be inserted
           // as props into the page component..
           //
