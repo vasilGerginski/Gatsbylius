@@ -16,8 +16,6 @@ export const CheckoutButton = styled.button`
   padding: 0.5rem;
   width: 100%;
   border: none;
-  cursor: pointer;
-
   color: ${color("white")};
   background-color: ${color("primary")};
   transition: all 200ms ease-in-out;
