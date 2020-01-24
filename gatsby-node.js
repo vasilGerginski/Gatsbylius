@@ -160,6 +160,13 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   const blogPostTemplate = path.resolve(`src/templates/product.js`);
   const categoryTemplate = path.resolve(`src/templates/category.js`);
+  const customerTemplate = path.resolve(`src/templates/checkout/customer.js`);
+
+  createPage({
+    path: `/checkout/customer`,
+    component: customerTemplate,
+  });
+
   // Query for markdown nodes to use in creating pages.
   // You can query for whatever data you want to create pages for e.g.
   // products, portfolio items, landing pages, etc.
@@ -171,6 +178,9 @@ exports.createPages = ({ graphql, actions }) => {
           nodes {
             code
             slug
+            taxons {
+              main
+            }
           }
         }
         allCategory {
@@ -222,6 +232,7 @@ exports.createPages = ({ graphql, actions }) => {
         component: blogPostTemplate,
         context: {
           slug: node.slug,
+          mainProductTaxon: node.taxons.main,
           // Add optional context data to be inserted
           // as props into the page component..
           //

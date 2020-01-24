@@ -3,7 +3,7 @@ import {
   useStoreDispatchContext,
   useStoreStateContext,
 } from "../../context/StoreContext";
-import {priceParser, getTotal} from "./../../helpers/cartHelper";
+import { priceParser, getTotal } from "./../../helpers/cartHelper";
 
 import {
   incrementQty,
@@ -34,12 +34,18 @@ const MiniCart = () => {
   const storeDispatch = useStoreDispatchContext();
 
   if (storeState.miniCartIsOpen) {
-    if (typeof window !== "undefined" && document.getElementsByTagName("main")[0] &&  storeState.miniCartIsOpen) {
-      document.getElementsByTagName("main")[0].addEventListener('mousedown', (e) => {
-        if (miniCartRef.current && !miniCartRef.current.contains(e.target)) {
-          storeDispatch({type: "toggleMiniCart"});
-        }
-      })
+    if (
+      typeof window !== "undefined" &&
+      document.getElementsByTagName("main")[0] &&
+      storeState.miniCartIsOpen
+    ) {
+      document
+        .getElementsByTagName("main")[0]
+        .addEventListener("mousedown", e => {
+          if (miniCartRef.current && !miniCartRef.current.contains(e.target)) {
+            storeDispatch({ type: "toggleMiniCart" });
+          }
+        });
     }
 
     return (
@@ -54,7 +60,9 @@ const MiniCart = () => {
         </MiniCartHeader>
         <MiniCartItems>
           {storeState.products.map(item => {
-            const productImage = item.product.images.filter(image => image.code === "main").shift();
+            const productImage = item.product.images
+              .filter(image => image.code === "main")
+              .shift();
             return (
               <MiniCartItem key={item.id}>
                 <MiniCartImage
@@ -64,17 +72,20 @@ const MiniCart = () => {
                 <MiniCartItemName>{item.product.name}</MiniCartItemName>
                 <MiniCartItemQty>{item.quantity} x </MiniCartItemQty>
                 <MiniCartItemPrice>
-                  {priceParser((item.total / item.quantity), storeState.currency)}
+                  {priceParser(item.total / item.quantity, storeState.currency)}
                 </MiniCartItemPrice>
               </MiniCartItem>
             );
           })}
         </MiniCartItems>
-        <CheckoutButton onClick={() => {
-          if (typeof window !== "undefined") {
-            window.location="/customer/checkout";
-          }
-        }}>
+        <CheckoutButton
+          onClick={() => {
+            if (typeof window !== "undefined") {
+              storeDispatch({ type: "toggleMiniCart" });
+              window.location = "/checkout/customer";
+            }
+          }}
+        >
           Checkout
         </CheckoutButton>
       </MinicartComponent>

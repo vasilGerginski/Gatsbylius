@@ -9,6 +9,7 @@ import ProductSynthesis from "../components/ProductSynthesis";
 import styled from "styled-components";
 import { color, spacing } from "../helpers/themeHelpers";
 import Img from "gatsby-image";
+import RelatedProducts from "../components/Layout/RelatedProducts/RelatedProducts";
 
 const ProductPageContainer = styled(Container)`
   background-color: ${color("white")};
@@ -49,23 +50,7 @@ const Product = ({ data }) => {
               </div>
             </Col>
           </Row>
-
-          <div>
-            <h4>Autres produits</h4>
-            <ul>
-              {data.allProduct.nodes.map(product => {
-                return (
-                  <li key={product.slug}>
-                    <p>
-                      <Link to={`/product/${product.slug}`}>
-                        {product.name}
-                      </Link>
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <RelatedProducts data={data} />
         </ProductPageContent>
       </ProductPageContainer>
     </Layout>
@@ -79,7 +64,23 @@ Product.propTypes = {
 export default Product;
 
 export const query = graphql`
-  query ProductPageQuery($slug: String) {
+  query ProductPageQuery($slug: String, $mainProductTaxon: String) {
+    category(code: { eq: $mainProductTaxon }) {
+      fields {
+        products {
+          id
+          name
+          slug
+          localImage {
+            childImageSharp {
+              fluid(maxWidth: 400, quality: 100) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
     product(slug: { eq: $slug }) {
       code
       slug

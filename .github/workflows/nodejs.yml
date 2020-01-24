@@ -23,7 +23,7 @@ jobs:
           SLACK_CHANNEL: gatsbylius # Optional.
         uses: Ilshidur/action-slack@master
         with:
-          args: 'Modifications has been pushed on master, starting build...'
+          args: "Modifications has been pushed on master, starting build..."
 
       - name: set environment variables
         uses: allenevans/set-env@v1.0.0
@@ -44,7 +44,7 @@ jobs:
           SLACK_CHANNEL: gatsbylius # Optional.
         uses: Ilshidur/action-slack@master
         with:
-          args: 'Error on master branch build'
+          args: "Error on master branch build"
 
       - name: Slack notification
         if: success()
@@ -54,7 +54,7 @@ jobs:
           SLACK_CHANNEL: gatsbylius # Optional.
         uses: Ilshidur/action-slack@master
         with:
-          args: 'Master build successfully, run deploy...'
+          args: "Master build successfully, run deploy..."
       - name: deploy to server
         if: success()
         uses: AEnterprise/rsync-deploy@v1.0
