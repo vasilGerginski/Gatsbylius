@@ -1,8 +1,12 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import BackgroundImage from "gatsby-background-image";
 import scrollTo from "gatsby-plugin-smoothscroll";
-import { StyledHero, Overlay, PageTitle, ProductsAnchor } from "./styled";
+import {
+  StyledBackgroundImage,
+  Overlay,
+  PageTitle,
+  ProductsAnchor,
+} from "./styled";
 
 const Hero = () => {
   const { file } = useStaticQuery(
@@ -22,28 +26,14 @@ const Hero = () => {
   console.log(file);
 
   return (
-    <StyledHero>
-      <BackgroundImage
-        fluid={file.childImageSharp.fluid}
-        Tag="section"
-        style={{
-          height: `100vh`,
-          width: `100vw`,
-          backgroundColor: `transparent`,
-          backgroundSize: `cover`,
-          backgroundPosition: `center center`,
-          display: `flex`,
-          alignItems: `center`,
-        }}
-      >
-        <Overlay>
-          <PageTitle>Gatsbylius Print Shop</PageTitle>
-          <ProductsAnchor onClick={() => scrollTo("#our-products")}>
-            Browse our collection
-          </ProductsAnchor>
-        </Overlay>
-      </BackgroundImage>
-    </StyledHero>
+    <StyledBackgroundImage fluid={file.childImageSharp.fluid} Tag="section">
+      <Overlay>
+        <PageTitle>Gatsbylius Print Shop</PageTitle>
+        <ProductsAnchor onClick={() => scrollTo("#our-products")}>
+          Browse our collection
+        </ProductsAnchor>
+      </Overlay>
+    </StyledBackgroundImage>
   );
 };
 
