@@ -1,38 +1,90 @@
-# Gatsbylius
+<div align="center">
+  <h1>Gatsbylius</h1>
 
-Gatsby + Sylius = :rocket:
+![Gatsbylius logo](./logo-gatsbylius.jpg)
 
-Le site le plus rapide du monde
+  <p>
 
-Started with :heart: :beers: :fire: in Béthune #opengento 
+**The fastest Open Source storefront for Sylius.**
 
-## Docs
+Gatsbylius leverages Gatsby for building eCommerce PWA storefronts using React backed by a headless Sylius store.
+Gatsby + Sylius = :rocket:,
+[Try the demo.](https://demo.gatsbylius.com/)
+
+  </p>
+
+  <p>
+
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![Dependencies status](https://img.shields.io/david/Gatsbylius/Gatsbylius.svg?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/Gatsbylius/Gatsbylius.svg?style=flat-square)
+[![Questions welcome](https://img.shields.io/badge/questions-welcome-blue.svg?style=flat-square)](https://github.com/Gatsbylius/Gatsbylius/issues)
+![license](https://img.shields.io/github/license/Gatsbylius/Gatsbylius.svg?style=flat-square)
+[![Twitter Follow](https://img.shields.io/twitter/follow/gatsbylius.svg?style=social&label=Follow)](https://twitter.com/gatsbylius)
+
+  </p>
+
+Started with :heart: :beers: :fire: in [Béthune #opengento](https://twitter.com/opengento/status/1196360198769778688)
+
+</div>
+
+## Overview
+
+**⚠️ Alpha software:** Gatsbylius is in active development, things will change but contributions are welcome.
+
+Gatsbylius contains everything you need to get started in minutes on an existing Sylius project with the Shop API enabled.
+Consider it as a boilerplate for creating your next eCommerce application.
+
+Here is what Gatsbylius can help you with:
+
+- start using new technologies (React, GraphQL) and concepts (JAMStack),
+- experiment an idea with your team,
+- build your new store theme with performance and user experience on mobile devices in mind,
+- convince your boss,
+- or win projects by building a <abbr title="Proof of Concept">PoC</abbr>.
+
+![The default Gatsbylius home page](./screenshot.png)
+
+## Features
+
+- **zero configuration:** start developing right away, all the tooling is already configured for you
+- **great developer experience:** get in the flow with immediate feedback and interactive tools (<abbr title="Hot Module Reloading">HMR</abbr>, GraphQL…)
+- **modern web technologies without the worries:** use up-to-date libraries with their latest features. We already took care of ensuring it all work!
+- **scale infinitely:** Gatsbylius generates most pages of your shop as "static" files. It means easy deployments and cheaper hosting, with unlimited scaling to handle heavy traffic
+- **<abbr title="Progressive Web Apps">PWA</abbr>:** leverage the latest best web practices to have the fastest possible storefront in mobile contexts
+
+## Get started
+
+Start building something now!
+
+The following steps are all you need if you already are familiar with the JavaScript ecosystem.
+
+1.  `git clone git@github.com:Gatsbylius/Gatsbylius.git`
+2.  `cd Gatsbylius && npm install`
+3.  create an `.env` file based on the `.env.xxx.dist` files in the repository root
+4.  `npm run develop`
+5.  open your favorite editor and start coding!
+
+> More detailed steps will be documented later!
+
+## Get help
+
+If you need help we encourage you to search on the web first. It will help you discover the community around both project (Gatsby & Sylius). You might find additional resources for learning each library in-depth when you will be ready.
+
+Useful resources:
 
 - https://docs.sylius.com/en/latest/index.html
 - https://app.swaggerhub.com/apis/Sylius/sylius-shop-api/1.0.0#/Product
 - https://www.gatsbyjs.org/docs/
 
-## Accéder à l'API
+You can also open
+[issues](https://github.com/Gatsby/Gatsby/issues) with the
+tag `"question"` and we will do our best to answer it. Of course, you can
+[browse answered questions](https://github.com/Gatsbylius/Gatsbylius/issues?q=label%3Aquestion+is%3Aclosed)
+and try to help others by answering their opened questions.
 
-- http://SYLIUS_URL.test/shop-api/product-latest/
+If you need anything else, [send an email to the team behind it!](mailto:contact@commit42.fr) We can also take care of your project!
 
-## Pour générer les clés secrètes JWT
+## License
 
-En dév, la passphrase est `Opengento !`.
-
-```
-openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
-openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
-```
-
-(Source : https://github.com/lexik/LexikJWTAuthenticationBundle/blob/master/Resources/doc/index.md#generate-the-ssh-keys)
-
-## Erreurs communes
-
-### Si composer génère une erreur de mémoire
-
-Préfixer la commande avec `COMPOSER_MEMORY_LIMIT=-1` :
-
-```
-COMPOSER_MEMORY_LIMIT=-1 composer install
-```
+MIT
