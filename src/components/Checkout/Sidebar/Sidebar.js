@@ -2,6 +2,7 @@ import React from "react";
 import _get from "lodash.get";
 import { Row, Col } from "styled-bootstrap-grid";
 import { useCheckoutStateContext } from "../../../context/CheckoutContext";
+import { priceParser } from "../../../helpers/cartHelper";
 import {
   SidebarContainer,
   ArticlesNumber,
@@ -32,7 +33,9 @@ const Sidebar = () => {
             <div className="item-datas">
               <span>{item.product.name}</span>
               <div className="item-price-qty">
-                <span className="item-price">&euro;{item.total}</span>
+                <span className="item-price">
+                  {priceParser(item.total, "EUR")}
+                </span>
                 <span className="item-qty">quantity {item.quantity}</span>
               </div>
             </div>
@@ -46,7 +49,7 @@ const Sidebar = () => {
         <Col>
           <FinalPrice>
             <span>Total</span>
-            <span>&euro; 164.50</span>
+            <span>{priceParser("16452", "EUR")}</span>
           </FinalPrice>
         </Col>
       </Row>
