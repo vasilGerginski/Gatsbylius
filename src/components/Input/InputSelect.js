@@ -16,18 +16,22 @@ const customStyles = {
   }),
 };
 
-const InputSelect = ({ label, name }) => {
+const InputSelect = ({ label, name, defaultValue, onChange }) => {
+  console.log(defaultValue)
+  const countryOption = [
+    { value: "FR", label: "France" },
+    { value: "UK", label: "Angleterre" },
+    { value: "ES", label: "Espagne" },
+  ];
   return (
     <div>
-      <Label for={name}>{label}</Label>
+      <Label htmlFor={name}>{label}</Label>
       <Select
         name={name}
+        defaultValue={countryOption.filter(item => item.value === defaultValue)}
+        onChange={onChange}
         styles={customStyles}
-        options={[
-          { value: "french", label: "France" },
-          { value: "uk", label: "Angleterre" },
-          { value: "spannish", label: "Espagne" },
-        ]}
+        options={countryOption}
       />
     </div>
   );

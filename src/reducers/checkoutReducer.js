@@ -10,6 +10,9 @@ export const checkoutReducer = (state, action) => {
     case "updateShippingInfos": {
       return { ...state, shippingInfos: action.payload };
     }
+    case "updateCheckoutCurrentTab": {
+      return { ...state, currentTab: action.payload };
+    }
     default: {
       throw new Error("This reducer action does not exist");
     }

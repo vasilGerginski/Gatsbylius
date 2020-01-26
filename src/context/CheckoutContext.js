@@ -16,8 +16,17 @@ export const defaultCheckoutState =
           currency: "USD",
           currentShipment: {},
         },
-        customerInfos: {},
+        customerInfos: {
+          firstName: "",
+          lastName: "",
+          address: "",
+          country: "",
+          city: "",
+          postalCode: "",
+          phone: "",
+        },
         shippingInfos: {},
+        currentTab: "CustomerInfoForm",
       };
 
 export const CheckoutStateContext = React.createContext(defaultCheckoutState);

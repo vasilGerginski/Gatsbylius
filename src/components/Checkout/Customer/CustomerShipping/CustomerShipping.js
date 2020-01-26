@@ -1,16 +1,33 @@
 import React from "react";
-import { Container, Row, Col } from "styled-bootstrap-grid";
-
-import { Title } from "../styled";
+import {Container, Col} from "styled-bootstrap-grid"
+import {ButtonsContainer, InputsRow, Title, ValidButton} from "../styled";
+import {useCheckoutDispatchContext} from "../../../../context/CheckoutContext";
+import {initShipping} from "../../../../services/checkout/initShipping";
+import {useStoreDispatchContext, useStoreStateContext} from "../../../../context/StoreContext";
 
 const CustomerShipping = () => {
+  const storeState = useStoreStateContext();
+  const storeDispatch = useStoreDispatchContext();
+  const checkoutDispatch = useCheckoutDispatchContext();
+
+  if (storeState.step !== "shippingInfos") {
+    initShipping(storeState, checkoutDispatch).then(() => {
+      storeDispatch({type: "updateStep", payload: "shippingInfos"})
+    });
+  }
   return (
     <Container>
-      <Row>
+      <InputsRow>
         <Col>
-          <Title>Shipping Info</Title>
+          <Title>Shipping Infos</Title>
+          <ButtonsContainer>
+            <ValidButton type="submit" onClick={
+              () => {
+              }
+            }>Continue to shipping</ValidButton>
+          </ButtonsContainer>
         </Col>
-      </Row>
+      </InputsRow>
     </Container>
   );
 };

@@ -12,6 +12,7 @@ export const defaultStoreState =
         adding: false,
         products: [],
         cart: {},
+        step: "shopping",
       };
 
 export const StoreStateContext = React.createContext(defaultStoreState);

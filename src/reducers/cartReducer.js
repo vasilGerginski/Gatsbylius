@@ -16,6 +16,9 @@ export const cartReducer = (state, action) => {
     case "changeCurrency": {
       return { ...state, currency: action.payload };
     }
+    case "updateStep": {
+      return { ...state, step: action.payload };
+    }
     default: {
       throw new Error("This reducer action does not exist");
     }
