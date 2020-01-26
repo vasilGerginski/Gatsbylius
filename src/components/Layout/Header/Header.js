@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { Fragment, useRef } from "react";
 import PropTypes from "prop-types";
 import { IoIosMenu, IoMdClose } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
@@ -48,8 +48,8 @@ const Header = ({ siteTitle = ``, menuLinks }) => {
           <NavList>
             {isWide &&
               menuLinks.map(({ node }) => (
-                <>
-                  <NavItem key={`wide-${node.code}`}>
+                <Fragment key={`wide-${node.code}`}>
+                  <NavItem>
                     <NavLink
                       activeClassName="active"
                       to={`/categories/${node.code}`}
@@ -65,7 +65,7 @@ const Header = ({ siteTitle = ``, menuLinks }) => {
                     <NavLink to="/">Contact</NavLink>
                   </NavItem>
                   {/* ---------------------------- */}
-                </>
+                </Fragment>
               ))}
             <div>
               <MiniCartButton />
@@ -88,8 +88,8 @@ const Header = ({ siteTitle = ``, menuLinks }) => {
           </MenuButtonWrapper>
           <NavListTouch>
             {menuLinks.map(({ node }) => (
-              <>
-                <NavItemTouch key={`touch-${node.code}`}>
+              <Fragment key={`touch-${node.code}`}>
+                <NavItemTouch>
                   <NavLinkTouch
                     activeClassName="active"
                     to={`/categories/${node.code}`}
@@ -108,7 +108,7 @@ const Header = ({ siteTitle = ``, menuLinks }) => {
                 <NavItemTouch>
                   <NavLinkTouch to="/">My account</NavLinkTouch>
                 </NavItemTouch>
-              </>
+              </Fragment>
             ))}
           </NavListTouch>
         </SlideMenu>

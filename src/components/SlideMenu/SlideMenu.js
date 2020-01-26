@@ -37,10 +37,11 @@ const SlideMenu = ({ isOpen, forwardRef, children }) => (
 
 SlideMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  /* TODO: fix SSR problem with typeof Element === 'undefined'
   forwardRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]),
+  ]), */
   children: PropTypes.node.isRequired,
 };
 

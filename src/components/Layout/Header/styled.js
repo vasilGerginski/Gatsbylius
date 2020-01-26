@@ -100,7 +100,7 @@ export const NavItemTouch = styled.li`
 `;
 
 export const NavLinkTouch = styled(Link)`
-  padding: 1.4rem;
+  padding: 1.2rem;
   color: rgb(36, 36, 40);
   transition: color 0.3s;
   &:hover,
