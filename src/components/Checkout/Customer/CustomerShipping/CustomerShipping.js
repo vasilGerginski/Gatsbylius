@@ -10,7 +10,7 @@ const CustomerShipping = () => {
   const storeDispatch = useStoreDispatchContext();
   const checkoutDispatch = useCheckoutDispatchContext();
 
-  if (storeState.step !== "shippingInfos") {
+  if (storeState.step !== "shippingInfos" && storeState.step === "customerInfo") {
     initShipping(storeState, checkoutDispatch).then(() => {
       storeDispatch({type: "updateStep", payload: "shippingInfos"})
     });

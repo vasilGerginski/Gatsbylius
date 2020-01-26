@@ -8,7 +8,7 @@ export const initShipping = async (storeState, checkoutDispatch) => {
       .get(`${SYLIUS_URL}/shop-api/checkout/${storeState.cartKey}/shipping`, {})
       .then(response => {
 
-        console.log(response);
+        console.log(response.data.shipments);
       })
       .catch(error => {
         console.error("Error on cart creation ", error);
