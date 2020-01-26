@@ -14,20 +14,28 @@ export const Header = styled.header`
   padding: ${spacing(["none", "xs"])};
   background-color: #fff;
   box-shadow: ${({ theme }) => theme.boxShadows.light};
-  z-index: 100;
-  ${media.md`
-    padding: ${spacing(["none", "sm"])};
-  `}
+  z-index: 20;
 `;
 
-export const MenuButton = styled.div`
+export const MenuButtonWrapper = styled.div`
   display: flex;
   flex-basis: 33%;
+  z-index: 30;
+`;
+
+export const UserAccountButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 `;
 
 export const Logo = styled(Link)`
   flex-basis: 33%;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: ${color("primary")};
   ${fontFamily("titleFont")}
   font-weight: 600;
@@ -35,6 +43,7 @@ export const Logo = styled(Link)`
   text-transform: uppercase;
   ${media.md`
     flex-basis: 50%;
+    font-size: 1.3rem;
     text-align: left;
   `}
 `;
@@ -55,10 +64,10 @@ export const NavList = styled.ul`
 `;
 
 export const NavItem = styled.li`
-  padding: 0 0.4rem;
+  margin-right: ${spacing(["xs"])};
   text-transform: uppercase;
   &:last-child {
-    padding-right: 0;
+    margin-right: 0;
   }
 `;
 
@@ -71,31 +80,31 @@ export const NavLink = styled(Link)`
   }
 `;
 
-export const NavTouchWrapper = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 310px;
-  padding: 1rem;
-  z-index: 50;
-  background-color: #fff;
-  box-shadow: ${({ theme }) => theme.boxShadows.light};
-  box-shadow: ${props => props.theme.shadows.boxShadow};
+export const NavListTouch = styled.ul`
+  ${NavList}
+  flex-direction: column;
 `;
 
-export const NavTouch = styled.nav`
+export const NavItemTouch = styled.li`
   display: flex;
-  flex-direction: column;
-  margin-top: 0.5rem;
-  .navtouch__link {
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 0.25rem;
-    color: #666;
-    &:hover {
-      color: #fff;
-      background-color: ${color("primary")};
-    }
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+  &:hover,
+  &.active {
+    background-color: ${color("greyLight1")};
+  }
+`;
+
+export const NavLinkTouch = styled(Link)`
+  padding: 1.2rem;
+  color: rgb(36, 36, 40);
+  transition: color 0.3s;
+  &:hover,
+  &.active {
+    color: ${color("primary")};
   }
 `;

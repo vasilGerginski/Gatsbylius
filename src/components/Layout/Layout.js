@@ -89,7 +89,7 @@ const Layout = ({ children }) => {
             <a href="https://github.com/gatsbylius/gatsbylius">
               <span>Gatsbylius on Github</span>
               <span>
-                <GoMarkGithub size="1.6rem" />
+                <GoMarkGithub size={24} />
               </span>
             </a>
           </div>
