@@ -20,8 +20,9 @@ export default styled.footer`
 
   a {
     ${centerXY}
+    color: ${color("black")};
     transition: color 0.3s;
-
+    text-decoration: underline;
     &:hover {
       color: ${color("primary")};
     }

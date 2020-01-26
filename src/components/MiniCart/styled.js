@@ -94,6 +94,7 @@ export const MiniCartItems = styled.ul`
     }
     
     img {
+        object-fit: cover;
         float: left;
         margin-right: 12px;
     }
@@ -111,7 +112,7 @@ export const MiniCart = styled.div`
   padding: 1rem;
   background: white;
   box-shadow: ${({ theme }) => theme.boxShadows.light};
-  z-index: 100;
+  z-index: 25;
 
   ${MiniCartHeader}
 
