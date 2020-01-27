@@ -37,6 +37,7 @@ export const addVariantToCart = async (
         toastrConfig
       );
       storeDispatch({ type: "updateProducts", payload: response.data.items });
+      storeDispatch({type: "updateStep", payload: "shopping"})
     })
     .catch(err => {
       toastr.error(
