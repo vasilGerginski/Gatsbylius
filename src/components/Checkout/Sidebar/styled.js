@@ -55,10 +55,60 @@ export const Item = styled.div`
     width: 100%;
     padding: 0.25rem 0;
 
+    .item-name-delete {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .item-delete-icon {
+      color: ${color("alert")};
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+
+      &:hover {
+        color: ${color("alertHover")};
+      }
+    }
+
     .item-price-qty {
       font-weight: 600;
       display: flex;
       justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .item-qty {
+      display: flex;
+      align-items: center;
+    }
+
+    .item-dec-inc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.4rem 0.15rem;
+      margin-left: ${spacing(["sm"])};
+      color: ${color("greySemiDark")};
+      font-weight: 600;
+      font-size: 18px;
+      background-color: ${color("greyAlto")};
+      border: solid 1px ${color("greyAlto")};
+      border-radius: 10px;
+      text-align: center;
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: ${spacing(["none", "sm"])};
+        color: ${color("greyMiddle1")};
+        cursor: pointer;
+        transition: all 200ms ease-in-out;
+
+        &:hover {
+          color: ${color("greyMiddle2")};
+        }
+      }
     }
   }
 `;
