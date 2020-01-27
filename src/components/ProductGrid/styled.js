@@ -83,6 +83,7 @@ export const ProductOverlayButton = styled.button`
 `;
 
 export const ProductOverlayLink = styled(Link)`
+  margin-top: ${spacing(["xs"])};
   ${ProductOverlayButtonStyle}
 `;
 
