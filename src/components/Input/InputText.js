@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Input, Label } from "./styled";
 
-const InputText = ({ label, name }) => {
+const InputText = ({ label, name, onChange, value }) => {
   return (
     <div>
-      <Label for={name}>{label}</Label>
-      <Input name={name} type="text" />
+      <Label htmlFor={name}>{label}</Label>
+      <Input name={name} onChange={onChange} value={value} type="text" />
     </div>
   );
 };

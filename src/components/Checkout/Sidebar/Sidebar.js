@@ -3,7 +3,7 @@ import _get from "lodash.get";
 import { Row, Col } from "styled-bootstrap-grid";
 import { FaChevronLeft, FaChevronRight, FaTimesCircle } from "react-icons/fa";
 import { useCheckoutStateContext } from "../../../context/CheckoutContext";
-import { priceParser } from "../../../helpers/cartHelper";
+import { getTotal, priceParser } from "../../../helpers/cartHelper";
 import {
   SidebarContainer,
   ArticlesNumber,
@@ -13,9 +13,11 @@ import {
   Item,
   FinalPrice,
 } from "./styled";
+import { useStoreStateContext } from "../../../context/StoreContext";
 
 const Sidebar = ({ isCartPage }) => {
   const checkoutState = useCheckoutStateContext();
+  const storeState = useStoreStateContext();
   const items = _get(checkoutState, "orderSummary.items", []);
 
   return (
@@ -38,11 +40,11 @@ const Sidebar = ({ isCartPage }) => {
               </div>
               <div className="item-price-qty">
                 <span className="item-price">
-                  {priceParser(item.total, "EUR")}
+                  {priceParser(item.total, storeState.currency)}
                 </span>
                 {isCartPage ? (
                   <div className="item-qty">
-                    <span>quantity</span>
+                    <span>QTY</span>
                     <div className="item-dec-inc">
                       <span className="icon">
                         <FaChevronLeft fontSize="1.3rem" />
@@ -54,7 +56,7 @@ const Sidebar = ({ isCartPage }) => {
                     </div>
                   </div>
                 ) : (
-                  <span className="item-qty">quantity {item.quantity}</span>
+                  <span className="item-qty">Qty {item.quantity}</span>
                 )}
               </div>
             </div>
@@ -68,7 +70,7 @@ const Sidebar = ({ isCartPage }) => {
         <Col>
           <FinalPrice>
             <span>Total</span>
-            <span>{priceParser("16452", "EUR")}</span>
+            <span>{priceParser(getTotal(items), storeState.currency)}</span>
           </FinalPrice>
         </Col>
       </Row>

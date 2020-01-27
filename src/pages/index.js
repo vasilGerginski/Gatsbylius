@@ -46,10 +46,6 @@ const IndexPage = ({ data }) => (
 
               <ProductOverlay>
                 <em>{product.name}</em>
-                <ProductOverlayButton type="button">
-                  <FiShoppingCart size="1.2em" />
-                  <span>Add to cart</span>
-                </ProductOverlayButton>
                 <ProductOverlayLink to={`/product/${product.slug}`}>
                   <FiEye size="1.2em" />
                   <span>Details</span>
