@@ -91,8 +91,8 @@ export const Item = styled.div`
       color: ${color("greySemiDark")};
       font-weight: 600;
       font-size: 18px;
-      background-color: ${color("greyAlto")};
-      border: solid 1px ${color("greyAlto")};
+      background-color: ${color("greyLight1")};
+      border: solid 1px ${color("greyLight1")};
       border-radius: 10px;
       text-align: center;
 
@@ -101,12 +101,12 @@ export const Item = styled.div`
         justify-content: center;
         align-items: center;
         margin: ${spacing(["none", "sm"])};
-        color: ${color("greyMiddle1")};
+        color: ${color("greyAltoMedium")};
         cursor: pointer;
         transition: all 200ms ease-in-out;
 
         &:hover {
-          color: ${color("greyMiddle2")};
+          color: ${color("greyMiddle1")};
         }
       }
     }

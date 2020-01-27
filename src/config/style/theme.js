@@ -19,6 +19,7 @@ const palette = {
   greyLight1: "#efefef",
   greyDisable: "#E4EAEE",
   greyAlto: "#DDE3E8",
+  greyAltoMedium: "#C9CFD3",
   greyMiddle1: "#a0a9aE",
   greyMiddle2: "#646e74",
   greySemiDark: "#788995",
