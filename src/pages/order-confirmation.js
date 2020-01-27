@@ -6,17 +6,16 @@ import {
   ConfirmationTitle,
   ConfirmationText,
 } from "../components/OrderConfirmation/styled";
-import { useCheckoutStateContext } from "../context/CheckoutContext";
 import { resetState } from "../context/helper";
 
 const OrderConfirmation = () => {
   let firstName = "";
   if (typeof window !== "undefined") {
+    resetState();
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     firstName = urlParams.get("customerName");
   }
-  resetState();
   return (
     <Layout>
       <Paper fluid>
