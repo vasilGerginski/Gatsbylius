@@ -6,6 +6,15 @@ export const defaultCheckoutState =
   typeof window !== "undefined" && localStorage.getItem("checkoutState")
     ? JSON.parse(localStorage.getItem("checkoutState"))
     : {
+        shippingInfos: {
+          shipments: [],
+          selectedShippingMethod: "",
+        },
+        paymentInfos: {
+          payments: [],
+          selectedPaymentMethod: "",
+        },
+        currentTab: "CustomerInfoForm",
         orderSummary: {
           items: [],
           subTotal: 0,
@@ -25,8 +34,6 @@ export const defaultCheckoutState =
           postalCode: "",
           phone: "",
         },
-        shippingInfos: {},
-        currentTab: "CustomerInfoForm",
       };
 
 export const CheckoutStateContext = React.createContext(defaultCheckoutState);

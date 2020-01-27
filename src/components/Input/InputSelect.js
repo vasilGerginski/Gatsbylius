@@ -17,7 +17,6 @@ const customStyles = {
 };
 
 const InputSelect = ({ label, name, defaultValue, onChange }) => {
-  console.log(defaultValue)
   const countryOption = [
     { value: "FR", label: "France" },
     { value: "UK", label: "Angleterre" },

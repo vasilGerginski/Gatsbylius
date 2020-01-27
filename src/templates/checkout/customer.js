@@ -27,7 +27,12 @@ const Customer = () => {
           <Col sm={8}>
             <Tabs
               defaultTab={checkoutState.currentTab}
-              onChange={tabId => checkoutDispatch({type: "updateCheckoutCurrentTab", payload: tabId})}
+              onChange={tabId =>
+                checkoutDispatch({
+                  type: "updateCheckoutCurrentTab",
+                  payload: tabId,
+                })
+              }
             >
               <TabListWrapper>
                 <TabCustom
@@ -49,15 +54,24 @@ const Customer = () => {
                   03 Payment Selection
                 </TabCustom>
               </TabListWrapper>
-              <TabPanel tabId="CustomerInfoForm"
-                        render={() => isActiveTab("CustomerInfoForm") ? <CustomerInfoForm /> : null}>
-              </TabPanel>
-              <TabPanel tabId="CustomerShipping"
-                        render={() => isActiveTab("CustomerShipping") ? <CustomerShipping /> : null}>
-              </TabPanel>
-              <TabPanel tabId="CustomerPayment"
-                        render={() => isActiveTab("CustomerPayment") ? <CustomerPayment /> : null}>
-              </TabPanel>
+              <TabPanel
+                tabId="CustomerInfoForm"
+                render={() =>
+                  isActiveTab("CustomerInfoForm") ? <CustomerInfoForm /> : null
+                }
+              />
+              <TabPanel
+                tabId="CustomerShipping"
+                render={() =>
+                  isActiveTab("CustomerShipping") ? <CustomerShipping /> : null
+                }
+              />
+              <TabPanel
+                tabId="CustomerPayment"
+                render={() =>
+                  isActiveTab("CustomerPayment") ? <CustomerPayment /> : null
+                }
+              />
             </Tabs>
           </Col>
           <Col sm={4}>

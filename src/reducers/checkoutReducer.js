@@ -10,6 +10,12 @@ export const checkoutReducer = (state, action) => {
     case "updateShippingInfos": {
       return { ...state, shippingInfos: action.payload };
     }
+    case "updateShipments": {
+      return { ...state, shippingInfos: action.payload };
+    }
+    case "updatePayment": {
+      return { ...state, paymentInfos: action.payload };
+    }
     case "updateCheckoutCurrentTab": {
       return { ...state, currentTab: action.payload };
     }

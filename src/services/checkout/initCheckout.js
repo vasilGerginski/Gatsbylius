@@ -17,11 +17,8 @@ export const initCheckout = async (storeState, checkoutDispatch) => {
             total: response.data.totals.total,
             cartDiscount: response.cartDiscount,
             currency: response.currency,
-            //@todo get current shipment after
-            //currentShipment: response.shipments[0].method,
           },
         });
-        console.log(response);
       })
       .catch(error => {
         console.error("Error on cart creation ", error);
