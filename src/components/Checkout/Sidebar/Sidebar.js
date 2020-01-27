@@ -44,7 +44,7 @@ const Sidebar = ({ isCartPage }) => {
                 </span>
                 {isCartPage ? (
                   <div className="item-qty">
-                    <span>QTY</span>
+                    <span>Qty</span>
                     <div className="item-dec-inc">
                       <span className="icon">
                         <FaChevronLeft fontSize="1.3rem" />
