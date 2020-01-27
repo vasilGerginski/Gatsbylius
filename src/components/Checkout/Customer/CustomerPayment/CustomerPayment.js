@@ -92,9 +92,10 @@ const CustomerPayment = () => {
               onClick={() => {
                 submitCustomerPayment(storeState, paymentCode).then(() => {
                   submitCompleteCheckout(storeState).then(() => {
-                    resetState();
                     if (typeof window !== "undefined") {
-                      window.location("/order-confirmation");
+                      window.location.replace(
+                        `/order-confirmation?customerName=${checkoutState.customerInfos.firstName}`
+                      );
                     }
                   });
                 });

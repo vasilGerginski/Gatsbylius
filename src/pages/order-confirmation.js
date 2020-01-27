@@ -7,16 +7,23 @@ import {
   ConfirmationText,
 } from "../components/OrderConfirmation/styled";
 import { useCheckoutStateContext } from "../context/CheckoutContext";
+import { resetState } from "../context/helper";
 
 const OrderConfirmation = () => {
-  const checkoutState = useCheckoutStateContext();
+  let firstName = "";
+  if (typeof window !== "undefined") {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    firstName = urlParams.get("customerName");
+  }
+  resetState();
   return (
     <Layout>
       <Paper fluid>
         <Row>
           <Col sm={12}>
             <ConfirmationTitle>
-              {checkoutState.customerInfos.firstName}, Thanks for your order !
+              {firstName}, Thanks for your order !
             </ConfirmationTitle>
             <ConfirmationText>
               You will receive an email with all the informations regarding your
