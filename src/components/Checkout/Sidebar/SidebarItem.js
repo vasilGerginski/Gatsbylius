@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {
+  useStoreStateContext,
+  useStoreDispatchContext,
+} from "../../../context/StoreContext";
 import { priceParser } from "../../../helpers/cartHelper";
 import { FaChevronLeft, FaChevronRight, FaTimesCircle } from "react-icons/fa";
 import {
@@ -10,7 +14,10 @@ import {
 } from "../../../services/cart";
 import { Item } from "./styled";
 
-const SidebarItem = ({ item, storeState, storeDispatch, isCartPage }) => {
+const SidebarItem = ({ item, isCartPage }) => {
+  const storeDispatch = useStoreDispatchContext();
+  const storeState = useStoreStateContext();
+
   return (
     <Item key={item.id}>
       <img src={item.product.images[0].cachedPath} />
@@ -66,8 +73,6 @@ const SidebarItem = ({ item, storeState, storeDispatch, isCartPage }) => {
 SidebarItem.propTypes = {
   isCartPage: PropTypes.bool,
   item: PropTypes.object.isRequired,
-  storeDispatch: PropTypes.func.isRequired,
-  storeState: PropTypes.object.isRequired,
 };
 
 export default SidebarItem;

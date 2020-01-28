@@ -13,15 +13,11 @@ import {
   FinalPrice,
   ButtonContainer,
 } from "./styled";
-import {
-  useStoreStateContext,
-  useStoreDispatchContext,
-} from "../../../context/StoreContext";
+import { useStoreStateContext } from "../../../context/StoreContext";
 import SidebarItem from "./SidebarItem";
 import Button from "../../shared/Button";
 
 const Sidebar = ({ isCartPage = false }) => {
-  const storeDispatch = useStoreDispatchContext();
   const storeState = useStoreStateContext();
   const items = _get(storeState, "products", []);
 
@@ -36,13 +32,7 @@ const Sidebar = ({ isCartPage = false }) => {
       </Row>
       {items.map(item => {
         return (
-          <SidebarItem
-            key={item.id}
-            item={item}
-            storeDispatch={storeDispatch}
-            storeState={storeState}
-            isCartPage={isCartPage}
-          />
+          <SidebarItem key={item.id} item={item} isCartPage={isCartPage} />
         );
       })}
       <Row>
