@@ -62,7 +62,6 @@ const Sidebar = ({ isCartPage = false }) => {
             <Button
               onClick={() => {
                 if (typeof window !== "undefined") {
-                  storeDispatch({ type: "toggleMiniCart" });
                   window.location = "/checkout/customer";
                 }
               }}
