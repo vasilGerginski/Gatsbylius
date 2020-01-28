@@ -15,6 +15,7 @@ import {
   MiniCartTotal,
   MiniCart as MinicartComponent,
   MiniCartImage,
+  ButtonContainer,
   CheckoutButton,
 } from "./styled";
 
@@ -70,16 +71,18 @@ const MiniCart = () => {
             );
           })}
         </MiniCartItems>
-        <CheckoutButton
-          onClick={() => {
-            if (typeof window !== "undefined") {
-              storeDispatch({ type: "toggleMiniCart" });
-              window.location = "/checkout/customer";
-            }
-          }}
-        >
-          Checkout
-        </CheckoutButton>
+        <ButtonContainer>
+          <CheckoutButton
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                storeDispatch({ type: "toggleMiniCart" });
+                window.location = "/cart";
+              }
+            }}
+          >
+            Go to cart
+          </CheckoutButton>
+        </ButtonContainer>
       </MinicartComponent>
     );
   }

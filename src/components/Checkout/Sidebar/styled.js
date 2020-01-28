@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Container, Col, Row } from "styled-bootstrap-grid";
+import { Container, Col } from "styled-bootstrap-grid";
 import { color, spacing } from "../../../helpers/themeHelpers";
 
 export const SidebarContainer = styled(Container)`
   background-color: #f8fafb;
   border-color: solid 1px #979797;
   padding: ${spacing(["xl", "lg"])};
-  min-height: 45rem;
+  min-height: 25rem;
 `;
 
 export const HeadContainer = styled(Col)`
@@ -118,4 +118,11 @@ export const FinalPrice = styled.div`
   justify-content: space-between;
   font-weight: 600;
   color: ${color("greyDark")};
+`;
+
+export const ButtonContainer = styled(Col)`
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-top: ${spacing(["lg"])};
 `;

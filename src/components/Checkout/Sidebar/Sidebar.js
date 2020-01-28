@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import _get from "lodash.get";
 import { Row, Col } from "styled-bootstrap-grid";
-import { FaChevronLeft, FaChevronRight, FaTimesCircle } from "react-icons/fa";
-import { useCheckoutStateContext } from "../../../context/CheckoutContext";
+
 import { getTotal, priceParser } from "../../../helpers/cartHelper";
 import {
   SidebarContainer,
@@ -10,15 +10,20 @@ import {
   Title,
   HeadContainer,
   Divider,
-  Item,
   FinalPrice,
+  ButtonContainer,
 } from "./styled";
-import { useStoreStateContext } from "../../../context/StoreContext";
+import {
+  useStoreStateContext,
+  useStoreDispatchContext,
+} from "../../../context/StoreContext";
+import SidebarItem from "./SidebarItem";
+import Button from "../../shared/Button";
 
-const Sidebar = ({ isCartPage }) => {
-  const checkoutState = useCheckoutStateContext();
+const Sidebar = ({ isCartPage = false }) => {
+  const storeDispatch = useStoreDispatchContext();
   const storeState = useStoreStateContext();
-  const items = _get(checkoutState, "orderSummary.items", []);
+  const items = _get(storeState, "products", []);
 
   return (
     <SidebarContainer>
@@ -31,36 +36,13 @@ const Sidebar = ({ isCartPage }) => {
       </Row>
       {items.map(item => {
         return (
-          <Item key={item.id}>
-            <img src={item.product.images[0].cachedPath} />
-            <div className="item-datas">
-              <div className="item-name-delete">
-                <span>{item.product.name}</span>
-                <FaTimesCircle className="item-delete-icon" fontSize="1.2rem" />
-              </div>
-              <div className="item-price-qty">
-                <span className="item-price">
-                  {priceParser(item.total, storeState.currency)}
-                </span>
-                {isCartPage ? (
-                  <div className="item-qty">
-                    <span>Qty</span>
-                    <div className="item-dec-inc">
-                      <span className="icon">
-                        <FaChevronLeft fontSize="1.3rem" />
-                      </span>
-                      <span>{item.quantity}</span>
-                      <span className="icon">
-                        <FaChevronRight fontSize="1.3rem" />
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <span className="item-qty">Qty {item.quantity}</span>
-                )}
-              </div>
-            </div>
-          </Item>
+          <SidebarItem
+            key={item.id}
+            item={item}
+            storeDispatch={storeDispatch}
+            storeState={storeState}
+            isCartPage={isCartPage}
+          />
         );
       })}
       <Row>
@@ -74,8 +56,28 @@ const Sidebar = ({ isCartPage }) => {
           </FinalPrice>
         </Col>
       </Row>
+      {isCartPage && (
+        <Row>
+          <ButtonContainer>
+            <Button
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  storeDispatch({ type: "toggleMiniCart" });
+                  window.location = "/checkout/customer";
+                }
+              }}
+            >
+              Go to checkout
+            </Button>
+          </ButtonContainer>
+        </Row>
+      )}
     </SidebarContainer>
   );
+};
+
+Sidebar.propTypes = {
+  isCartPage: PropTypes.bool,
 };
 
 export default Sidebar;
