@@ -61,7 +61,7 @@ The following steps are all you need if you already are familiar with the JavaSc
 
 1.  `git clone git@github.com:Gatsbylius/Gatsbylius.git`
 2.  `cd Gatsbylius && npm install`
-3.  create an `.env` file based on the `.env.xxx.dist` files in the repository root
+3.  create an `.env.development` file based on the `.env.development.dist` files in the repository root
 4.  `npm run develop`
 5.  open your favorite editor and start coding!
 
