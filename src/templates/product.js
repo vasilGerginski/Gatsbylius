@@ -66,16 +66,14 @@ export default Product;
 export const query = graphql`
   query ProductPageQuery($slug: String, $mainProductTaxon: String) {
     category(code: { eq: $mainProductTaxon }) {
-      fields {
-        products {
-          id
-          name
-          slug
-          localImage {
-            childImageSharp {
-              fluid(maxWidth: 400, quality: 100) {
-                ...GatsbyImageSharpFluid
-              }
+      products {
+        id
+        name
+        slug
+        localImage {
+          childImageSharp {
+            fluid(maxWidth: 400, quality: 100) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

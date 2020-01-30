@@ -8,6 +8,10 @@ const got = require("got");
 
 const SYLIUS_URL = process.env.GATSBY_SYLIUS_URL;
 
+const syliusConsumer = require("./sylius-consumer");
+
+exports.createResolvers = syliusConsumer.createResolvers;
+
 const getAllProductsData = async () => {
   if (!SYLIUS_URL) {
     return require("./__fixtures__/product-latest.json");
@@ -37,12 +41,14 @@ exports.sourceNodes = async ({
 
   const adaptCategory = originalCategory => {
     return {
+      level: originalCategory.level,
       code: originalCategory.code,
       name: originalCategory.name,
       slug: originalCategory.slug,
       description: originalCategory.description,
       position: originalCategory.position,
-      syliusChildren: originalCategory.children,
+      subcategories: originalCategory.children,
+      parentCategory: originalCategory.parent,
       images: originalCategory.images,
       categoryImage:
         originalCategory.images.length > 0
@@ -95,21 +101,16 @@ exports.sourceNodes = async ({
   const createNodeFromCategory = categoryData => {
     const nodeContent = JSON.stringify(categoryData);
 
-    if (nodeContent.hasOwnProperty("children")) {
-      nodeContent["syliusChildren"] = nodeContent["children"];
-      delete nodeContent["children"];
-    }
-
     const nodeMeta = {
       id: createNodeId(`category-${categoryData.code}`),
       parent: null,
+      children: [],
       internal: {
         type: `Category`,
         mediaType: `text/html`,
         content: nodeContent,
         contentDigest: createContentDigest(categoryData),
       },
-      level: 0,
     };
 
     const node = Object.assign({}, categoryData, nodeMeta);
@@ -138,8 +139,26 @@ exports.sourceNodes = async ({
   };
 
   await getAllCategoryData().then(({ children }) => {
-    return children.map(originalCategoryData => {
+    const flattenCategories = (rootCategory, level = 0, parent = null) => {
+      return rootCategory.reduce((acc, category) => {
+        return acc
+          .concat({
+            ...category,
+            parent,
+            level,
+            children: category.children.map(({ code }) => code),
+          })
+          .concat(
+            flattenCategories(category.children, level + 1, category.code)
+          );
+      }, []);
+    };
+
+    const flattenedCategories = flattenCategories(children);
+
+    return flattenedCategories.map(originalCategoryData => {
       const categoryData = adaptCategory(originalCategoryData);
+
       return createNodeFromCategory(categoryData);
     });
   });
@@ -189,11 +208,9 @@ exports.createPages = ({ graphql, actions }) => {
               id
               code
               slug
-              fields {
-                products {
-                  id
-                  name
-                }
+              products {
+                id
+                name
               }
             }
           }
@@ -248,14 +265,8 @@ exports.createPages = ({ graphql, actions }) => {
 };
 
 // For function createNodeField
-exports.onCreateNode = ({
-  node,
-  getNode,
-  createNodeId,
-  createContentDigest,
-  actions,
-}) => {
-  const { createNodeField, createParentChildLink, createNode } = actions;
+exports.onCreateNode = ({ node, getNode, createNodeId, actions }) => {
+  const { createNodeField } = actions;
 
   if (
     node &&
@@ -263,48 +274,20 @@ exports.onCreateNode = ({
     node.internal.type === "Product" &&
     node.taxons
   ) {
-    let categoryNode = getNode(createNodeId(`category-${node.taxons.main}`));
+    const categoryNode = getNode(createNodeId(`category-${node.taxons.main}`));
 
-    let categoryNodeValue = [node.id];
-    if (
-      categoryNode &&
-      categoryNode.fields &&
-      categoryNode.fields.products___NODE
-    ) {
-      categoryNodeValue = [...categoryNode.fields.products___NODE, node.id];
+    let categoryNodeValue = [node.code];
+    if (categoryNode && categoryNode.fields && categoryNode.fields.products) {
+      categoryNodeValue = [
+        ...categoryNode.fields.products,
+        ...categoryNodeValue,
+      ];
     }
 
     createNodeField({
       node: categoryNode,
-      name: "products___NODE",
+      name: "products",
       value: categoryNodeValue,
-    });
-  }
-
-  if (node.internal.type === "Category" && node.level === 0) {
-    return node.syliusChildren.map(childrenCategoryData => {
-      const nodeContent = JSON.stringify(childrenCategoryData);
-      const nodeMeta = {
-        id: createNodeId(`category-${childrenCategoryData.code}`),
-        parent: node.id,
-        children: [],
-        internal: {
-          type: `Category`,
-          mediaType: `text/html`,
-          content: nodeContent,
-          contentDigest: createContentDigest(childrenCategoryData),
-        },
-        level: 1,
-      };
-
-      const childrenNode = Object.assign({}, childrenCategoryData, nodeMeta);
-      createNode(childrenNode);
-      createParentChildLink({
-        parent: node,
-        child: childrenNode,
-      });
-
-      return childrenNode;
     });
   }
 };
