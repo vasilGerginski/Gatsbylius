@@ -3,10 +3,7 @@ import { Row, Col } from "styled-bootstrap-grid";
 import { Tabs, TabPanel } from "react-web-tabs";
 
 import { getCheckoutSummary } from "../../services/checkout/getCheckoutSummary";
-import {
-  useCheckoutDispatchContext,
-  useCheckoutStateContext,
-} from "../../context/CheckoutContext";
+import { useCheckoutDispatchContext } from "../../context/CheckoutContext";
 import { useStoreStateContext } from "../../context/StoreContext";
 
 import Paper from "../../components/Paper";
@@ -15,7 +12,7 @@ import CustomerInfoForm from "../../components/Checkout/Customer/CustomerInfoFor
 import CustomerShipping from "../../components/Checkout/Customer/CustomerShipping";
 import CustomerPayment from "../../components/Checkout/Customer/CustomerPayment";
 import Sidebar from "../../components/Checkout/Sidebar";
-import { TabListWrapper, TabCustom } from "./styled";
+import { TabListWrapper, TabCustom } from "../../templates/checkout/styled";
 
 const Customer = () => {
   const storeState = useStoreStateContext();

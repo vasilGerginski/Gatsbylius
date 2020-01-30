@@ -1,0 +1,11 @@
+{
+  "name": "gatsby-source-sylius",
+  "version": "0.1.0",
+  "description": "Gatsby source for Sylius Shop API",
+  "author": "Adrien Louis-Rossignol <adrien.louis.r@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "gatsby-source-filesystem": "^2.1.47",
+    "got": "^9.6.0"
+  }
+}
