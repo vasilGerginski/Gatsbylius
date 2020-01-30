@@ -40,20 +40,17 @@ const Category = ({ data }) => {
 
   return (
     <Layout>
+      <CategoryImageContainer>
+        <Img
+          sizes={{
+            ...fluidCategoryImage,
+            aspectRatio: 8 / 2,
+          }}
+        />
+        <CategoryTitle>{categoryName}</CategoryTitle>
+      </CategoryImageContainer>
+
       <Container css={categoryGridTextStyle} fluid>
-        <Row>
-          <Col sm={12}>
-            <CategoryImageContainer>
-              <Img
-                sizes={{
-                  ...fluidCategoryImage,
-                  aspectRatio: 8 / 2,
-                }}
-              />
-              <CategoryTitle>{categoryName}</CategoryTitle>
-            </CategoryImageContainer>
-          </Col>
-        </Row>
         <Row>
           <Col lg={2}>
             {subCategories && subCategories.length > 0 && (

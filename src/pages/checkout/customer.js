@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col } from "styled-bootstrap-grid";
 import { Tabs, TabPanel } from "react-web-tabs";
 
-import { getCheckoutSummary } from "../../services/checkout/getCheckoutSummary";
-import { useCheckoutDispatchContext } from "../../context/CheckoutContext";
-import { useStoreStateContext } from "../../context/StoreContext";
+import {
+  useCheckoutDispatchContext,
+  useCheckoutStateContext,
+} from "../../context/CheckoutContext";
 
 import Paper from "../../components/Paper";
 import Layout from "../../components/Layout";
@@ -12,16 +13,12 @@ import CustomerInfoForm from "../../components/Checkout/Customer/CustomerInfoFor
 import CustomerShipping from "../../components/Checkout/Customer/CustomerShipping";
 import CustomerPayment from "../../components/Checkout/Customer/CustomerPayment";
 import Sidebar from "../../components/Checkout/Sidebar";
-import { TabListWrapper, TabCustom } from "../../templates/checkout/styled";
+import { TabListWrapper, TabCustom } from "./styled";
 
 const Customer = () => {
-  const storeState = useStoreStateContext();
+  const checkoutState = useCheckoutStateContext();
   const checkoutDispatch = useCheckoutDispatchContext();
-  const [currentTab, setCurrentTab] = useState("CustomerInfoForm");
-
-  getCheckoutSummary(storeState, checkoutDispatch).then(() => {});
-
-  const isActiveTab = tabFor => currentTab === tabFor;
+  const isActiveTab = tabFor => checkoutState.currentTab === tabFor;
 
   return (
     <Layout>
@@ -29,8 +26,13 @@ const Customer = () => {
         <Row>
           <Col sm={8}>
             <Tabs
-              defaultTab="CustomerInfoForm"
-              onChange={tabId => setCurrentTab(tabId)}
+              defaultTab={checkoutState.currentTab}
+              onChange={tabId =>
+                checkoutDispatch({
+                  type: "updateCheckoutCurrentTab",
+                  payload: tabId,
+                })
+              }
             >
               <TabListWrapper>
                 <TabCustom
@@ -52,15 +54,24 @@ const Customer = () => {
                   03 Payment Selection
                 </TabCustom>
               </TabListWrapper>
-              <TabPanel tabId="CustomerInfoForm">
-                <CustomerInfoForm />
-              </TabPanel>
-              <TabPanel tabId="CustomerShipping">
-                <CustomerShipping />
-              </TabPanel>
-              <TabPanel tabId="CustomerPayment">
-                <CustomerPayment />
-              </TabPanel>
+              <TabPanel
+                tabId="CustomerInfoForm"
+                render={() =>
+                  isActiveTab("CustomerInfoForm") ? <CustomerInfoForm /> : null
+                }
+              />
+              <TabPanel
+                tabId="CustomerShipping"
+                render={() =>
+                  isActiveTab("CustomerShipping") ? <CustomerShipping /> : null
+                }
+              />
+              <TabPanel
+                tabId="CustomerPayment"
+                render={() =>
+                  isActiveTab("CustomerPayment") ? <CustomerPayment /> : null
+                }
+              />
             </Tabs>
           </Col>
           <Col sm={4}>

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
-import { Link } from "gatsby";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 import Layout from "../components/Layout";
 import ProductBreadcrumb from "../components/ProductBreadcrumb";

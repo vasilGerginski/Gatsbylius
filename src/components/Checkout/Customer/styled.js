@@ -11,6 +11,12 @@ const styleButtonShared = `
   border: none;
 `;
 
+export const RadioText = styled.p`
+  color: black;
+  font-weight: bold;
+  margin: 0;
+`;
+
 export const Title = styled.h1`
   padding: ${spacing(["md", "none"])};
   text-transform: capitalize;
