@@ -14,7 +14,6 @@ module.exports = ({
   createResolvers({
     Product: {
       localImage: {
-        type: "File",
         resolve: source =>
           createRemoteFileNode({
             url: source.firstImage,
@@ -28,7 +27,6 @@ module.exports = ({
     },
     Category: {
       localImage: {
-        type: "File",
         resolve: source =>
           createRemoteFileNode({
             url: source.categoryImage,
@@ -50,7 +48,6 @@ module.exports = ({
           ),
       },
       products: {
-        type: "[Product]!",
         resolve: (source, _, context) =>
           source.fields && source.fields.products
             ? source.fields.products.map(productCode =>

@@ -34,6 +34,12 @@ module.exports = {
       resolve: `gatsby-source-sylius`,
       options: {
         url: process.env.GATSBY_SYLIUS_URL,
+        attributes: `
+          type Attributes {
+            photographer: String
+            unsplash_url: String
+          }
+        `,
       },
     },
     {

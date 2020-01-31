@@ -84,8 +84,7 @@ export const query = graphql`
       name
       description
       shortDescription
-      photographer
-      unsplash_url
+      ...Attributes
       channelCode
       averageRating
       taxons {
