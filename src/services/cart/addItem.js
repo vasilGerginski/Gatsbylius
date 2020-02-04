@@ -17,6 +17,10 @@ export const addVariantToCart = async (
   await ensureCartKey(storeState, storeDispatch);
   const cartKey = storeState.cartKey;
 
+  storeDispatch({
+    type: "updateProducts",
+  });
+
   const productData = {
     productCode: productCode,
     quantity: qty,
@@ -36,8 +40,11 @@ export const addVariantToCart = async (
         `"${name}"` + successQtyString,
         toastrConfig
       );
-      storeDispatch({ type: "updateProducts", payload: response.data.items });
-      storeDispatch({type: "updateStep", payload: "shopping"})
+      storeDispatch({
+        type: "updateProductsSuccess",
+        payload: response.data.items,
+      });
+      storeDispatch({ type: "updateStep", payload: "shopping" });
     })
     .catch(err => {
       toastr.error(
@@ -45,6 +52,10 @@ export const addVariantToCart = async (
         `"${name}"` + successQtyString,
         toastrConfig
       );
+      storeDispatch({
+        type: "updateProductsError",
+        payload: err.message,
+      });
       console.error("Error on add to cart", err);
     });
 };
