@@ -39,7 +39,6 @@ const adaptProduct = ({ product, syliusUrl }) => {
     name: product.name,
     description: product.description,
     shortDescription: product.shortDescription,
-    originalAttributes: product.attributes,
     attributes: product.attributes.reduce(
       (acc, attribute) => ({
         ...acc,
