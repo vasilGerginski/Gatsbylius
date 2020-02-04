@@ -33,7 +33,7 @@ const cssTitle = css`
   line-height: 1.2;
   text-transform: uppercase;
   color: ${color("white")};
-  text-shadow: ${({ theme }) => theme.boxShadows.textMedium};
+  text-shadow: ${({ theme }) => theme.textShadows.medium};
 `;
 
 export const HeroTitle = styled.h1`
