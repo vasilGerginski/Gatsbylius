@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import { Container, Row, Col } from "styled-bootstrap-grid";
-import { FiEye, FiShoppingCart } from "react-icons/fi";
 
 import Layout from "../components/Layout";
+import Price from "../components/Price";
 import {
   GalleryItem,
   GalleryImageWrapper,
@@ -43,14 +43,11 @@ const IndexPage = ({ data }) => (
                   imgStyle={{ objectFit: "contain" }}
                 />
               </GalleryImageWrapper>
-
-              <ProductOverlay>
-                <em>{product.name}</em>
-                <ProductOverlayLink to={`/product/${product.slug}`}>
-                  <FiEye size="1.2em" />
-                  <span>Details</span>
-                </ProductOverlayLink>
-              </ProductOverlay>
+                  <Price
+                    price={product.variants[0].price}
+                    fontSize="1.2rem"
+                    hasSymbolBefore
+                  />
             </GalleryItem>
           </Col>
         ))}

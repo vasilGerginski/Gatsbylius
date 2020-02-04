@@ -4,13 +4,15 @@ import styled from "styled-components";
 import { priceParser } from "../helpers/cartHelper";
 
 const StyledPrice = styled.strong`
-  font-size: 2rem;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "2rem")};
 `;
 
-const Price = ({ price }) => (
-  <p>
-    <StyledPrice>{priceParser(price.current, price.currency)}</StyledPrice>
-  </p>
+const Price = ({ price, hasSymbolBefore, fontSize }) => (
+  <div>
+    <StyledPrice fontSize={fontSize}>
+      {priceParser(price.current, price.currency, hasSymbolBefore)}
+    </StyledPrice>
+  </div>
 );
 
 Price.propTypes = {
@@ -18,6 +20,8 @@ Price.propTypes = {
     current: PropTypes.number.isRequired,
     currency: PropTypes.oneOf(["USD", "EUR"]),
   }),
+  hasSymbolBefore: PropTypes.bool,
+  fontSize: PropTypes.string,
 };
 
 export default Price;

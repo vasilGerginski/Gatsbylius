@@ -65,9 +65,9 @@ const ProductSynthesis = ({ product }) => {
       </p>
 
       {selectedVariant ? (
-        <Price price={selectedVariant.price} />
+        <Price price={selectedVariant.price} hasSymbolBefore />
       ) : (
-        <Price price={variants[0].price} />
+        <Price price={variants[0].price} hasSymbolBefore />
       )}
 
       <Configurator
