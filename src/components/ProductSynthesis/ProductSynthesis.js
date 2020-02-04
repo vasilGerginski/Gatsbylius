@@ -5,7 +5,7 @@ import scrollTo from "gatsby-plugin-smoothscroll";
 import { FiExternalLink } from "react-icons/fi";
 
 import Configurator from "../Configurator";
-import AddToCartButton from "../Button/AddToCartButton";
+import AddToCartButton from "../Buttons/AddToCartButton";
 import Price from "../Price";
 import QuantitySelect from "../QuantitySelect";
 import { ProductTitle, Sku, LearnMoreButton } from "./styled";
