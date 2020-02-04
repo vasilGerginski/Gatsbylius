@@ -1,11 +1,10 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import scrollTo from "gatsby-plugin-smoothscroll";
 import {
   StyledBackgroundImage,
   Overlay,
-  PageTitle,
-  ProductsAnchor,
+  HeroTitle,
+  HeroSubTitle,
 } from "./styled";
 
 const Hero = () => {
@@ -26,10 +25,8 @@ const Hero = () => {
   return (
     <StyledBackgroundImage fluid={file.childImageSharp.fluid} Tag="section">
       <Overlay>
-        <PageTitle>Gatsbylius Print Shop</PageTitle>
-        <ProductsAnchor onClick={() => scrollTo("#our-products")}>
-          Browse our collection
-        </ProductsAnchor>
+        <HeroTitle>Gatsbylius</HeroTitle>
+        <HeroSubTitle>Print Shop</HeroSubTitle>
       </Overlay>
     </StyledBackgroundImage>
   );

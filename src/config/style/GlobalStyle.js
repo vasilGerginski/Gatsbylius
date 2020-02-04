@@ -8,9 +8,12 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html,
-  body {
+  html {
     height: 100%;
+  }
+
+  body {
+    min-height: calc(100% - ${spacing(["lg"])});
   }
 
   /* Remove default padding */
@@ -36,7 +39,6 @@ export const GlobalStyle = createGlobalStyle`
 
   /* Set core body defaults */
   body {
-    min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
@@ -105,4 +107,11 @@ body {
   background-color: ${color("background")};
 }
 
+.toast.toast-success {
+  background-color: ${color("primaryDark")};
+}
+
+.toast-progress {
+  background-color: ${color("white")} !important;
+}
 `;

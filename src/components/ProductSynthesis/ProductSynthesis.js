@@ -4,7 +4,7 @@ import { IoMdStarHalf, IoMdStarOutline, IoMdStar } from "react-icons/io";
 import scrollTo from "gatsby-plugin-smoothscroll";
 
 import Configurator from "../Configurator";
-import AddToCartButton from "../Button/AddToCartButton";
+import AddToCartButton from "../Buttons/AddToCartButton";
 import Price from "../Price";
 import QuantitySelect from "../QuantitySelect";
 import Attributes from "./Attributes";
@@ -45,9 +45,9 @@ const ProductSynthesis = ({ product }) => {
       </p>
 
       {selectedVariant ? (
-        <Price price={selectedVariant.price} />
+        <Price price={selectedVariant.price} hasSymbolBefore />
       ) : (
-        <Price price={variants[0].price} />
+        <Price price={variants[0].price} hasSymbolBefore />
       )}
 
       <Configurator

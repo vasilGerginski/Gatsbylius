@@ -5,6 +5,7 @@ const lineHeight = 1.5;
 const palette = {
   white: "#fff",
   black: "#222",
+  greenSyliusDark: "#0B8E74",
   greenSylius: "#0fbf9c",
   greenSyliusLight: "#06D8AE",
   purpleGatsby: "#663399",
@@ -44,6 +45,7 @@ export default {
   colors: {
     text: palette.greyDark,
     background: palette.sandLight,
+    primaryDark: palette.greenSyliusDark,
     primary: palette.greenSylius,
     primaryLight: palette.greenSyliusLight,
     secondary: palette.deepBlue1,
