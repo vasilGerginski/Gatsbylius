@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Tab, TabList } from "react-web-tabs";
-import { spacing, color } from "../../helpers/themeHelpers";
+import { spacing, color } from "helpers/themeHelpers";
 
 export const TabListWrapper = styled(TabList)`
   display: flex;

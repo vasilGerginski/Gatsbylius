@@ -5,15 +5,15 @@ import { Tabs, TabPanel } from "react-web-tabs";
 import {
   useCheckoutDispatchContext,
   useCheckoutStateContext,
-} from "../../context/CheckoutContext";
+} from "context/CheckoutContext";
 
-import Paper from "../../components/Paper";
-import Layout from "../../components/Layout";
-import CustomerInfoForm from "../../components/Checkout/Customer/CustomerInfoForm";
-import CustomerShipping from "../../components/Checkout/Customer/CustomerShipping";
-import CustomerPayment from "../../components/Checkout/Customer/CustomerPayment";
-import Sidebar from "../../components/Checkout/Sidebar";
-import { TabListWrapper, TabCustom } from "./styled";
+import Paper from "components/Paper";
+import Layout from "components/Layout";
+import CustomerInfoForm from "components/Checkout/Customer/CustomerInfoForm";
+import CustomerShipping from "components/Checkout/Customer/CustomerShipping";
+import CustomerPayment from "components/Checkout/Customer/CustomerPayment";
+import Sidebar from "components/Checkout/Sidebar";
+import { TabCustom, TabListWrapper } from "components/Checkout/Customer/Tab";
 
 const Customer = () => {
   const checkoutState = useCheckoutStateContext();
