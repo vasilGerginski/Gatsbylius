@@ -1,7 +1,7 @@
-import { css } from "styled-components";
+import styled from "styled-components";
 import { spacing, color } from "../../../helpers/themeHelpers";
 
-export const Button = css`
+export const Button = styled.button`
   display: flex;
   align-items: center;
   width: 13rem;

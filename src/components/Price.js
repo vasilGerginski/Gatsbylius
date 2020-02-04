@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { priceParser } from "../helpers/cartHelper";
 
 const StyledPrice = styled.strong`
-  font-size: ${({ fontSize }) => (fontSize ? fontSize : "2rem")};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "1.6rem")};
 `;
 
 const Price = ({ price, hasSymbolBefore, fontSize }) => (

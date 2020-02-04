@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from "../../helpers/themeHelpers";
+import { color, spacing } from "../../helpers/themeHelpers";
 
 export const ProductTitle = styled.h1`
   margin-top: 0;
@@ -15,23 +15,27 @@ export const Sku = styled.small`
   color: ${color("greyMedium")};
 `;
 
+export const PricePanel = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: ${spacing(["xs"])};
+`;
+
 export const LearnMoreButton = styled.button`
-  text-transform: uppercase;
-  font-size: 14px;
-  text-align: center;
-  font-weight: 600;
-  padding: 0.5rem;
-  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem 1rem;
   border: none;
   cursor: pointer;
-  margin: 1rem 0;
+  margin: ${spacing(["xs", "none"])};
   display: block;
-
   color: ${color("white")};
-  background-color: ${color("black")};
+  background-color: ${color("secondary")};
   transition: all 200ms ease-in-out;
 
   &:hover {
-    background-color: ${color("deepBlue2")};
+    background-color: ${color("secondaryDark")};
   }
 `;

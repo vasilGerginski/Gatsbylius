@@ -13,6 +13,7 @@ import {
   Link,
 } from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
+import Loader from "components/shared/Loader";
 
 const pageTitle = "Gatsbylius Print Shop";
 
@@ -27,6 +28,8 @@ const IndexPage = ({ data }) => (
           </h2>
         </Col>
       </Row>
+
+      <Loader />
 
       <Row>
         {[...data.allProduct.nodes].slice(0, 12).map(product => (

@@ -7,6 +7,7 @@ import {
 } from "../../context/StoreContext";
 import { addVariantToCart } from "./../../services/cart";
 import { AddToCartButton as StyledAddToCartButton } from "./styled";
+import Loader from "../shared/Loader";
 
 const AddToCartButton = ({ slug, variantsCode, qty, isSimple, name }) => {
   const storeState = useStoreStateContext();
@@ -25,8 +26,14 @@ const AddToCartButton = ({ slug, variantsCode, qty, isSimple, name }) => {
         ).then(() => {});
       }}
     >
-      <FiShoppingCart size="1.2em" />
-      <span>Add to cart</span>
+      {storeState.isAdding ? (
+        <Loader />
+      ) : (
+        <>
+          <FiShoppingCart size="1.2em" />
+          <span>Add to cart</span>
+        </>
+      )}
     </StyledAddToCartButton>
   );
 };

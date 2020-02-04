@@ -16,7 +16,7 @@ export const CategoryTitle = styled.h1`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 5.5vw;
-  text-shadow: ${({ theme }) => theme.boxShadows.textMedium};
+  text-shadow: ${({ theme }) => theme.textShadows.medium};
 `;
 
 export const CategoryImageContainer = styled.div`

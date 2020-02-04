@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useReducer, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { cartReducer } from "../reducers/cartReducer";
 
@@ -9,19 +9,21 @@ export const defaultStoreState =
         cartKey: "",
         currency: "USD",
         miniCartIsOpen: false,
-        adding: false,
+        isAdding: false,
+        success: null,
+        error: null,
         products: [],
         cart: {},
         step: "shopping",
       };
 
-export const StoreStateContext = React.createContext(defaultStoreState);
-export const StoreDispatchContext = React.createContext({});
+export const StoreStateContext = createContext(defaultStoreState);
+export const StoreDispatchContext = createContext({});
 
 export const StoreProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(cartReducer, defaultStoreState);
+  const [state, dispatch] = useReducer(cartReducer, defaultStoreState);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("storeState", JSON.stringify(state));
   }, [state]);
 
@@ -39,7 +41,7 @@ StoreProvider.propTypes = {
 };
 
 export const useStoreStateContext = () => {
-  const context = React.useContext(StoreStateContext);
+  const context = useContext(StoreStateContext);
   if (context === undefined) {
     throw new Error(
       "useStoreStateContext must be used within a StoreStateProvider"
@@ -49,7 +51,7 @@ export const useStoreStateContext = () => {
 };
 
 export const useStoreDispatchContext = () => {
-  const context = React.useContext(StoreDispatchContext);
+  const context = useContext(StoreDispatchContext);
   if (context === undefined) {
     throw new Error(
       "useStoreDispatchContext must be used within a StoreDispatchContext"

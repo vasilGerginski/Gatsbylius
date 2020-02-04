@@ -7,7 +7,6 @@ import { spacing } from "../../helpers/themeHelpers";
 const QuantitySelectContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: ${spacing(["xs"])};
 `;
 
 const SelectWrapper = styled.div`

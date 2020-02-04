@@ -107,8 +107,20 @@ body {
   background-color: ${color("background")};
 }
 
+
+/* ==== Notifications ==== */
+#toast-container > div {
+  
+  box-shadow: ${({ theme }) => theme.boxShadows.light} !important;
+  transition: box-shadow 0.3s;
+}
+
+#toast-container > div:hover {
+  box-shadow: ${({ theme }) => theme.boxShadows.medium} !important;
+}
+
 .toast.toast-success {
-  background-color: ${color("primaryDark")};
+  background-color: ${color("success")} !important;
 }
 
 .toast-progress {
