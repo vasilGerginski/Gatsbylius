@@ -7,7 +7,7 @@ export const AddToCartButton = styled.button`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: ${spacing(["xs", "sm"])};
+  height: 3rem;
   font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 0.1em;
