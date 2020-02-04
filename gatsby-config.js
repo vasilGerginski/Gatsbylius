@@ -31,17 +31,15 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-remote-images`,
+      resolve: `gatsby-source-sylius`,
       options: {
-        nodeType: "Product",
-        imagePath: "firstImage",
-      },
-    },
-    {
-      resolve: `gatsby-plugin-remote-images`,
-      options: {
-        nodeType: "Category",
-        imagePath: "categoryImage",
+        url: process.env.GATSBY_SYLIUS_URL,
+        attributes: `
+          type Attributes {
+            photographer: String
+            unsplash_url: String
+          }
+        `,
       },
     },
     {

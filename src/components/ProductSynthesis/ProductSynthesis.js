@@ -2,23 +2,16 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { IoMdStarHalf, IoMdStarOutline, IoMdStar } from "react-icons/io";
 import scrollTo from "gatsby-plugin-smoothscroll";
-import { FiExternalLink } from "react-icons/fi";
 
 import Configurator from "../Configurator";
 import AddToCartButton from "../Buttons/AddToCartButton";
 import Price from "../Price";
 import QuantitySelect from "../QuantitySelect";
+import Attributes from "./Attributes";
 import { ProductTitle, Sku, LearnMoreButton } from "./styled";
 
 const ProductSynthesis = ({ product }) => {
-  const {
-    name,
-    photographer,
-    unsplash_url,
-    shortDescription,
-    code,
-    variants,
-  } = product;
+  const { name, attributes, shortDescription, code, variants } = product;
   const [selectedVariant, selectVariant] = useState(null);
   const [quantity, setQuantity] = useState({ label: 1, value: 1 });
 
@@ -37,20 +30,7 @@ const ProductSynthesis = ({ product }) => {
         <IoMdStarOutline />
       </p>
 
-      {photographer && (
-        <p>
-          <strong>Photographer:</strong> {photographer}
-        </p>
-      )}
-
-      {unsplash_url && (
-        <a href={unsplash_url} target="_blank" rel="noreferrer noopener">
-          <span>
-            <FiExternalLink />
-          </span>
-          <span>See this photo on unsplash.com</span>
-        </a>
-      )}
+      <Attributes attributes={attributes} />
 
       <p>
         {shortDescription && shortDescription}
