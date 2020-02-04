@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import { Container, Row, Col } from "styled-bootstrap-grid";
 
@@ -10,9 +10,7 @@ import {
   GalleryItem,
   GalleryImageWrapper,
   Infos,
-  ProductOverlay,
-  ProductOverlayButton,
-  ProductOverlayLink,
+  Link,
 } from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
 
@@ -31,23 +29,28 @@ const IndexPage = ({ data }) => (
       </Row>
 
       <Row>
-        {[...data.allProduct.nodes].slice(0, 8).map(product => (
+        {[...data.allProduct.nodes].slice(0, 12).map(product => (
           <Col key={product.slug} sm={6} md={4} lg={3}>
             <GalleryItem>
-              <GalleryImageWrapper>
-                <Img
-                  sizes={{
-                    ...product.localImage.childImageSharp.fluid,
-                  }}
-                  style={{ maxHeight: "100%" }}
-                  imgStyle={{ objectFit: "contain" }}
-                />
-              </GalleryImageWrapper>
+              <Link to={`/product/${product.slug}`}>
+                <GalleryImageWrapper>
+                  <Img
+                    sizes={{
+                      ...product.localImage.childImageSharp.fluid,
+                    }}
+                    style={{ maxHeight: "300px" }}
+                    imgStyle={{ objectFit: "contain" }}
+                  />
+                </GalleryImageWrapper>
+                <Infos>
+                  <strong>{product.name}</strong>
                   <Price
                     price={product.variants[0].price}
                     fontSize="1.2rem"
                     hasSymbolBefore
                   />
+                </Infos>
+              </Link>
             </GalleryItem>
           </Col>
         ))}
@@ -123,9 +126,15 @@ export const query = graphql`
       nodes {
         slug
         name
+        variants {
+          price {
+            currency
+            current
+          }
+        }
         localImage {
           childImageSharp {
-            fluid(maxWidth: 700) {
+            fluid(maxHeight: 300) {
               ...GatsbyImageSharpFluid
             }
           }
