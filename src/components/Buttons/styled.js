@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { spacing, color } from "../../helpers/themeHelpers";
 
 export const AddToCartButton = styled.button`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
