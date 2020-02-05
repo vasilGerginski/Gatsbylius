@@ -39,7 +39,7 @@
     "react-use": "^13.24.0",
     "react-web-tabs": "^1.0.1",
     "styled-bootstrap-grid": "^3.0.5",
-    "styled-components": "^4.4.1",
+    "styled-components": "^5.0.1",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
