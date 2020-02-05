@@ -23,6 +23,7 @@ test("Normalize product", () => {
       {
         code: "touann_carheadlights",
         name: undefined,
+        axis: ["20cm", "red"],
         price: {
           currency: "USD",
           current: 1099,
@@ -75,8 +76,11 @@ const apiProduct = {
   variants: {
     touann_carheadlights: {
       code: "touann_carheadlights",
-      axis: [],
-      nameAxis: {},
+      axis: ["20cm", "red"],
+      nameAxis: {
+        "20cm": "Size 20cm",
+        red: "Color Red",
+      },
       price: {
         current: 1099,
         currency: "USD",
