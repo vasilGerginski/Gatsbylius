@@ -12,14 +12,16 @@ export const OptionItem = styled.li`
   display: flex;
   cursor: pointer;
   transition: background-color 0.25s;
-  background-color: white;
+  background-color: ${({ selected }) =>
+    selected ? color("greyLight1") : "white"};
 
   &:first-child {
     border-top: 1px solid ${color("greyMedium")};
   }
 
   &:hover {
-    background-color: ${color("greyLight")};
+    background-color: ${({ selected }) =>
+      selected ? color("greyLight1") : color("greyLight")};
   }
 `;
 

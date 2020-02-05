@@ -11,7 +11,11 @@ const Configurator = ({ variants, selectedVariant, onChange }) => {
   return (
     <OptionList>
       {variants.map(variant => (
-        <OptionItem key={variant.code} onClick={() => onChange(variant)}>
+        <OptionItem
+          key={variant.code}
+          selected={selectedVariant.code === variant.code}
+          onClick={() => onChange(variant)}
+        >
           {variant.axis.join(" | ")}
           <OptionLeft>
             {priceParser(variant.price.current, variant.price.currency)}
