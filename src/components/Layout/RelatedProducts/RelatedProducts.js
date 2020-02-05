@@ -46,7 +46,7 @@ const RelatedProducts = ({ data }) => {
         <Col sm={12}>
           <h4>Similar Products</h4>
           <Slider {...settings}>
-            {data.category.fields.products
+            {data.category.products
               .filter(product => data.product.name !== product.name)
               .map(product => {
                 return (

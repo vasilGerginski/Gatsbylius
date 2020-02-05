@@ -16,11 +16,11 @@ import {
 
 const Category = ({ data }) => {
   const category = data.category;
-  const products = category.fields && category.fields.products;
+  const products = category.products;
   const baseCategoryCode = category.parent
     ? category.parent.code
     : category.code;
-  let subCategories = category.childrenCategory;
+  let subCategories = category.children;
   let fluidCategoryImage =
     category.localImage &&
     (category.localImage
@@ -35,7 +35,7 @@ const Category = ({ data }) => {
         ? category.parent.localImage.childImageSharp.fluid
         : data.file.childImageSharp.fluid);
     categoryName = category.parent.name;
-    subCategories = category.parent.childrenCategory;
+    subCategories = category.parent.children;
   }
 
   return (
@@ -113,17 +113,16 @@ const Category = ({ data }) => {
               </Row>
             )}
 
-            {!products && subCategories && subCategories.length > 0 && (
+            {!products.length > 0 && subCategories && subCategories.length > 0 && (
               <Row>
                 <Col sm={12}>
                   <h2>Products</h2>
                 </Col>
                 {subCategories.map(subCategory => {
                   return (
-                    subCategory.fields &&
-                    subCategory.fields.products &&
-                    subCategory.fields.products.length > 0 &&
-                    subCategory.fields.products.map(product => {
+                    subCategory.products &&
+                    subCategory.products.length > 0 &&
+                    subCategory.products.map(product => {
                       return (
                         <CategoryProductContainer
                           md={6}
@@ -169,9 +168,11 @@ export const query = graphql`
         ... on Category {
           name
           code
-          childrenCategory {
-            name
-            code
+          children {
+            ... on Category {
+              name
+              code
+            }
           }
           localImage {
             childImageSharp {
@@ -189,26 +190,24 @@ export const query = graphql`
           }
         }
       }
-      fields {
-        products {
-          id
-          name
-          slug
-          localImage {
-            childImageSharp {
-              fluid(maxWidth: 400, quality: 100) {
-                ...GatsbyImageSharpFluid
-              }
+      products {
+        id
+        name
+        slug
+        localImage {
+          childImageSharp {
+            fluid(maxWidth: 400, quality: 100) {
+              ...GatsbyImageSharpFluid
             }
           }
         }
       }
-      childrenCategory {
+      children {
         id
-        code
-        slug
-        name
-        fields {
+        ... on Category {
+          code
+          slug
+          name
           products {
             id
             name

@@ -2,7 +2,23 @@
 export const cartReducer = (state, action) => {
   switch (action.type) {
     case "updateProducts": {
-      return { ...state, products: action.payload };
+      return { ...state, success: null, error: null, isAdding: true };
+    }
+    case "updateProductsSuccess": {
+      return {
+        ...state,
+        products: action.payload,
+        success: true,
+        isAdding: false,
+      };
+    }
+    case "updateProductsError": {
+      return {
+        ...state,
+        error: action.payload,
+        success: false,
+        isAdding: false,
+      };
     }
     case "toggleMiniCart": {
       return {

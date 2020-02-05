@@ -1,20 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 import Img from "gatsby-image";
 import { Container, Row, Col } from "styled-bootstrap-grid";
-import { FiEye, FiShoppingCart } from "react-icons/fi";
 
 import Layout from "../components/Layout";
+import Price from "../components/Price";
 import {
   GalleryItem,
   GalleryImageWrapper,
   Infos,
-  ProductOverlay,
-  ProductOverlayButton,
-  ProductOverlayLink,
+  Link,
 } from "../components/ProductGrid/styled";
 import SEO from "../components/seo";
+import Loader from "components/shared/Loader";
 
 const pageTitle = "Gatsbylius Print Shop";
 
@@ -30,27 +29,31 @@ const IndexPage = ({ data }) => (
         </Col>
       </Row>
 
+      <Loader />
+
       <Row>
-        {[...data.allProduct.nodes].slice(0, 8).map(product => (
+        {[...data.allProduct.nodes].slice(0, 12).map(product => (
           <Col key={product.slug} sm={6} md={4} lg={3}>
             <GalleryItem>
-              <GalleryImageWrapper>
-                <Img
-                  sizes={{
-                    ...product.localImage.childImageSharp.fluid,
-                  }}
-                  style={{ maxHeight: "100%" }}
-                  imgStyle={{ objectFit: "contain" }}
-                />
-              </GalleryImageWrapper>
-
-              <ProductOverlay>
-                <em>{product.name}</em>
-                <ProductOverlayLink to={`/product/${product.slug}`}>
-                  <FiEye size="1.2em" />
-                  <span>Details</span>
-                </ProductOverlayLink>
-              </ProductOverlay>
+              <Link to={`/product/${product.slug}`}>
+                <GalleryImageWrapper>
+                  <Img
+                    sizes={{
+                      ...product.localImage.childImageSharp.fluid,
+                    }}
+                    style={{ maxHeight: "300px" }}
+                    imgStyle={{ objectFit: "contain" }}
+                  />
+                </GalleryImageWrapper>
+                <Infos>
+                  <strong>{product.name}</strong>
+                  <Price
+                    price={product.variants[0].price}
+                    fontSize="1.2rem"
+                    hasSymbolBefore
+                  />
+                </Infos>
+              </Link>
             </GalleryItem>
           </Col>
         ))}
@@ -126,9 +129,15 @@ export const query = graphql`
       nodes {
         slug
         name
+        variants {
+          price {
+            currency
+            current
+          }
+        }
         localImage {
           childImageSharp {
-            fluid(maxWidth: 700) {
+            fluid(maxHeight: 300) {
               ...GatsbyImageSharpFluid
             }
           }

@@ -3,8 +3,12 @@ const localeMapping = {
   USD: "$",
 };
 
-export const priceParser = (centsPrice, locale) => {
-  return `${centsPrice / 100} ${localeMapping[locale]}`;
+export const priceParser = (centsPrice, locale, hasSymbolBefore) => {
+  const currency = localeMapping[locale] ? localeMapping[locale] : locale;
+
+  return hasSymbolBefore
+    ? `${currency}${centsPrice / 100}`
+    : `${centsPrice / 100}${currency}`;
 };
 
 export const getTotal = products => {

@@ -5,6 +5,8 @@ const lineHeight = 1.5;
 const palette = {
   white: "#fff",
   black: "#222",
+  green: "#48c774",
+  greenSyliusDark: "#0B8E74",
   greenSylius: "#0fbf9c",
   greenSyliusLight: "#06D8AE",
   purpleGatsby: "#663399",
@@ -47,17 +49,23 @@ export default {
   colors: {
     text: palette.greyDark,
     background: palette.sandLight,
+    primaryDark: palette.greenSyliusDark,
     primary: palette.greenSylius,
     primaryLight: palette.greenSyliusLight,
     secondary: palette.deepBlue1,
     alert: palette.flamingo,
     alertHover: palette.flamingo2,
+    secondaryDark: palette.deepBlue2,
     info1: palette.softBlue,
     info2: palette.blue,
+    success: palette.green,
     ...palette,
   },
   boxShadows: {
     light: "0 0 6px rgba(36, 36, 36, 0.2)",
-    textMedium: "2px 2px 10px rgba(36, 36, 36, 0.6)",
+    medium: "0 0 10px rgba(36, 36, 36, 0.4)",
+  },
+  textShadows: {
+    medium: "2px 2px 10px rgba(36, 36, 36, 0.6)",
   },
 };
