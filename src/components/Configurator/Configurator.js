@@ -23,6 +23,7 @@ const Configurator = ({ variants, selectedVariant, onChange }) => {
               id={variant.code}
               type="radio"
               value={variant.code}
+              onChange={() => onChange(variant)}
               checked={selectedVariant.code === variant.code}
             />
           </OptionLeft>
@@ -33,7 +34,15 @@ const Configurator = ({ variants, selectedVariant, onChange }) => {
 };
 
 Configurator.propTypes = {
-  variants: PropTypes.array.isRequired,
+  variants: PropTypes.arrayOf(
+    PropTypes.shape({
+      code: PropTypes.string.isRequired,
+      price: PropTypes.shape({
+        current: PropTypes.number.isRequired,
+        currency: PropTypes.string.isRequired,
+      }).isRequired,
+    })
+  ).isRequired,
   selectedVariant: PropTypes.shape({
     code: PropTypes.string.isRequired,
   }).isRequired,
