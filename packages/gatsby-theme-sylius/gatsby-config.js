@@ -1,5 +1,5 @@
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${process.env.NODE_ENV}`
 });
 
 module.exports = {
@@ -11,13 +11,13 @@ module.exports = {
     menuLinks: [
       {
         name: "home",
-        link: "/",
+        link: "/"
       },
       {
         name: "page2",
-        link: "/page-2",
-      },
-    ],
+        link: "/page-2"
+      }
+    ]
   },
   plugins: [
     `gatsby-plugin-styled-components`,
@@ -27,8 +27,8 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
-      },
+        path: `${__dirname}/src/images`
+      }
     },
     {
       resolve: `gatsby-source-sylius`,
@@ -39,16 +39,16 @@ module.exports = {
             photographer: String
             unsplash_url: String
           }
-        `,
-      },
+        `
+      }
     },
     {
       resolve: `gatsby-transformer-sharp`,
       options: {
         useMozJpeg: false,
         stripMetadata: true,
-        defaultQuality: 75,
-      },
+        defaultQuality: 75
+      }
     },
     `gatsby-plugin-sharp`,
     {
@@ -60,8 +60,8 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsbylius-logo.jpg`, // This path is relative to the root of the site.
-      },
+        icon: `${__dirname}/src/images/gatsbylius-logo.jpg` // This path is relative to the root of the site.
+      }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
@@ -74,8 +74,8 @@ module.exports = {
         start_url: `/`,
         background_color: `#f7f0eb`,
         theme_color: `#a2466c`,
-        display: `standalone`,
-      },
-    },
-  ],
+        display: `standalone`
+      }
+    }
+  ]
 };

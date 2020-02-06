@@ -1,9 +1,17 @@
 const path = require("path");
 
-module.exports = ({ graphql, actions }) => {
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.resolve(__dirname, "src"), "node_modules"]
+    }
+  });
+};
+
+exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const blogPostTemplate = path.resolve("src/templates/product.js");
-  const categoryTemplate = path.resolve("src/templates/category.js");
+  const blogPostTemplate = require.resolve("./src/templates/product.js");
+  const categoryTemplate = require.resolve("./src/templates/category.js");
 
   return graphql(
     `
@@ -41,8 +49,8 @@ module.exports = ({ graphql, actions }) => {
         path: `/categories/${node.code}`,
         component: categoryTemplate,
         context: {
-          code: node.code,
-        },
+          code: node.code
+        }
       });
     });
     result.data.allProduct.nodes.forEach(node => {
@@ -51,8 +59,8 @@ module.exports = ({ graphql, actions }) => {
         component: blogPostTemplate,
         context: {
           slug: node.slug,
-          mainProductTaxon: node.taxons.main,
-        },
+          mainProductTaxon: node.taxons.main
+        }
       });
     });
   });
