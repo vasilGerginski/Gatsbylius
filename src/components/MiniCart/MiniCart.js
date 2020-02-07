@@ -4,7 +4,7 @@ import {
   useStoreStateContext,
 } from "../../context/StoreContext";
 import { priceParser, getTotal } from "./../../helpers/cartHelper";
-
+import { navigate } from "gatsby";
 import {
   MiniCartHeader,
   MiniCartItem,
@@ -15,6 +15,7 @@ import {
   MiniCartTotal,
   MiniCart as MinicartComponent,
   MiniCartImage,
+  ButtonContainer,
   CheckoutButton,
 } from "./styled";
 
@@ -70,16 +71,16 @@ const MiniCart = () => {
             );
           })}
         </MiniCartItems>
-        <CheckoutButton
-          onClick={() => {
-            if (typeof window !== "undefined") {
+        <ButtonContainer>
+          <CheckoutButton
+            onClick={() => {
               storeDispatch({ type: "toggleMiniCart" });
-              window.location = "/checkout/customer";
-            }
-          }}
-        >
-          Checkout
-        </CheckoutButton>
+              navigate("/cart");
+            }}
+          >
+            Go to cart
+          </CheckoutButton>
+        </ButtonContainer>
       </MinicartComponent>
     );
   }

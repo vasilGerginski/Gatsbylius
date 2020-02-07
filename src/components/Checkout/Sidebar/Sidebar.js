@@ -1,23 +1,25 @@
 import React from "react";
+import PropTypes from "prop-types";
 import _get from "lodash.get";
 import { Row, Col } from "styled-bootstrap-grid";
-import { useCheckoutStateContext } from "../../../context/CheckoutContext";
 import { getTotal, priceParser } from "../../../helpers/cartHelper";
+import { navigate } from "gatsby";
 import {
   SidebarContainer,
   ArticlesNumber,
   Title,
   HeadContainer,
   Divider,
-  Item,
   FinalPrice,
+  ButtonContainer,
 } from "./styled";
 import { useStoreStateContext } from "../../../context/StoreContext";
+import SidebarItem from "./SidebarItem";
+import Button from "../../shared/Button";
 
-const Sidebar = () => {
-  const checkoutState = useCheckoutStateContext();
+const Sidebar = ({ isCartPage = false }) => {
   const storeState = useStoreStateContext();
-  const items = _get(checkoutState, "orderSummary.items", []);
+  const items = _get(storeState, "products", []);
 
   return (
     <SidebarContainer>
@@ -30,18 +32,7 @@ const Sidebar = () => {
       </Row>
       {items.map(item => {
         return (
-          <Item key={item.id}>
-            <img src={item.product.images[0].cachedPath} />
-            <div className="item-datas">
-              <span>{item.product.name}</span>
-              <div className="item-price-qty">
-                <span className="item-price">
-                  {priceParser(item.total, storeState.currency)}
-                </span>
-                <span className="item-qty">Qty: {item.quantity}</span>
-              </div>
-            </div>
-          </Item>
+          <SidebarItem key={item.id} item={item} isCartPage={isCartPage} />
         );
       })}
       <Row>
@@ -55,8 +46,21 @@ const Sidebar = () => {
           </FinalPrice>
         </Col>
       </Row>
+      {isCartPage && (
+        <Row>
+          <ButtonContainer>
+            <Button onClick={() => navigate("/checkout/customer")}>
+              Go to checkout
+            </Button>
+          </ButtonContainer>
+        </Row>
+      )}
     </SidebarContainer>
   );
+};
+
+Sidebar.propTypes = {
+  isCartPage: PropTypes.bool,
 };
 
 export default Sidebar;

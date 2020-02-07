@@ -8,7 +8,7 @@ export const removeItemFromCart = async (itemId, storeState, storeDispatch) => {
     .then(async response => {
       //@todo: update totals ?
       storeDispatch({ type: "updateProducts", payload: response.data.items });
-      storeDispatch({type: "updateStep", payload: "shopping"})
+      storeDispatch({ type: "updateStep", payload: "shopping" });
     })
     .catch(error => {
       console.error("Error on remove item from cart", error);
