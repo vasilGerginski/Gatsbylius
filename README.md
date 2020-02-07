@@ -67,11 +67,14 @@ If you don't have any Gatsby site up and running, follow the next steps:
 
 1. `npm install -g gatsby`
 2. `gatsby new my-shop`
-3. `cd my-shop && npm start`
+3. `cd my-shop`
+4. `yarn start` or `npm start`
 
 ### Install gatsbylius theme
 
 ```
+yarn add gatsby-theme-sylius
+or
 npm install gatsby-theme-sylius
 ```
 
@@ -96,12 +99,14 @@ You need at least the `syliusUrl` options. If you want to try it out quickly, yo
 
 ### Start it!
 
-```
-npm start
-```
-
 If you use the `gatsby-starter-default`, you will need to delete the `src/components` and `src/pages` folders because some queries will be conflicting with ours.
 To override it, you can use [Gatsby shadowing](https://www.gatsbyjs.org/docs/themes/shadowing/), more documentation will be done on this subject soon!
+
+```
+yarn start
+or
+npm start
+```
 
 ## Get help
 
