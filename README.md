@@ -55,39 +55,42 @@ Here is what Gatsbylius can help you with:
 
 ## Get started
 
-`npm install gatsby-theme-sylius`
+Start building something now!
 
-in `gatsby-config.js`
+The following steps are all you need if you already are familiar with the JavaScript ecosystem.
+
+> More detailed steps will be documented later!
+
+### Installation
 
 ```
+npm install gatsby-theme-sylius
+```
+
+### Configuration
+
+```javascript
+// In your gatsby-config.js
+
 plugins: [
     ...
     {
       resolve: `gatsby-theme-sylius`,
       options: {
-        syliusUrl: {{ Your sylius url}}
+        syliusUrl: `https://{{your-sylius-url}}`,
       },
     },
     ...
   ],
-
 ```
 
-`npm start`
+You need at least the `syliusUrl` options. If you want to try it out quickly, you can use our demo instance `https://api.gatsbylius.com`.
 
-## Contributing to dev
+### Start it!
 
-Start building something now!
-
-The following steps are all you need if you already are familiar with the JavaScript ecosystem.
-
-1.  `git clone git@github.com:Gatsbylius/Gatsbylius.git`
-2.  `cd Gatsbylius && npm install`
-3.  create an `.env.development` file based on the `.env.development.dist` files in the repository root
-4.  `npm run develop`
-5.  open your favorite editor and start coding!
-
-> More detailed steps will be documented later!
+```
+npm start
+```
 
 ## Get help
 
@@ -106,6 +109,29 @@ tag `"question"` and we will do our best to answer it. Of course, you can
 and try to help others by answering their opened questions.
 
 If you need anything else, [send an email to the team behind it!](mailto:contact@gatsbylius.com) We can also take care of your project!
+
+## Setting up a local dev environment
+
+If you wish to contribute to the project, this part will describe how to get a local dev environment up and running.
+
+> We use [Lerna](https://github.com/lerna/lerna) and [Yarn](https://yarnpkg.com/) to manage a monorepo. It allows us to easily manage and publish our packages.
+
+### Installation
+
+#### Node and yarn
+
+- Install node at least with the version (>= 10.16.0) `node --version`
+- Install Yarn at least with the version (>= 1.0.2) `yarn --version`
+
+#### Fork and clone
+
+1. Fork the [gatsbylius/gatsbylius](https://github.com/gatsbylius/gatsbylius) repository
+2. `git clone git@github.com:<your-username>/Gatsbylius.git`
+3. `cd Gatsbylius && yarn run bootstrap`
+4. `cd demo`
+5. create an `.env.development` file based on the `.env.development.dist` files in the repository root
+6. `yarn start`
+7. open your favorite editor and start coding!
 
 ## License
 

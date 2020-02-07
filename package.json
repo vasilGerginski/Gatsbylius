@@ -11,6 +11,7 @@
   "scripts": {
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
+    "lerna": "lerna",
     "lint": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "workspaces": [
