@@ -95,7 +95,7 @@ export const query = graphql`
           currency
           current
         }
-        #name
+        axis
         code
       }
       localImage {

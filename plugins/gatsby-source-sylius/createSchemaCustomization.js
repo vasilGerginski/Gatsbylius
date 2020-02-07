@@ -15,9 +15,10 @@ module.exports = ({ actions }, options) => {
     }
 
     type Variant {
-      name: String!,
+      name: String,
       price: Price!,
       code: String!,
+      axis: [String]!
     }
 
     type Product implements Node @dontInfer {

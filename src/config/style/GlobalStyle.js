@@ -18,16 +18,16 @@ export const GlobalStyle = createGlobalStyle`
 
   /* Remove default padding */
   /* Remove list styles on ul, ol elements with a class attribute */
-  ul[class],
-  ol[class] {
+  ul,
+  ol {
     padding: 0;
     list-style: none;
   }
 
   /* Remove default margin */
   body,
-  ul[class],
-  ol[class],
+  ul,
+  ol,
   li,
   figure,
   figcaption,

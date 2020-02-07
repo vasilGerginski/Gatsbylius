@@ -12,7 +12,7 @@ import { ProductTitle, Sku, PricePanel, LearnMoreButton } from "./styled";
 
 const ProductSynthesis = ({ product }) => {
   const { name, attributes, shortDescription, code, variants } = product;
-  const [selectedVariant, selectVariant] = useState(null);
+  const [selectedVariant, selectVariant] = useState(variants[0]);
   const [quantity, setQuantity] = useState({ label: 1, value: 1 });
 
   return (
@@ -41,8 +41,9 @@ const ProductSynthesis = ({ product }) => {
       </p>
 
       <Configurator
+        selectedVariant={selectedVariant}
         variants={variants}
-        onChange={variant => selectVariant(variant)}
+        onChange={selectVariant}
       />
 
       <PricePanel>

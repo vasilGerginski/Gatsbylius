@@ -17,11 +17,12 @@ const adaptCategory = originalCategory => {
 };
 
 const adaptVariants = variants => {
-  return Object.values(variants).map(({ name, price, code }) => {
+  return Object.values(variants).map(({ name, price, code, axis }) => {
     return {
       name: name,
       price: price,
       code: code,
+      axis: axis,
     };
   });
 };

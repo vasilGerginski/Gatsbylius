@@ -37,6 +37,7 @@ export default {
   },
   spaces: {
     none: 0,
+    xxs: lineHeight / 4,
     xs: lineHeight / 2,
     sm: lineHeight,
     md: lineHeight * 1.5,
