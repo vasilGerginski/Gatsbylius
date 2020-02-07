@@ -18,7 +18,7 @@ const getAllProductsData = async syliusUrl => {
     return require("./__fixtures__/product-latest.json");
   }
 
-  return got(`${syliusUrl}/shop-api/product-latest/?limit=100000`, {
+  return got(`${syliusUrl}/product-latest/?limit=100000`, {
     json: true,
   }).then(response => response.body);
 };
@@ -28,7 +28,7 @@ const getAllCategoryData = async syliusUrl => {
     return require("./__fixtures__/category.json").self;
   }
 
-  return got(`${syliusUrl}/shop-api/taxons/category`, {
+  return got(`${syliusUrl}/taxons/category`, {
     json: true,
   })
     .then(response => response.body.self)

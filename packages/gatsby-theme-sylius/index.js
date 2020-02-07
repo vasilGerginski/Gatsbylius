@@ -1,1 +1,1 @@
-// Mandatory for Gatsby
+// noop
