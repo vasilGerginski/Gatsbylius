@@ -4,7 +4,7 @@ import {
   useStoreStateContext,
 } from "../../context/StoreContext";
 import { priceParser, getTotal } from "./../../helpers/cartHelper";
-
+import { navigate } from "gatsby";
 import {
   MiniCartHeader,
   MiniCartItem,
@@ -74,10 +74,8 @@ const MiniCart = () => {
         <ButtonContainer>
           <CheckoutButton
             onClick={() => {
-              if (typeof window !== "undefined") {
-                storeDispatch({ type: "toggleMiniCart" });
-                window.location = "/cart";
-              }
+              storeDispatch({ type: "toggleMiniCart" });
+              navigate("/cart");
             }}
           >
             Go to cart

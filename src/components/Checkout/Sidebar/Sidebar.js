@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import _get from "lodash.get";
 import { Row, Col } from "styled-bootstrap-grid";
-
 import { getTotal, priceParser } from "../../../helpers/cartHelper";
+import { navigate } from "gatsby";
 import {
   SidebarContainer,
   ArticlesNumber,
@@ -49,13 +49,7 @@ const Sidebar = ({ isCartPage = false }) => {
       {isCartPage && (
         <Row>
           <ButtonContainer>
-            <Button
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.location = "/checkout/customer";
-                }
-              }}
-            >
+            <Button onClick={() => navigate("/checkout/customer")}>
               Go to checkout
             </Button>
           </ButtonContainer>
