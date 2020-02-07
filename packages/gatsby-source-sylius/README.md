@@ -18,7 +18,7 @@ module.exports = {
     {
       resolve: `gatsby-source-sylius`,
       options: {
-        syliusUrl: `https://{{your-sylius-url}}/shop-api`,
+        syliusUrl: `https://{{your-sylius-url}}`,
       },
     },
   ],
