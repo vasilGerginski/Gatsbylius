@@ -92,6 +92,9 @@ You need at least the `syliusUrl` options. If you want to try it out quickly, yo
 npm start
 ```
 
+If you use the `gatsby-starter-default`, you will need to remove the src folder content because we already define the `Layout` in the theme.
+To override it, you can use [Gatsby shadowing](https://www.gatsbyjs.org/docs/themes/shadowing/), more documentation will be done on this subject soon!
+
 ## Get help
 
 If you need help we encourage you to search on the web first. It will help you discover the community around both project (Gatsby & Sylius). You might find additional resources for learning each library in-depth when you will be ready.

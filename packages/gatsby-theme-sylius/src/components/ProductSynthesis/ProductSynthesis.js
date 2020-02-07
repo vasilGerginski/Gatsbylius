@@ -102,6 +102,5 @@ export const query = graphql`
         }
       }
     }
-    ...Attributes
   }
 `;
