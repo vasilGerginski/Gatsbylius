@@ -43,17 +43,11 @@
     "styled-components": "^4.4.1",
     "toastr": "^2.1.4"
   },
-  "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1"
-  },
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "peerDependencies": {
-    "gatsby": "^2.17.11"
+    "gatsby": "^2.19.12"
   }
 }

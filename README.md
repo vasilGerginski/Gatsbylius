@@ -55,6 +55,28 @@ Here is what Gatsbylius can help you with:
 
 ## Get started
 
+`npm install gatsby-theme-sylius`
+
+in `gatsby-config.js`
+
+```
+plugins: [
+    ...
+    {
+      resolve: `gatsby-theme-sylius`,
+      options: {
+        syliusUrl: {{ Your sylius url}}
+      },
+    },
+    ...
+  ],
+
+```
+
+`npm start`
+
+## Contributing to dev
+
 Start building something now!
 
 The following steps are all you need if you already are familiar with the JavaScript ecosystem.
@@ -83,7 +105,7 @@ tag `"question"` and we will do our best to answer it. Of course, you can
 [browse answered questions](https://github.com/Gatsbylius/Gatsbylius/issues?q=is%3Aissue+label%3Aquestion+is%3Aopen)
 and try to help others by answering their opened questions.
 
-If you need anything else, [send an email to the team behind it!](mailto:contact@commit42.fr) We can also take care of your project!
+If you need anything else, [send an email to the team behind it!](mailto:contact@gatsbylius.com) We can also take care of your project!
 
 ## License
 
