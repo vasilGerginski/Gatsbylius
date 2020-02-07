@@ -27,7 +27,6 @@ jobs:
         with:
           args: "Modifications has been pushed on master, starting build..."
       - name: set environment variables
-        working-directory: ${{env.working-directory}}
         uses: allenevans/set-env@v1.0.0
         with:
           GATSBY_SYLIUS_URL: ${{ secrets.SYLIUS_URL }}
