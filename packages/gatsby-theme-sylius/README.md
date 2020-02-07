@@ -30,3 +30,7 @@ module.exports = {
 ## Options
 
 You can use all the [`gatsby-source-sylius` options](../gatsby-source-sylius/README.md#Options).
+
+## License
+
+MIT

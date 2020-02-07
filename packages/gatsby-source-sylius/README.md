@@ -58,3 +58,7 @@ module.exports = {
 ```
 
 Thoses types will be included direcly in the schema, so you can declare complex types if needed.
+
+## License
+
+MIT

@@ -6,7 +6,7 @@
   "author": "Waiting for a contact email, see https://github.com/Gatsbylius/Gatsbylius",
   "dependencies": {
     "gatsby": "^2.19.12",
-    "gatsby-theme-sylius": "^0.1.2"
+    "gatsby-theme-sylius": "^0.2.0"
   },
   "devDependencies": {
     "cypress": "^3.8.2",
