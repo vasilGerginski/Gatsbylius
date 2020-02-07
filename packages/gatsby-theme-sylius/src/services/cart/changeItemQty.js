@@ -23,7 +23,7 @@ const changeItemQty = async (itemId, changeType, storeState, storeDispatch) => {
     })
     .then(response => {
       storeDispatch({ type: "updateProducts", payload: response.data.items });
-      storeDispatch({type: "updateStep", payload: "shopping"})
+      storeDispatch({ type: "updateStep", payload: "shopping" });
     })
     .catch(error => {
       console.error("Error on change qty item", error);

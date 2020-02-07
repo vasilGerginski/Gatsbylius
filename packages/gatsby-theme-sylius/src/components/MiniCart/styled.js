@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { color } from "../../helpers/themeHelpers";
+import { color, spacing } from "../../helpers/themeHelpers";
+import Button from "../shared/Button";
 
 export const MiniCartImage = styled.img`
   margin-top: 10px;
@@ -8,21 +9,8 @@ export const MiniCartImage = styled.img`
   border: 2px solid black;
 `;
 
-export const CheckoutButton = styled.button`
-  text-transform: uppercase;
-  font-size: 14px;
-  text-align: center;
-  font-weight: 600;
-  padding: 0.5rem;
+export const CheckoutButton = styled(Button)`
   width: 100%;
-  border: none;
-  color: ${color("white")};
-  background-color: ${color("primary")};
-  transition: all 200ms ease-in-out;
-
-  &:hover {
-    background-color: ${color("deepBlue2")};
-  }
 `;
 
 export const CartButton = styled.button`
@@ -131,4 +119,11 @@ export const MiniCart = styled.div`
     border-width: 8px;
     margin-left: -8px;
   }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: ${spacing(["sm"])};
 `;
