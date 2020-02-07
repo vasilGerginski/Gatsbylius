@@ -20,7 +20,6 @@ import {
 } from "../../../../context/StoreContext";
 import { priceParser } from "../../../../helpers/cartHelper";
 import { RadioGroup, ReversedRadioButton } from "react-radio-buttons";
-import { submitCustomerInfo } from "../../../../services/checkout/submitCustomerInfo";
 import { submitCustomerShipping } from "../../../../services/checkout/submitCustomerShipping";
 
 const CustomerShipping = () => {

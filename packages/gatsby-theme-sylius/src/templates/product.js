@@ -79,34 +79,7 @@ export const query = graphql`
       }
     }
     product(slug: { eq: $slug }) {
-      code
-      slug
-      name
-      description
-      shortDescription
-      ...Attributes
-      channelCode
-      averageRating
-      taxons {
-        main
-      }
-      variants {
-        price {
-          currency
-          current
-        }
-        axis
-        code
-      }
-      localImage {
-        childImageSharp {
-          # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
-          fluid(maxWidth: 700) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
+      ...ProductSynthesis
     }
 
     allProduct {

@@ -21,7 +21,6 @@ import {
 import { RadioGroup, ReversedRadioButton } from "react-radio-buttons";
 import { submitCustomerPayment } from "../../../../services/checkout/submitCustomerPayment";
 import { submitCompleteCheckout } from "../../../../services/checkout/submitCompleteCheckout";
-import { resetState } from "../../../../context/helper";
 
 const CustomerPayment = () => {
   const storeState = useStoreStateContext();

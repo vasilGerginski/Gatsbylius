@@ -20,7 +20,7 @@ const SidebarItem = ({ item, isCartPage }) => {
 
   return (
     <Item key={item.id}>
-      <img src={item.product.images[0].cachedPath} />
+      <img src={item.product.images[0].cachedPath} alt={item.product.name} />
       <div className="item-datas">
         <div className="item-name-delete">
           <span>{item.product.name}</span>
@@ -44,6 +44,11 @@ const SidebarItem = ({ item, isCartPage }) => {
               <div className="item-dec-inc">
                 <span
                   className="icon"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={() =>
+                    decrementQty(item.id, storeState, storeDispatch)
+                  }
                   onClick={() =>
                     decrementQty(item.id, storeState, storeDispatch)
                   }
@@ -53,6 +58,11 @@ const SidebarItem = ({ item, isCartPage }) => {
                 <span>{item.quantity}</span>
                 <span
                   className="icon"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={() =>
+                    incrementQty(item.id, storeState, storeDispatch)
+                  }
                   onClick={() =>
                     incrementQty(item.id, storeState, storeDispatch)
                   }

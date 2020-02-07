@@ -2,7 +2,7 @@ module.exports = ({ actions }, options) => {
   const { createTypes } = actions;
 
   const typeDefs = `
-    ${options.attributes || ""}
+    ${options.attributeDefinitions || ""}
 
     type Taxons {
       main: String
@@ -31,7 +31,7 @@ module.exports = ({ actions }, options) => {
       averageRating: Int!
       localImage: File
       taxons: Taxons
-      ${options.attributes ? "attributes: Attributes" : ""}
+      ${options.attributeDefinitions ? "attributes: Attributes" : ""}
       variants: [Variant]!
     }
 
