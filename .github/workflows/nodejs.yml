@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-18.04
+    env:
+      working-directory: ./demo
     strategy:
       matrix:
         node-version: [10.x]
@@ -24,18 +26,18 @@ jobs:
         uses: Ilshidur/action-slack@master
         with:
           args: "Modifications has been pushed on master, starting build..."
-
       - name: set environment variables
+        working-directory: ${{env.working-directory}}
         uses: allenevans/set-env@v1.0.0
         with:
           GATSBY_SYLIUS_URL: ${{ secrets.SYLIUS_URL }}
       - name: npm install, build, and test
+        working-directory: ${{env.working-directory}}
         run: |
           npm ci
           npm run build --if-present
         env:
           CI: true
-
       - name: Slack notification
         if: failure()
         env:
@@ -45,7 +47,6 @@ jobs:
         uses: Ilshidur/action-slack@master
         with:
           args: "Error on master branch build"
-
       - name: Slack notification
         if: success()
         env:
@@ -56,6 +57,7 @@ jobs:
         with:
           args: "Master build successfully, run deploy..."
       - name: deploy to server
+        working-directory: ${{env.working-directory}}
         if: success()
         uses: AEnterprise/rsync-deploy@v1.0
         env:
