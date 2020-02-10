@@ -27,18 +27,6 @@ module.exports = options => {
         },
       },
       `gatsby-plugin-sharp`,
-      {
-        resolve: `gatsby-plugin-manifest`,
-        options: {
-          name: `Gatsbylius`,
-          short_name: `Gatsbylius`,
-          start_url: `/`,
-          background_color: `#f7f0eb`,
-          theme_color: `#a2466c`,
-          display: `standalone`,
-          icon: `${__dirname}/src/images/gatsbylius-logo.jpg`, // This path is relative to the root of the site.
-        },
-      },
     ],
   };
 };
