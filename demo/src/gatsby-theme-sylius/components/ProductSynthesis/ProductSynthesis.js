@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { IoMdStarHalf, IoMdStarOutline, IoMdStar } from "react-icons/io";
 import scrollTo from "gatsby-plugin-smoothscroll";
-import { graphql } from "gatsby";
 import Configurator from "gatsby-theme-sylius/src/components/Configurator";
 import AddToCartButton from "gatsby-theme-sylius/src/components/Buttons/AddToCartButton";
 import Price from "gatsby-theme-sylius/src/components/Price";
@@ -81,34 +80,3 @@ ProductSynthesis.propTypes = {
 };
 
 export default ProductSynthesis;
-
-export const query = graphql`
-  fragment ProductSynthesysWithAttributes on Product {
-    code
-    slug
-    name
-    description
-    shortDescription
-    channelCode
-    averageRating
-    taxons {
-      main
-    }
-    variants {
-      price {
-        currency
-        current
-      }
-      axis
-      code
-    }
-    localImage {
-      childImageSharp {
-        fluid(maxWidth: 700) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-    ...Attributes
-  }
-`;
