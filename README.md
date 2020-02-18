@@ -143,7 +143,7 @@ If you wish to contribute to the project, this part will describe how to get a l
 
 1. Fork the [gatsbylius/gatsbylius](https://github.com/gatsbylius/gatsbylius) repository
 2. `git clone git@github.com:<your-username>/Gatsbylius.git`
-3. `cd Gatsbylius && yarn run bootstrap`
+3. `cd Gatsbylius && yarn && yarn run bootstrap`
 4. `cd demo`
 5. create an `.env.development` file based on the `.env.development.dist` files in the repository root
 6. `yarn start`
