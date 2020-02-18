@@ -5,7 +5,6 @@ import { graphql } from "gatsby";
 import { FiExternalLink } from "react-icons/fi";
 
 const Attributes = ({ attributes: { photographer, unsplash_url } }) => {
-  console.log(photographer, unsplash_url);
   return (
     <>
       {photographer && (
