@@ -47,7 +47,7 @@ module.exports = async (
     return await createNode(node);
   };
 
-  await getAllCategoryData(options.url).then(categories => {
+  await getAllCategoryData(options.syliusUrl).then(categories => {
     return categories.map(originalCategoryData => {
       const categoryData = adaptCategory(originalCategoryData);
 
@@ -55,12 +55,12 @@ module.exports = async (
     });
   });
 
-  await getAllProductsData(options.url).then(({ items }) => {
+  await getAllProductsData(options.syliusUrl).then(({ items }) => {
     return Promise.all(
       items.map(originalProductData => {
         const productData = adaptProduct({
           product: originalProductData,
-          syliusUrl: options.url,
+          syliusUrl: options.syliusUrl,
         });
         return createNodeFromProduct(productData);
       })

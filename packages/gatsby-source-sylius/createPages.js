@@ -41,8 +41,8 @@ module.exports = ({ graphql, actions }) => {
         path: `/categories/${node.code}`,
         component: categoryTemplate,
         context: {
-          code: node.code
-        }
+          code: node.code,
+        },
       });
     });
     result.data.allProduct.nodes.forEach(node => {
@@ -51,8 +51,8 @@ module.exports = ({ graphql, actions }) => {
         component: blogPostTemplate,
         context: {
           slug: node.slug,
-          mainProductTaxon: node.taxons.main
-        }
+          mainProductTaxon: node.taxons.main,
+        },
       });
     });
   });

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { graphql } from "gatsby";
 
 import { FiExternalLink } from "react-icons/fi";
-import { graphql } from "gatsby";
 
 const Attributes = ({ attributes: { photographer, unsplash_url } }) => {
   return (

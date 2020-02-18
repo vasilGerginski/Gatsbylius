@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "gatsby";
 import { Container, Row, Col } from "styled-bootstrap-grid";
-import Layout from "../components/Layout";
-import ProductBreadcrumb from "../components/ProductBreadcrumb";
-import ProductSynthesis from "../components/ProductSynthesis";
+import Layout from "gatsby-theme-sylius/src/components/Layout";
+import ProductBreadcrumb from "gatsby-theme-sylius/src/components/ProductBreadcrumb";
+import ProductSynthesis from "gatsby-theme-sylius/src/components/ProductSynthesis";
 import styled from "styled-components";
-import { color, spacing } from "../helpers/themeHelpers";
+import { color, spacing } from "gatsby-theme-sylius/src/helpers/themeHelpers";
 import Img from "gatsby-image";
-import RelatedProducts from "../components/Layout/RelatedProducts/RelatedProducts";
+import RelatedProducts from "gatsby-theme-sylius/src/components/Layout/RelatedProducts/RelatedProducts";
 
 const ProductPageContainer = styled(Container)`
   background-color: ${color("white")};
@@ -30,7 +30,6 @@ const Product = ({ data }) => {
               <ProductBreadcrumb product={data.product} />
             </Col>
           </Row>
-
           <Row>
             <Col md={7}>
               <Img fluid={data.product.localImage.childImageSharp.fluid} />
@@ -63,7 +62,10 @@ Product.propTypes = {
 export default Product;
 
 export const query = graphql`
-  query ProductPageQuery($slug: String, $mainProductTaxon: String) {
+  query ProductPageQueryWithAttributes(
+    $slug: String
+    $mainProductTaxon: String
+  ) {
     category(code: { eq: $mainProductTaxon }) {
       products {
         id
@@ -80,6 +82,7 @@ export const query = graphql`
     }
     product(slug: { eq: $slug }) {
       ...ProductSynthesis
+      ...Attributes
     }
 
     allProduct {

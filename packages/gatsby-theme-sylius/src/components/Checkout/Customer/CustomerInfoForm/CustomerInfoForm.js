@@ -42,7 +42,7 @@ const CustomerInfoForm = () => {
   };
 
   const handleSelectChange = e => {
-    setFormValues({ ...formValues, ["country"]: e.value });
+    setFormValues({ ...formValues, country: e.value });
   };
 
   return (

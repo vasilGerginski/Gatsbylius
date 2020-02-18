@@ -1,7 +1,7 @@
 module.exports = ({ reporter }, options) => {
-  if (!options.url) {
+  if (!options.syliusUrl) {
     reporter.panic(
-      "Problems with gatsby-source-sylius options: url is mandatory"
+      "Problem with gatsby-source-sylius options: syliusUrl is mandatory"
     );
   }
 };

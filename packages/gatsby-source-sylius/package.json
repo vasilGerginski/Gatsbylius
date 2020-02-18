@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-sylius",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Gatsby source for Sylius Shop API",
   "author": "Waiting for a contact email, see https://github.com/Gatsbylius/Gatsbylius",
   "license": "ISC",
@@ -13,5 +13,8 @@
   },
   "scripts": {
     "test": "jest --watch"
+  },
+  "peerDependencies": {
+    "gatsby": "^2.19.12"
   }
 }

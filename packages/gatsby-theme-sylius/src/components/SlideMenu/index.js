@@ -1,1 +1,1 @@
-export { default } from './SlideMenu';
+export { default } from "./SlideMenu";
