@@ -1,8 +1,8 @@
 describe("Product", () => {
   it("Click on Add to cart shoud display an informative message", () => {
-    const cartQuantity = "header nav ul li:nth-child(2)";
+    const cartQuantity = "header nav ul button:first-child";
 
-    cy.visit("http://localhost:8000/product/car-lights-and-stars");
+    cy.visit("/product/car-lights-and-stars");
 
     cy.contains("Successfully added to cart").should("not.be.visible");
 

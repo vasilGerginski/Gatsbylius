@@ -11,7 +11,8 @@
   },
   "devDependencies": {
     "cypress": "^3.8.2",
-    "gh-pages": "^2.1.1"
+    "gh-pages": "^2.1.1",
+    "start-server-and-test": "^1.10.8"
   },
   "license": "MIT",
   "scripts": {
@@ -23,6 +24,9 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "clean": "gatsby clean",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test develop http://localhost:8000 cy:open",
+    "test:e2e:ci": "start-server-and-test develop http://localhost:8000 cy:run"
   }
 }
