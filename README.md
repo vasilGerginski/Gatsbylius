@@ -75,8 +75,7 @@ If you wish to contribute to the project, this part will describe how to get a l
 1. Fork the [gatsbylius/gatsbylius](https://github.com/gatsbylius/gatsbylius) repository
 2. `git clone git@github.com:<your-username>/Gatsbylius.git`
 3. `cd Gatsbylius && yarn && yarn run bootstrap`
-4. `cd demo`
-5. open your favorite editor and start coding!
+4. open your favorite editor and start coding!
 
 ## License
 
