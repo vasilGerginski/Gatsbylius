@@ -19,6 +19,7 @@ module.exports = {
       resolve: `gatsby-source-sylius`,
       options: {
         syliusUrl: `https://{{your-sylius-url}}`,
+        mainTaxonCode: `category`,
       },
     },
   ],
@@ -45,6 +46,7 @@ module.exports = {
       resolve: `gatsby-source-sylius`,
       options: {
         syliusUrl: `https://{{sylius-url}}`,
+        mainTaxonCode: `category`,
         attributeDefinitions: `
           type Attributes {
             photographer: String
