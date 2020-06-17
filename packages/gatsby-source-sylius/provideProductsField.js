@@ -5,7 +5,7 @@ const getAllTaxons = taxons => {
     mainAndOtherToxons = mainAndOtherToxons.concat(taxons.others);
   }
 
-  return mainAndOtherToxons;
+  return [...new Set(mainAndOtherToxons)];
 };
 
 module.exports = ({ node, getNode, createNodeId, createNodeField }) => {
