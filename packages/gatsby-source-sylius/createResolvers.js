@@ -43,13 +43,17 @@ module.exports = ({
       },
       parent: {
         resolve: source =>
-          getNode(createNodeId(`category-${source.parentCategory}`)),
+          source.parentCategory
+            ? getNode(createNodeId(`category-${source.parentCategory}`))
+            : null,
       },
       children: {
         resolve: source =>
-          source.subcategories.map(categoryCode =>
-            getNode(createNodeId(`category-${categoryCode}`))
-          ),
+          source.subcategories
+            ? source.subcategories.map(categoryCode =>
+                getNode(createNodeId(`category-${categoryCode}`))
+              )
+            : null,
       },
       products: {
         resolve: (source, _, context) =>

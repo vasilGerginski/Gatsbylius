@@ -32,7 +32,7 @@ const getAllCategoryData = async (syliusUrl, mainTaxonCode) => {
     json: true,
   })
     .then(response => response.body.self)
-    .then(({ children }) => flattenCategories(children));
+    .then(rootCategory => flattenCategories([rootCategory]));
 };
 
 module.exports = { getAllProductsData, getAllCategoryData };
