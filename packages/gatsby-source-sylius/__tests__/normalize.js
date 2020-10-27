@@ -14,6 +14,8 @@ test("Normalize product", () => {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur ligula tincidunt risus pellentesque, nec faucibus eros egestas. Nulla malesuada luctus dui nec scelerisque. Integer nec rhoncus urna. Nulla lacinia mauris nec augue venenatis facilisis. Quisque at mi enim. Sed in rhoncus orci. Suspendisse ac nisl gravida, consequat elit quis, sollicitudin dolor. Morbi laoreet, arcu id fringilla viverra, magna mauris faucibus tellus, vitae pulvinar augue felis ac ligula.",
     shortDescription:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur ligula tincidunt risus pellentesque, nec faucibus eros egestas. Nulla malesuada luctus dui nec scelerisque.",
+    metaDescription:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur ligula tincidunt risus pellentesque, nec faucibus eros egestas. Nulla malesuada luctus dui nec scelerisque.",
     attributes: {},
     channelCode: "default",
     averageRating: 0,
