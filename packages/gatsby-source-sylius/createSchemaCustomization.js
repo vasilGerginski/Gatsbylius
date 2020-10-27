@@ -27,6 +27,7 @@ module.exports = ({ actions }, options) => {
       name: String!
       description: String
       shortDescription: String
+      metaDescription: String
       channelCode: String!
       averageRating: Int!
       localImage: File
